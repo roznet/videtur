@@ -37,7 +37,7 @@ struct videturApp: App {
         .onChange(of: scenePhase){
             phase in
             Model.shared.locationTracker.startTracking()
-            //Model.shared.test()
+            
         }
     }
 }

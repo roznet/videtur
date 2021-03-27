@@ -27,11 +27,13 @@ import Foundation
 import UserNotifications
 
 class TrackingEvent {
-    
+
     func startNotification() {
+        /*
         let event = UNMutableNotificationContent()
         event.title = "Collect Location"
         event.body = "another event"
+        
         
         let request = UNNotificationRequest( identifier: UUID().uuidString, content: event, trigger: UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: true))
         
@@ -39,6 +41,7 @@ class TrackingEvent {
             (granted,_) in
             print( "\(granted)")
         }
+ */
     }
     
 }

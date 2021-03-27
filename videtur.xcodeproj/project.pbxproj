@@ -25,6 +25,12 @@
 		42E16911260F21F000224979 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E16910260F21F000224979 /* AppDelegate.swift */; };
 		42E1691D260F230200224979 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E1691C260F230200224979 /* Model.swift */; };
 		42E1691E260F230200224979 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E1691C260F230200224979 /* Model.swift */; };
+		42E1692F260F31A000224979 /* RecordKeeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E1692E260F319F00224979 /* RecordKeeper.swift */; };
+		42E16930260F31A000224979 /* RecordKeeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E1692E260F319F00224979 /* RecordKeeper.swift */; };
+		42E16937260F31CB00224979 /* RecordLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E16936260F31CB00224979 /* RecordLocation.swift */; };
+		42E16938260F31CB00224979 /* RecordLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E16936260F31CB00224979 /* RecordLocation.swift */; };
+		42E1693F260F31FD00224979 /* RecordLocationChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E1693E260F31FD00224979 /* RecordLocationChange.swift */; };
+		42E16940260F31FD00224979 /* RecordLocationChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E1693E260F31FD00224979 /* RecordLocationChange.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +79,9 @@
 		42E168EE260F1F3200224979 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		42E16910260F21F000224979 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42E1691C260F230200224979 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		42E1692E260F319F00224979 /* RecordKeeper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordKeeper.swift; sourceTree = "<group>"; };
+		42E16936260F31CB00224979 /* RecordLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordLocation.swift; sourceTree = "<group>"; };
+		42E1693E260F31FD00224979 /* RecordLocationChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordLocationChange.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +209,9 @@
 				42E168CB260F1C2000224979 /* LocationTracker.swift */,
 				42E168CA260F1C2000224979 /* TrackingEvent.swift */,
 				42E1691C260F230200224979 /* Model.swift */,
+				42E1692E260F319F00224979 /* RecordKeeper.swift */,
+				42E16936260F31CB00224979 /* RecordLocation.swift */,
+				42E1693E260F31FD00224979 /* RecordLocationChange.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -418,12 +430,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42E1692F260F31A000224979 /* RecordKeeper.swift in Sources */,
 				42E168CC260F1C2000224979 /* TrackingEvent.swift in Sources */,
 				42E1691D260F230200224979 /* Model.swift in Sources */,
 				42E168CE260F1C2000224979 /* LocationTracker.swift in Sources */,
 				42E168B2260F1BAB00224979 /* ContentView.swift in Sources */,
 				42E16911260F21F000224979 /* AppDelegate.swift in Sources */,
 				42E168B0260F1BAB00224979 /* videturApp.swift in Sources */,
+				42E1693F260F31FD00224979 /* RecordLocationChange.swift in Sources */,
+				42E16937260F31CB00224979 /* RecordLocation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -433,8 +448,11 @@
 			files = (
 				42E1691E260F230200224979 /* Model.swift in Sources */,
 				42E168CD260F1C2000224979 /* TrackingEvent.swift in Sources */,
+				42E16930260F31A000224979 /* RecordKeeper.swift in Sources */,
+				42E16940260F31FD00224979 /* RecordLocationChange.swift in Sources */,
 				42E168CF260F1C2000224979 /* LocationTracker.swift in Sources */,
 				42E168B3260F1BAB00224979 /* ContentView.swift in Sources */,
+				42E16938260F31CB00224979 /* RecordLocation.swift in Sources */,
 				42E168B1260F1BAB00224979 /* videturApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

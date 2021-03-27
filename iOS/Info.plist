@@ -22,6 +22,8 @@
 	<true/>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Keep count of country visited</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Keep count of country visited</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Keep count of country visited</string>
 	<key>UIApplicationSceneManifest</key>

@@ -1,6 +1,6 @@
 //  MIT License
 //
-//  Created on 26/03/2021 for Videtur
+//  Created on 27/03/2021 for videtur
 //
 //  Copyright (c) 2021 Brice Rosenzweig
 //
@@ -22,26 +22,45 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 //
+
+
+
 import Foundation
-import CoreLocation
+import FMDB
 import RZUtils
 
-class Model {
-    static var shared = Model()
+class RecordKeeper {
     
-    let locationTracker : LocationTracker
-    let recordKeeper : RecordKeeper
-    
-    init(dbname : String = "videtur.db") {
-        self.locationTracker = LocationTracker()
-        
-        let db = FMDatabase(path: RZFileOrganizer.writeableFilePath(dbname))
-        db.open()
-        RecordKeeper.ensureDbStructure(db: db)
-        self.recordKeeper = RecordKeeper(db: db)
-        
-        self.locationTracker.model = self
-        self.recordKeeper.model = self
+    enum Status : Error {
+        case ok
+        case invalidRecordWithoutId
     }
     
+    let db : FMDatabase
+    var records : [Int:RecordLocation] = [:]
+    weak var model : Model? = nil
+    
+    init(db : FMDatabase) {
+        self.db = db
+    }
+    
+    func add( record : RecordLocation ) -> RecordLocation? {
+        guard let newRecord = try? record.save(db: self.db),
+              let recordId = newRecord.recordId else { return nil }
+        records[recordId] = newRecord
+        return newRecord
+    }
+    
+    func update( record : RecordLocation) throws -> RecordLocation {
+        guard let recordId = record.recordId else { throw RecordKeeper.Status.invalidRecordWithoutId }
+        let newRecord = try record.save(db: self.db)
+        self.records[recordId] = newRecord
+        return newRecord
+    }
+    
+    static func ensureDbStructure(db : FMDatabase){
+        if !db.tableExists("recordLocation") {
+            db.executeUpdate(RecordLocation.sqlCreationStatement, withArgumentsIn: [])
+        }
+    }
 }

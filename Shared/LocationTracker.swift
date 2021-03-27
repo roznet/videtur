@@ -31,11 +31,11 @@ import RZUtils
 class LocationTracker : NSObject,CLLocationManagerDelegate {
     let locationManager = CLLocationManager()
     let geoCoder = CLGeocoder()
+    weak var model : Model? = nil
     
     let db : FMDatabase
     
     override init() {
-        
         self.db = FMDatabase(path: RZFileOrganizer.writeableFilePath("videtur.db"))
     }
     
@@ -55,31 +55,28 @@ class LocationTracker : NSObject,CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        self.reverseAndSave(locations:locations) {
-            geocoded in
-            print( "\(geocoded)")
-        }
-    }
-    
-    func reverseAndSave( locations : [CLLocation], completion: @escaping ([CLLocation:CLPlacemark]) -> Void) {
-        let group = DispatchGroup()
-        var places : [CLLocation:CLPlacemark] = [:]
+        guard let first = locations.first else { return }
         
-        for location in locations {
-            group.enter()
-            geoCoder.reverseGeocodeLocation(location){ (placemark, error) in
-                if let placemark = placemark?.first {
-                    print( "\(placemark)")
-                    places[location] = placemark
-                }
-                group.leave()
+        self.updateNewLocation(date: Date(), coordinate: first.coordinate) {
+            record in
+            if let record = record {
+                print( "Updated \(record)" )
+            }else{
+                print( "No record for \(locations)" )
             }
         }
-        
-        group.notify(queue: DispatchQueue.global(qos: .background)) {
-            completion(places)
-        }
     }
     
-    
+    func updateNewLocation( date: Date, coordinate : CLLocationCoordinate2D, completion: @escaping (RecordLocation?) -> Void) {
+        guard let model = self.model, let record = model.recordKeeper.add(record: RecordLocation(date: date, coordinate: coordinate) ) else { completion(nil); return }
+        
+        geoCoder.reverseGeocodeLocation(CLLocation(latitude: record.coordinate.latitude, longitude: record.coordinate.longitude)){
+            (placemark, error) in
+            if let placemark = placemark?.first {
+                let geocodedRecord = record.geocoded(country: placemark.isoCountryCode, city: placemark.locality)
+                let savedRecord = try? model.recordKeeper.update(record: geocodedRecord)
+                completion( savedRecord )
+            }
+        }
+    }
 }
