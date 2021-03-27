@@ -26,12 +26,77 @@
 
 
 import Foundation
+import CoreLocation
+import FMDB
 
-struct Location {
+struct Location : Codable,Equatable,Hashable {
     let isoCountryCode : String?
     let administrativeArea : String?
     let locality : String?
     let timeZone : TimeZone?
-
     
+    init(placemark : CLPlacemark? = nil) {
+        self.isoCountryCode = placemark?.isoCountryCode
+        self.locality = placemark?.locality
+        self.timeZone = placemark?.timeZone
+        self.administrativeArea = placemark?.administrativeArea
+    }
+    
+    init(res:FMResultSet) {
+        self.isoCountryCode = res.string(forColumn: "country")
+        self.locality = res.string(forColumn: "city")
+        self.administrativeArea = res.string(forColumn: "administrativeArea")
+        if let tzIdenfitier = res.string(forColumn: "timeZone"),
+           let tz = TimeZone(identifier: tzIdenfitier) {
+            self.timeZone = tz
+        }else{
+            self.timeZone = nil
+        }
+    }
+    
+    var sqlParamDictionary : [String:Any] {
+        return [
+            "isoCountryCode" : self.isoCountryCode ?? NSNull(),
+            "locality" : self.locality ?? NSNull(),
+            "administrativeArea" : self.administrativeArea ?? NSNull(),
+            "timezone" : self.timeZone?.identifier ?? NSNull()
+        ]
+    }
+    
+    static var emptyParamDictionary : [String:Any] {
+        return [
+            "isoCountryCode" : NSNull(),
+            "locality" : NSNull(),
+            "administrativeArea" : NSNull(),
+            "timezone" : NSNull()
+        ]
+
+    }
+    
+    var country : Country? {
+        return self.isoCountryCode
+    }
+}
+
+extension Location : CustomStringConvertible {
+    var description: String {
+        var info : [String] = []
+        if let country = self.isoCountryCode {
+            info.append("\(country) \(country.flag)")
+        }
+        if let area = self.administrativeArea {
+            info.append(area)
+        }
+        if let city = self.locality {
+            info.append(city)
+        }
+        if let tz = self.timeZone?.identifier {
+            info.append(tz)
+        }
+        if info.count > 0 {
+            return String(format: "Location(%@)", info.joined(separator: ", "))
+        }else{
+            return "Location(Empty)"
+        }
+    }
 }

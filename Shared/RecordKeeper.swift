@@ -67,17 +67,35 @@ class RecordKeeper {
         }
     }
         
-    var days : [Day] {
-        var found : [Int:Day] = [:]
+    var days : [DayVisits] {
+        var found : [Int:DayVisits] = [:]
         for one in self.records.values{
             if var day = found[one.day] {
-                day.add(record: one)
+                if day.add(record: one) {
+                    found[one.day] = day
+                }
             }else{
-                found[one.day] = Day(record: one)
+                found[one.day] = DayVisits(record: one)
             }
         }
         return Array(found.values).sorted {
             $1.day < $0.day
+        }
+    }
+    
+    var locations : [LocationVisits] {
+        var found : [Location:LocationVisits] = [:]
+        for one in self.records.values{
+            if var location = found[one.location] {
+                if location.add(other: one) {
+                    found[one.location] = location
+                }
+            }else{
+                found[one.location] = LocationVisits(record: one)
+            }
+        }
+        return Array(found.values).sorted {
+            $1.latest < $0.latest
         }
     }
 }

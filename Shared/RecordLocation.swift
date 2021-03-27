@@ -52,86 +52,88 @@ struct RecordLocation : Codable {
     }
     
     let recordId : Int?
-    let date : Date
+    let timestamp : Date
+    let date : Int // Format YYYYMMDD
     let coordinate : CLLocationCoordinate2D
-    let isoCountryCode : String?
-    let administrativeArea : String?
-    let locality : String?
-    let timeZone : TimeZone?
+    let location : Location
+    
+    var isoCountryCode : String? { self.location.isoCountryCode }
+    var administrativeArea : String? { self.location.administrativeArea }
+    var locality : String? { self.location.locality }
+    var timeZone : TimeZone? { self.location.timeZone }
     
     var country : Country? {
         return self.isoCountryCode
     }
     var day : Int {
-        return Int( self.date.timeIntervalSince1970 / (3600.0 * 24.0) )
+        let formatter = DateFormatter()
+        formatter.dateFormat = "YYYYMMdd"
+        if let day = Int(formatter.string(from: self.timestamp)) {
+            return day
+        }else{
+            return 0
+        }
+        //return Int( self.date.timeIntervalSince1970 / (3600.0 * 24.0) )
     }
     
-    static var sqlCreationStatement = "CREATE TABLE recordLocation (recordId INTEGER PRIMARY KEY, date REAL NONNULL, latitude REAL,longitude REAL, isoCountryCode TEXT, administrativeArea TEXT, locality TEXT, timezone TEXT)"
+    static var sqlCreationStatement = "CREATE TABLE recordLocation (recordId INTEGER PRIMARY KEY, timestamp REAL NONNULL, date INTEGER, latitude REAL,longitude REAL, isoCountryCode TEXT, administrativeArea TEXT, locality TEXT, timezone TEXT)"
         
     init(date : Date, coordinate : CLLocationCoordinate2D) {
-        self.date = date
+        self.timestamp = date
+        let formatter = DateFormatter()
+        formatter.dateFormat = "YYYYMMdd"
+        if let day = Int(formatter.string(from: self.timestamp)) {
+            self.date = day
+        }else{
+            self.date = 0
+        }
         self.coordinate = coordinate
-        self.isoCountryCode = nil
-        self.locality = nil
-        self.administrativeArea = nil
+        self.location = Location()
         self.recordId = nil
-        self.timeZone = nil
     }
     
     private init(record : RecordLocation, with id : Int) {
+        self.timestamp = record.timestamp
         self.date = record.date
         self.coordinate = record.coordinate
-        self.isoCountryCode = record.isoCountryCode
-        self.locality = record.locality
-        self.timeZone = record.timeZone
-        self.administrativeArea = record.administrativeArea
+        self.location = record.location
         self.recordId = id
     }
     
     private init( record : RecordLocation, placemark : CLPlacemark){
+        self.timestamp = record.timestamp
         self.date = record.date
         self.coordinate = record.coordinate
-        self.isoCountryCode = placemark.isoCountryCode
-        self.locality = placemark.locality
-        self.timeZone = placemark.timeZone
-        self.administrativeArea = placemark.administrativeArea
         self.recordId = record.recordId
+        self.location = Location(placemark: placemark)
     }
     
     init(res : FMResultSet) throws{
-        guard let date = res.date(forColumn: "date") else { throw RecordLocation.Status.invalidDate }
+        guard let timestamp = res.date(forColumn: "timestamp") else { throw RecordLocation.Status.invalidDate }
         
         self.recordId = Int(res.int(forColumn: "recordId"))
-        self.date = date
+        self.date = Int(res.int(forColumn: "date"))
+        self.timestamp = timestamp
         self.coordinate = CLLocationCoordinate2D(latitude: res.double(forColumn: "latitude"), longitude: res.double(forColumn: "longitude"))
-        self.isoCountryCode = res.string(forColumn: "country")
-        self.locality = res.string(forColumn: "city")
-        self.administrativeArea = res.string(forColumn: "administrativeArea")
-        if let tzIdenfitier = res.string(forColumn: "timeZone"),
-           let tz = TimeZone(identifier: tzIdenfitier) {
-            self.timeZone = tz
-        }else{
-            self.timeZone = nil
-        }
+        self.location = Location(res: res)
     }
     
     func save(db : FMDatabase) throws -> RecordLocation {
-        let row : [Any] = [
-            self.date,
-            self.coordinate.latitude,
-            self.coordinate.longitude,
-            self.isoCountryCode ?? NSNull(),
-            self.administrativeArea ?? NSNull(),
-            self.locality ?? NSNull(),
-            self.timeZone != nil ? self.timeZone!.identifier : NSNull()
+        var params : [String:Any] = [
+            "date" : self.date,
+            "timestamp" : self.timestamp,
+            "latitude" : self.coordinate.latitude,
+            "longitude" : self.coordinate.longitude,
         ]
+        for (key,val) in self.location.sqlParamDictionary {
+            params[key] = val
+        }
         
         if let recordId = self.recordId {
-
-            try db.executeUpdate("UPDATE recordLocation SET date = ?, latitude = ?, longitude = ?, isoCountryCode = ?, administrativeArea = ?, locality = ?, timezone = ? WHERE recordId = \(recordId)", values: row)
+            db.executeUpdate("UPDATE recordLocation SET timestamp = :timestamp, date = :date, latitude = :latitude, longitude = :longitude, isoCountryCode = :isoCountryCode, administrativeArea = :administrativeArea, locality = :locality, timezone = :timezone WHERE recordId = \(recordId)", withParameterDictionary: params)
             return self
         }else{
-            try db.executeUpdate("INSERT INTO recordLocation (date,latitude,longitude,isoCountryCode,administrativeArea,locality,timezone) VALUES (?,?,?,?,?,?,?)", values: row)
+            db.executeUpdate("INSERT INTO recordLocation (timestamp,date,latitude,longitude,isoCountryCode,administrativeArea,locality,timezone) VALUES (:timestamp,:date,:latitude,:longitude,:isoCountryCode,:administrativeArea,:locality,:timezone)", withParameterDictionary: params)
             return RecordLocation(record: self, with: Int(db.lastInsertRowId) )
         }
     }
@@ -139,53 +141,24 @@ struct RecordLocation : Codable {
     func geocoded(placemark : CLPlacemark) -> RecordLocation {
         return RecordLocation(record: self, placemark: placemark)
     }
-    
-    func isSameLocation(other : RecordLocation) -> Bool {
-        // only consider same if resovled
-        guard let isoCountryCode = self.isoCountryCode,
-              let administrativeArea = self.administrativeArea,
-              let locality = self.locality
-        else {
-            return false
-        }
-        
-        return isoCountryCode == other.isoCountryCode && administrativeArea == other.administrativeArea && locality == other.locality
-    }
-    
-    func isSameDay(other : RecordLocation) -> Bool {
-        return self.day == other.day
-    }
 }
 
 extension RecordLocation : CustomStringConvertible {
     var description: String {
         let formatter = DateFormatter()
-        formatter.dateStyle = .short
+        formatter.dateStyle = .none
         formatter.timeStyle = .short
         var idstr = "noid"
         if let recordId = self.recordId {
             idstr = "\(recordId)"
         }
         
-        var info = [
+        let info = [
             idstr,
-            formatter.string(from: self.date),
-            "\(self.day)",
+            "\(self.date)",
+            formatter.string(from: self.timestamp),
             String(format: "(%.4f,%.4f)", self.coordinate.latitude, self.coordinate.longitude)
         ]
-        if let country = self.isoCountryCode {
-            info.append(country)
-            info.append(country.flag)
-        }
-        if let area = self.administrativeArea {
-            info.append(area)
-        }
-        if let city = self.locality {
-            info.append(city)
-        }
-        if let tz = self.timeZone?.identifier {
-            info.append(tz)
-        }
-        return String(format:"RecordLocation(%@)", info.joined(separator: ", "))
+        return String(format:"RecordLocation(%@,%@)", info.joined(separator: ", "), self.location.description)
     }
 }

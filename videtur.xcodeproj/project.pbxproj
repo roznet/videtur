@@ -33,8 +33,8 @@
 		42E16940260F31FD00224979 /* EventLocationChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E1693E260F31FD00224979 /* EventLocationChange.swift */; };
 		42E1694C260F650600224979 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E1694B260F650600224979 /* Country.swift */; };
 		42E1694D260F650600224979 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E1694B260F650600224979 /* Country.swift */; };
-		42E16954260F763F00224979 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E16953260F763F00224979 /* Day.swift */; };
-		42E16955260F763F00224979 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E16953260F763F00224979 /* Day.swift */; };
+		42E16954260F763F00224979 /* DayVisits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E16953260F763F00224979 /* DayVisits.swift */; };
+		42E16955260F763F00224979 /* DayVisits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E16953260F763F00224979 /* DayVisits.swift */; };
 		42E1695C260F79FB00224979 /* LocationVisits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E1695B260F79FB00224979 /* LocationVisits.swift */; };
 		42E1695D260F79FB00224979 /* LocationVisits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E1695B260F79FB00224979 /* LocationVisits.swift */; };
 		42E16964260F7F1100224979 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E16963260F7F1100224979 /* Location.swift */; };
@@ -91,7 +91,7 @@
 		42E16936260F31CB00224979 /* RecordLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordLocation.swift; sourceTree = "<group>"; };
 		42E1693E260F31FD00224979 /* EventLocationChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventLocationChange.swift; sourceTree = "<group>"; };
 		42E1694B260F650600224979 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
-		42E16953260F763F00224979 /* Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
+		42E16953260F763F00224979 /* DayVisits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayVisits.swift; sourceTree = "<group>"; };
 		42E1695B260F79FB00224979 /* LocationVisits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationVisits.swift; sourceTree = "<group>"; };
 		42E16963260F7F1100224979 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -226,7 +226,7 @@
 				42E16963260F7F1100224979 /* Location.swift */,
 				42E1693E260F31FD00224979 /* EventLocationChange.swift */,
 				42E1694B260F650600224979 /* Country.swift */,
-				42E16953260F763F00224979 /* Day.swift */,
+				42E16953260F763F00224979 /* DayVisits.swift */,
 				42E1695B260F79FB00224979 /* LocationVisits.swift */,
 			);
 			name = Model;
@@ -450,7 +450,7 @@
 				42E168CC260F1C2000224979 /* TrackingEvent.swift in Sources */,
 				42E1691D260F230200224979 /* Model.swift in Sources */,
 				42E168CE260F1C2000224979 /* LocationTracker.swift in Sources */,
-				42E16954260F763F00224979 /* Day.swift in Sources */,
+				42E16954260F763F00224979 /* DayVisits.swift in Sources */,
 				42E168B2260F1BAB00224979 /* ContentView.swift in Sources */,
 				42E16964260F7F1100224979 /* Location.swift in Sources */,
 				42E16911260F21F000224979 /* AppDelegate.swift in Sources */,
@@ -475,7 +475,7 @@
 				42E168CF260F1C2000224979 /* LocationTracker.swift in Sources */,
 				42E168B3260F1BAB00224979 /* ContentView.swift in Sources */,
 				42E16938260F31CB00224979 /* RecordLocation.swift in Sources */,
-				42E16955260F763F00224979 /* Day.swift in Sources */,
+				42E16955260F763F00224979 /* DayVisits.swift in Sources */,
 				42E16965260F7F1100224979 /* Location.swift in Sources */,
 				42E168B1260F1BAB00224979 /* videturApp.swift in Sources */,
 			);

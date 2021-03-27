@@ -28,28 +28,36 @@
 import Foundation
 
 struct LocationVisits {
-    let location : RecordLocation
-    var days : [RecordLocation] = []
-    var earliest : RecordLocation
-    var latest : RecordLocation
+    let location : Location
+    var days : [Int] = []
+    var earliest : Int
+    var latest : Int
     
     init(record : RecordLocation) {
-        self.location = record
-        self.days = [ record ]
-        self.earliest = record
-        self.latest = record
+        self.location = record.location
+        self.days = [ record.day ]
+        self.earliest = record.day
+        self.latest = record.day
     }
     
-    mutating func add(other : RecordLocation) {
-        var new = true
-        for one in days {
-            if other.isSameLocation(other: one) && other.isSameDay(other: one){
-                new = false
-                break
-            }
+    mutating func add(other : RecordLocation) -> Bool {
+        let day = other.day
+        
+        guard other.location == self.location && !days.contains(day) else { return false }
+        
+        days.append(day)
+        if day < self.earliest {
+            self.earliest = day
         }
-        if new {
-            days.append(other)
+        if day > self.latest {
+            self.latest = day
         }
+        return true
+    }
+}
+
+extension LocationVisits : CustomStringConvertible {
+    var description: String {
+        return String(format: "Visits(%@, days: %@)", self.location.description, self.days.sorted { $0 > $1 })
     }
 }

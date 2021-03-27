@@ -63,8 +63,7 @@ class videturTests: XCTestCase {
             CLLocationCoordinate2D(latitude: 47.1748, longitude: 8.7128), // schindellegi
             CLLocationCoordinate2D(latitude: 47.1748, longitude: 8.7128), // schindellegi
             CLLocationCoordinate2D(latitude: 47.1748, longitude: 8.7128), // schindellegi
-            CLLocationCoordinate2D(latitude: 46.2941, longitude: 7.5335), // schindellegi
-            CLLocationCoordinate2D(latitude: 46.2044, longitude: 6.1432), // geneva
+            CLLocationCoordinate2D(latitude: 46.2941, longitude: 7.5335), // sierre
             CLLocationCoordinate2D(latitude: 46.2044, longitude: 6.1432), // geneva
             CLLocationCoordinate2D(latitude: 40.7128, longitude: -74.0060), // New York, NY
             CLLocationCoordinate2D(latitude: 40.7128, longitude: -74.0060), // New York, NY
@@ -81,8 +80,14 @@ class videturTests: XCTestCase {
         
         wait(for: [expectation], timeout: 5.0, enforceOrder: false)
         
-        let days = self.model?.recordKeeper.days
-        print( "\(days)")
+        if let days = self.model?.recordKeeper.days {
+            print( "\(days)")
+        }
+        
+        if let locations = self.model?.recordKeeper.locations {
+            print( "\(locations)")
+        }
+
     }
     
     func updateNext() {
