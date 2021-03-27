@@ -38,6 +38,7 @@ class RecordKeeper {
     
     let db : FMDatabase
     var records : [Int:RecordLocation] = [:]
+    
     weak var model : Model? = nil
     
     init(db : FMDatabase) {
@@ -63,6 +64,20 @@ class RecordKeeper {
     static func ensureDbStructure(db : FMDatabase){
         if !db.tableExists("recordLocation") {
             db.executeUpdate(RecordLocation.sqlCreationStatement, withArgumentsIn: [])
+        }
+    }
+        
+    var days : [Day] {
+        var found : [Int:Day] = [:]
+        for one in self.records.values{
+            if var day = found[one.day] {
+                day.add(record: one)
+            }else{
+                found[one.day] = Day(record: one)
+            }
+        }
+        return Array(found.values).sorted {
+            $1.day < $0.day
         }
     }
 }

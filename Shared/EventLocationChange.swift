@@ -27,6 +27,6 @@
 
 import Foundation
 
-struct RecordLocationChange {
+struct EventLocationChange {
     
 }

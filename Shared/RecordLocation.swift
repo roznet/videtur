@@ -55,20 +55,25 @@ struct RecordLocation : Codable {
     let date : Date
     let coordinate : CLLocationCoordinate2D
     let isoCountryCode : String?
+    let administrativeArea : String?
     let locality : String?
     let timeZone : TimeZone?
     
+    var country : Country? {
+        return self.isoCountryCode
+    }
     var day : Int {
         return Int( self.date.timeIntervalSince1970 / (3600.0 * 24.0) )
     }
     
-    static var sqlCreationStatement = "CREATE TABLE recordLocation (recordId INTEGER PRIMARY KEY, date REAL NONNULL, latitude REAL,longitude REAL, isoCountryCode TEXT, locality TEXT, timezone TEXT)"
+    static var sqlCreationStatement = "CREATE TABLE recordLocation (recordId INTEGER PRIMARY KEY, date REAL NONNULL, latitude REAL,longitude REAL, isoCountryCode TEXT, administrativeArea TEXT, locality TEXT, timezone TEXT)"
         
     init(date : Date, coordinate : CLLocationCoordinate2D) {
         self.date = date
         self.coordinate = coordinate
         self.isoCountryCode = nil
         self.locality = nil
+        self.administrativeArea = nil
         self.recordId = nil
         self.timeZone = nil
     }
@@ -79,6 +84,7 @@ struct RecordLocation : Codable {
         self.isoCountryCode = record.isoCountryCode
         self.locality = record.locality
         self.timeZone = record.timeZone
+        self.administrativeArea = record.administrativeArea
         self.recordId = id
     }
     
@@ -88,6 +94,7 @@ struct RecordLocation : Codable {
         self.isoCountryCode = placemark.isoCountryCode
         self.locality = placemark.locality
         self.timeZone = placemark.timeZone
+        self.administrativeArea = placemark.administrativeArea
         self.recordId = record.recordId
     }
     
@@ -99,6 +106,7 @@ struct RecordLocation : Codable {
         self.coordinate = CLLocationCoordinate2D(latitude: res.double(forColumn: "latitude"), longitude: res.double(forColumn: "longitude"))
         self.isoCountryCode = res.string(forColumn: "country")
         self.locality = res.string(forColumn: "city")
+        self.administrativeArea = res.string(forColumn: "administrativeArea")
         if let tzIdenfitier = res.string(forColumn: "timeZone"),
            let tz = TimeZone(identifier: tzIdenfitier) {
             self.timeZone = tz
@@ -113,16 +121,17 @@ struct RecordLocation : Codable {
             self.coordinate.latitude,
             self.coordinate.longitude,
             self.isoCountryCode ?? NSNull(),
+            self.administrativeArea ?? NSNull(),
             self.locality ?? NSNull(),
             self.timeZone != nil ? self.timeZone!.identifier : NSNull()
         ]
         
         if let recordId = self.recordId {
 
-            try db.executeUpdate("UPDATE recordLocation SET date = ?, latitude = ?, longitude = ?, isoCountryCode = ?, locality = ?, timezone = ? WHERE recordId = \(recordId)", values: row)
+            try db.executeUpdate("UPDATE recordLocation SET date = ?, latitude = ?, longitude = ?, isoCountryCode = ?, administrativeArea = ?, locality = ?, timezone = ? WHERE recordId = \(recordId)", values: row)
             return self
         }else{
-            try db.executeUpdate("INSERT INTO recordLocation (date,latitude,longitude,isoCountryCode,locality,timezone) VALUES (?,?,?,?,?,?)", values: row)
+            try db.executeUpdate("INSERT INTO recordLocation (date,latitude,longitude,isoCountryCode,administrativeArea,locality,timezone) VALUES (?,?,?,?,?,?,?)", values: row)
             return RecordLocation(record: self, with: Int(db.lastInsertRowId) )
         }
     }
@@ -131,16 +140,20 @@ struct RecordLocation : Codable {
         return RecordLocation(record: self, placemark: placemark)
     }
     
-    var flag : String {
-        var rv = ""
-        if let country = self.isoCountryCode?.uppercased() {
-            for uS in country.unicodeScalars {
-                if let nuS = UnicodeScalar(127397+uS.value) {
-                    rv.unicodeScalars.append( nuS )
-                }
-            }
+    func isSameLocation(other : RecordLocation) -> Bool {
+        // only consider same if resovled
+        guard let isoCountryCode = self.isoCountryCode,
+              let administrativeArea = self.administrativeArea,
+              let locality = self.locality
+        else {
+            return false
         }
-        return rv
+        
+        return isoCountryCode == other.isoCountryCode && administrativeArea == other.administrativeArea && locality == other.locality
+    }
+    
+    func isSameDay(other : RecordLocation) -> Bool {
+        return self.day == other.day
     }
 }
 
@@ -162,7 +175,10 @@ extension RecordLocation : CustomStringConvertible {
         ]
         if let country = self.isoCountryCode {
             info.append(country)
-            info.append(self.flag)
+            info.append(country.flag)
+        }
+        if let area = self.administrativeArea {
+            info.append(area)
         }
         if let city = self.locality {
             info.append(city)

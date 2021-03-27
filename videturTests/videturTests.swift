@@ -59,9 +59,17 @@ class videturTests: XCTestCase {
             CLLocationCoordinate2D(latitude: 48.8566, longitude: 2.3522), // Paris
             CLLocationCoordinate2D(latitude: 48.8566, longitude: 2.3522), // Paris
             CLLocationCoordinate2D(latitude: 47.3769, longitude: 8.5417), // zurich
+            CLLocationCoordinate2D(latitude: 47.3769, longitude: 8.5417), // zurich
+            CLLocationCoordinate2D(latitude: 47.1748, longitude: 8.7128), // schindellegi
+            CLLocationCoordinate2D(latitude: 47.1748, longitude: 8.7128), // schindellegi
+            CLLocationCoordinate2D(latitude: 47.1748, longitude: 8.7128), // schindellegi
+            CLLocationCoordinate2D(latitude: 46.2941, longitude: 7.5335), // schindellegi
             CLLocationCoordinate2D(latitude: 46.2044, longitude: 6.1432), // geneva
             CLLocationCoordinate2D(latitude: 46.2044, longitude: 6.1432), // geneva
-            CLLocationCoordinate2D(latitude: 40.7128, longitude: -74.0060), // New York
+            CLLocationCoordinate2D(latitude: 40.7128, longitude: -74.0060), // New York, NY
+            CLLocationCoordinate2D(latitude: 40.7128, longitude: -74.0060), // New York, NY
+            CLLocationCoordinate2D(latitude: 41.0534, longitude: -73.5387), // Stamford, CO
+            CLLocationCoordinate2D(latitude: 41.0534, longitude: -73.5387), // Stamford, CO
         ]
         self.remaining = coords
         let component = DateComponents(year: 2021, month: 3, day: 10, hour: 11)
@@ -72,6 +80,9 @@ class videturTests: XCTestCase {
         self.updateNext()
         
         wait(for: [expectation], timeout: 5.0, enforceOrder: false)
+        
+        let days = self.model?.recordKeeper.days
+        print( "\(days)")
     }
     
     func updateNext() {

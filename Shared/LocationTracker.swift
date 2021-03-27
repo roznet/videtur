@@ -68,7 +68,12 @@ class LocationTracker : NSObject,CLLocationManagerDelegate {
     }
     
     func updateNewLocation( date: Date, coordinate : CLLocationCoordinate2D, completion: @escaping (RecordLocation?) -> Void) {
-        guard let model = self.model, let record = model.recordKeeper.add(record: RecordLocation(date: date, coordinate: coordinate) ) else { completion(nil); return }
+        guard let model = self.model,
+              let record = model.recordKeeper.add(record: RecordLocation(date: date, coordinate: coordinate) )
+        else {
+            completion(nil);
+            return
+        }
         
         geoCoder.reverseGeocodeLocation(CLLocation(latitude: record.coordinate.latitude, longitude: record.coordinate.longitude)){
             (placemark, error) in
