@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,6 +15,16 @@
 		42E168B3260F1BAB00224979 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E16888260F1BAB00224979 /* ContentView.swift */; };
 		42E168B4260F1BAB00224979 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42E16889260F1BAB00224979 /* Assets.xcassets */; };
 		42E168B5260F1BAB00224979 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42E16889260F1BAB00224979 /* Assets.xcassets */; };
+		42E168CC260F1C2000224979 /* TrackingEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E168CA260F1C2000224979 /* TrackingEvent.swift */; };
+		42E168CD260F1C2000224979 /* TrackingEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E168CA260F1C2000224979 /* TrackingEvent.swift */; };
+		42E168CE260F1C2000224979 /* LocationTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E168CB260F1C2000224979 /* LocationTracker.swift */; };
+		42E168CF260F1C2000224979 /* LocationTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E168CB260F1C2000224979 /* LocationTracker.swift */; };
+		42E168D6260F1C5C00224979 /* FMDB in Frameworks */ = {isa = PBXBuildFile; productRef = 42E168D5260F1C5C00224979 /* FMDB */; };
+		42E168DD260F1C6E00224979 /* RZUtils in Frameworks */ = {isa = PBXBuildFile; productRef = 42E168DC260F1C6E00224979 /* RZUtils */; };
+		42E168ED260F1F3200224979 /* videturTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E168EC260F1F3200224979 /* videturTests.swift */; };
+		42E16911260F21F000224979 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E16910260F21F000224979 /* AppDelegate.swift */; };
+		42E1691D260F230200224979 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E1691C260F230200224979 /* Model.swift */; };
+		42E1691E260F230200224979 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E1691C260F230200224979 /* Model.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +41,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 42E16895260F1BAB00224979;
 			remoteInfo = "videtur (macOS)";
+		};
+		42E168EF260F1F3200224979 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 42E16882260F1BAA00224979 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 42E1688D260F1BAB00224979;
+			remoteInfo = "videtur (iOS)";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -49,6 +66,13 @@
 		42E168A9260F1BAB00224979 /* Tests macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		42E168AD260F1BAB00224979 /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
 		42E168AF260F1BAB00224979 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		42E168CA260F1C2000224979 /* TrackingEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackingEvent.swift; sourceTree = "<group>"; };
+		42E168CB260F1C2000224979 /* LocationTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTracker.swift; sourceTree = "<group>"; };
+		42E168EA260F1F3200224979 /* videturTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = videturTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		42E168EC260F1F3200224979 /* videturTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = videturTests.swift; sourceTree = "<group>"; };
+		42E168EE260F1F3200224979 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		42E16910260F21F000224979 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		42E1691C260F230200224979 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +80,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42E168DD260F1C6E00224979 /* RZUtils in Frameworks */,
+				42E168D6260F1C5C00224979 /* FMDB in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,6 +106,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		42E168E7260F1F3200224979 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -89,8 +122,7 @@
 				42E16886260F1BAB00224979 /* Shared */,
 				42E16890260F1BAB00224979 /* iOS */,
 				42E16897260F1BAB00224979 /* macOS */,
-				42E168A1260F1BAB00224979 /* Tests iOS */,
-				42E168AC260F1BAB00224979 /* Tests macOS */,
+				42E168F9260F1F4200224979 /* Tests */,
 				42E1688F260F1BAB00224979 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -98,9 +130,8 @@
 		42E16886260F1BAB00224979 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				42E16887260F1BAB00224979 /* videturApp.swift */,
-				42E16888260F1BAB00224979 /* ContentView.swift */,
-				42E16889260F1BAB00224979 /* Assets.xcassets */,
+				42E168C9260F1C0B00224979 /* Model */,
+				42E168C8260F1BFE00224979 /* UI */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -112,6 +143,7 @@
 				42E16896260F1BAB00224979 /* videtur.app */,
 				42E1689E260F1BAB00224979 /* Tests iOS.xctest */,
 				42E168A9260F1BAB00224979 /* Tests macOS.xctest */,
+				42E168EA260F1F3200224979 /* videturTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -119,6 +151,7 @@
 		42E16890260F1BAB00224979 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				42E16910260F21F000224979 /* AppDelegate.swift */,
 				42E16891260F1BAB00224979 /* Info.plist */,
 			);
 			path = iOS;
@@ -151,6 +184,45 @@
 			path = "Tests macOS";
 			sourceTree = "<group>";
 		};
+		42E168C8260F1BFE00224979 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				42E16887260F1BAB00224979 /* videturApp.swift */,
+				42E16888260F1BAB00224979 /* ContentView.swift */,
+				42E16889260F1BAB00224979 /* Assets.xcassets */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		42E168C9260F1C0B00224979 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				42E168CB260F1C2000224979 /* LocationTracker.swift */,
+				42E168CA260F1C2000224979 /* TrackingEvent.swift */,
+				42E1691C260F230200224979 /* Model.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		42E168EB260F1F3200224979 /* videturTests */ = {
+			isa = PBXGroup;
+			children = (
+				42E168EC260F1F3200224979 /* videturTests.swift */,
+				42E168EE260F1F3200224979 /* Info.plist */,
+			);
+			path = videturTests;
+			sourceTree = "<group>";
+		};
+		42E168F9260F1F4200224979 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				42E168A1260F1BAB00224979 /* Tests iOS */,
+				42E168AC260F1BAB00224979 /* Tests macOS */,
+				42E168EB260F1F3200224979 /* videturTests */,
+			);
+			name = Tests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -167,6 +239,10 @@
 			dependencies = (
 			);
 			name = "videtur (iOS)";
+			packageProductDependencies = (
+				42E168D5260F1C5C00224979 /* FMDB */,
+				42E168DC260F1C6E00224979 /* RZUtils */,
+			);
 			productName = "videtur (iOS)";
 			productReference = 42E1688E260F1BAB00224979 /* videtur.app */;
 			productType = "com.apple.product-type.application";
@@ -224,6 +300,24 @@
 			productReference = 42E168A9260F1BAB00224979 /* Tests macOS.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		42E168E9260F1F3200224979 /* videturTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 42E168F1260F1F3200224979 /* Build configuration list for PBXNativeTarget "videturTests" */;
+			buildPhases = (
+				42E168E6260F1F3200224979 /* Sources */,
+				42E168E7260F1F3200224979 /* Frameworks */,
+				42E168E8260F1F3200224979 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				42E168F0260F1F3200224979 /* PBXTargetDependency */,
+			);
+			name = videturTests;
+			productName = videturTests;
+			productReference = 42E168EA260F1F3200224979 /* videturTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -247,6 +341,10 @@
 						CreatedOnToolsVersion = 12.4;
 						TestTargetID = 42E16895260F1BAB00224979;
 					};
+					42E168E9260F1F3200224979 = {
+						CreatedOnToolsVersion = 12.4;
+						TestTargetID = 42E1688D260F1BAB00224979;
+					};
 				};
 			};
 			buildConfigurationList = 42E16885260F1BAA00224979 /* Build configuration list for PBXProject "videtur" */;
@@ -258,6 +356,10 @@
 				Base,
 			);
 			mainGroup = 42E16881260F1BAA00224979;
+			packageReferences = (
+				42E168D4260F1C5C00224979 /* XCRemoteSwiftPackageReference "fmdb" */,
+				42E168DB260F1C6E00224979 /* XCRemoteSwiftPackageReference "rzutils" */,
+			);
 			productRefGroup = 42E1688F260F1BAB00224979 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -266,6 +368,7 @@
 				42E16895260F1BAB00224979 /* videtur (macOS) */,
 				42E1689D260F1BAB00224979 /* Tests iOS */,
 				42E168A8260F1BAB00224979 /* Tests macOS */,
+				42E168E9260F1F3200224979 /* videturTests */,
 			);
 		};
 /* End PBXProject section */
@@ -301,6 +404,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		42E168E8260F1F3200224979 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -308,7 +418,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42E168CC260F1C2000224979 /* TrackingEvent.swift in Sources */,
+				42E1691D260F230200224979 /* Model.swift in Sources */,
+				42E168CE260F1C2000224979 /* LocationTracker.swift in Sources */,
 				42E168B2260F1BAB00224979 /* ContentView.swift in Sources */,
+				42E16911260F21F000224979 /* AppDelegate.swift in Sources */,
 				42E168B0260F1BAB00224979 /* videturApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -317,6 +431,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42E1691E260F230200224979 /* Model.swift in Sources */,
+				42E168CD260F1C2000224979 /* TrackingEvent.swift in Sources */,
+				42E168CF260F1C2000224979 /* LocationTracker.swift in Sources */,
 				42E168B3260F1BAB00224979 /* ContentView.swift in Sources */,
 				42E168B1260F1BAB00224979 /* videturApp.swift in Sources */,
 			);
@@ -338,6 +455,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		42E168E6260F1F3200224979 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				42E168ED260F1F3200224979 /* videturTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -350,6 +475,11 @@
 			isa = PBXTargetDependency;
 			target = 42E16895260F1BAB00224979 /* videtur (macOS) */;
 			targetProxy = 42E168AA260F1BAB00224979 /* PBXContainerItemProxy */;
+		};
+		42E168F0260F1F3200224979 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 42E1688D260F1BAB00224979 /* videtur (iOS) */;
+			targetProxy = 42E168EF260F1F3200224979 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -647,6 +777,51 @@
 			};
 			name = Release;
 		};
+		42E168F2260F1F3200224979 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = M7QSSF3624;
+				INFOPLIST_FILE = videturTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "net.ro-z.videturTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/videtur.app/videtur";
+			};
+			name = Debug;
+		};
+		42E168F3260F1F3200224979 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = M7QSSF3624;
+				INFOPLIST_FILE = videturTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "net.ro-z.videturTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/videtur.app/videtur";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -695,7 +870,48 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		42E168F1260F1F3200224979 /* Build configuration list for PBXNativeTarget "videturTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				42E168F2260F1F3200224979 /* Debug */,
+				42E168F3260F1F3200224979 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		42E168D4260F1C5C00224979 /* XCRemoteSwiftPackageReference "fmdb" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ccgus/fmdb";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.7.7;
+			};
+		};
+		42E168DB260F1C6E00224979 /* XCRemoteSwiftPackageReference "rzutils" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/roznet/rzutils.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.11;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		42E168D5260F1C5C00224979 /* FMDB */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 42E168D4260F1C5C00224979 /* XCRemoteSwiftPackageReference "fmdb" */;
+			productName = FMDB;
+		};
+		42E168DC260F1C6E00224979 /* RZUtils */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 42E168DB260F1C6E00224979 /* XCRemoteSwiftPackageReference "rzutils" */;
+			productName = RZUtils;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 42E16882260F1BAA00224979 /* Project object */;
 }

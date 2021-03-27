@@ -1,4 +1,4 @@
-///  MIT License
+//  MIT License
 //
 //  Created on 26/03/2021 for Videtur
 //
@@ -23,21 +23,22 @@
 //  SOFTWARE.
 //
 
-import SwiftUI
+import Foundation
+import UserNotifications
 
-@main
-struct videturApp: App {
-    @Environment(\.scenePhase) private var scenePhase
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+class TrackingEvent {
     
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
-        .onChange(of: scenePhase){
-            phase in
-            Model.shared.locationTracker.startTracking()
-            //Model.shared.test()
+    func startNotification() {
+        let event = UNMutableNotificationContent()
+        event.title = "Collect Location"
+        event.body = "another event"
+        
+        let request = UNNotificationRequest( identifier: UUID().uuidString, content: event, trigger: UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: true))
+        
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert]){
+            (granted,_) in
+            print( "\(granted)")
         }
     }
+    
 }

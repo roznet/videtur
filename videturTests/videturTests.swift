@@ -24,38 +24,39 @@
 //
 
 import XCTest
+import CoreLocation
+@testable import videtur
 
-class Tests_iOS: XCTestCase {
+class videturTests: XCTestCase {
 
+    var tracker : LocationTracker?
+    
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
-        continueAfterFailure = false
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
     }
 
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-
-    func disabletestExample() throws {
-        // UI tests must launch the application that they test.
-        let app = XCUIApplication()
-        app.launch()
-
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
     
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
+    func testPlacemark() throws {
+        let coords = [ CLLocation(latitude: 51.5074, longitude: 0.1278), // London
+                       CLLocation(latitude: 40.7128, longitude: 74.0060), // New York
+                       CLLocation(latitude: 48.8566, longitude: 2.3522), // Paris
+                       CLLocation(latitude: 47.3769, longitude: 8.5417), // zurich
+        ]
+        let tracker = LocationTracker()
+        self.tracker = tracker
+        let expectation = XCTestExpectation(description: "geocode")
+        tracker.reverseAndSave(locations: coords){
+            geocoded in
+            print( "\(geocoded)" )
+            self.tracker = nil
+            expectation.fulfill()
         }
+        
+        wait(for: [expectation], timeout: 5.0, enforceOrder: false)
     }
+
+
 }

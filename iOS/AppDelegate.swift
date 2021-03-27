@@ -1,4 +1,4 @@
-///  MIT License
+//  MIT License
 //
 //  Created on 26/03/2021 for Videtur
 //
@@ -23,21 +23,20 @@
 //  SOFTWARE.
 //
 
-import SwiftUI
+import Foundation
+import UIKit
 
-@main
-struct videturApp: App {
-    @Environment(\.scenePhase) private var scenePhase
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+class AppDelegate : NSObject, UIApplicationDelegate {
     
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
-        .onChange(of: scenePhase){
-            phase in
-            Model.shared.locationTracker.startTracking()
-            //Model.shared.test()
-        }
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        print( "Launching" )
+        
+        //application.setMinimumBackgroundFetchInterval(60.0)
+        
+        return true
+    }
+    
+    func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        
     }
 }
