@@ -35,22 +35,23 @@ struct LocationVisits {
     
     init(record : RecordLocation) {
         self.location = record.location
-        self.days = [ record.day ]
-        self.earliest = record.day
-        self.latest = record.day
+        self.days = [ record.date ]
+        self.earliest = record.date
+        self.latest = record.date
     }
     
     mutating func add(other : RecordLocation) -> Bool {
-        let day = other.day
+        let date = other.date
         
-        guard other.location == self.location && !days.contains(day) else { return false }
+        guard other.location == self.location && !days.contains(date) else { return false }
         
-        days.append(day)
-        if day < self.earliest {
-            self.earliest = day
+        days.append(date)
+        days.sort { $0 < $1 }
+        if date < self.earliest {
+            self.earliest = date
         }
-        if day > self.latest {
-            self.latest = day
+        if date > self.latest {
+            self.latest = date
         }
         return true
     }
@@ -59,5 +60,11 @@ struct LocationVisits {
 extension LocationVisits : CustomStringConvertible {
     var description: String {
         return String(format: "Visits(%@, days: %@)", self.location.description, self.days.sorted { $0 > $1 })
+    }
+}
+
+extension LocationVisits : Equatable {
+    static func == (lhs : LocationVisits, rhs : LocationVisits) -> Bool {
+        return lhs.location == rhs.location && lhs.days == rhs.days
     }
 }

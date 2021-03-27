@@ -21,7 +21,7 @@
 		42E168CF260F1C2000224979 /* LocationTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E168CB260F1C2000224979 /* LocationTracker.swift */; };
 		42E168D6260F1C5C00224979 /* FMDB in Frameworks */ = {isa = PBXBuildFile; productRef = 42E168D5260F1C5C00224979 /* FMDB */; };
 		42E168DD260F1C6E00224979 /* RZUtils in Frameworks */ = {isa = PBXBuildFile; productRef = 42E168DC260F1C6E00224979 /* RZUtils */; };
-		42E168ED260F1F3200224979 /* videturTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E168EC260F1F3200224979 /* videturTests.swift */; };
+		42E168ED260F1F3200224979 /* RecordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E168EC260F1F3200224979 /* RecordTests.swift */; };
 		42E16911260F21F000224979 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E16910260F21F000224979 /* AppDelegate.swift */; };
 		42E1691D260F230200224979 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E1691C260F230200224979 /* Model.swift */; };
 		42E1691E260F230200224979 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E1691C260F230200224979 /* Model.swift */; };
@@ -83,7 +83,7 @@
 		42E168CA260F1C2000224979 /* TrackingEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackingEvent.swift; sourceTree = "<group>"; };
 		42E168CB260F1C2000224979 /* LocationTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTracker.swift; sourceTree = "<group>"; };
 		42E168EA260F1F3200224979 /* videturTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = videturTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		42E168EC260F1F3200224979 /* videturTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = videturTests.swift; sourceTree = "<group>"; };
+		42E168EC260F1F3200224979 /* RecordTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordTests.swift; sourceTree = "<group>"; };
 		42E168EE260F1F3200224979 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		42E16910260F21F000224979 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42E1691C260F230200224979 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
@@ -218,9 +218,9 @@
 		42E168C9260F1C0B00224979 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				42E1691C260F230200224979 /* Model.swift */,
 				42E168CB260F1C2000224979 /* LocationTracker.swift */,
 				42E168CA260F1C2000224979 /* TrackingEvent.swift */,
-				42E1691C260F230200224979 /* Model.swift */,
 				42E1692E260F319F00224979 /* RecordKeeper.swift */,
 				42E16936260F31CB00224979 /* RecordLocation.swift */,
 				42E16963260F7F1100224979 /* Location.swift */,
@@ -235,7 +235,7 @@
 		42E168EB260F1F3200224979 /* videturTests */ = {
 			isa = PBXGroup;
 			children = (
-				42E168EC260F1F3200224979 /* videturTests.swift */,
+				42E168EC260F1F3200224979 /* RecordTests.swift */,
 				42E168EE260F1F3200224979 /* Info.plist */,
 			);
 			path = videturTests;
@@ -501,7 +501,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				42E168ED260F1F3200224979 /* videturTests.swift in Sources */,
+				42E168ED260F1F3200224979 /* RecordTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

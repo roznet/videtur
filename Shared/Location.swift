@@ -34,7 +34,7 @@ struct Location : Codable,Equatable,Hashable {
     let administrativeArea : String?
     let locality : String?
     let timeZone : TimeZone?
-    
+        
     init(placemark : CLPlacemark? = nil) {
         self.isoCountryCode = placemark?.isoCountryCode
         self.locality = placemark?.locality
@@ -43,17 +43,17 @@ struct Location : Codable,Equatable,Hashable {
     }
     
     init(res:FMResultSet) {
-        self.isoCountryCode = res.string(forColumn: "country")
-        self.locality = res.string(forColumn: "city")
+        self.isoCountryCode = res.string(forColumn: "isoCountryCode")
+        self.locality = res.string(forColumn: "locality")
         self.administrativeArea = res.string(forColumn: "administrativeArea")
-        if let tzIdenfitier = res.string(forColumn: "timeZone"),
+        if let tzIdenfitier = res.string(forColumn: "timezone"),
            let tz = TimeZone(identifier: tzIdenfitier) {
             self.timeZone = tz
         }else{
             self.timeZone = nil
         }
     }
-    
+        
     var sqlParamDictionary : [String:Any] {
         return [
             "isoCountryCode" : self.isoCountryCode ?? NSNull(),
@@ -61,16 +61,6 @@ struct Location : Codable,Equatable,Hashable {
             "administrativeArea" : self.administrativeArea ?? NSNull(),
             "timezone" : self.timeZone?.identifier ?? NSNull()
         ]
-    }
-    
-    static var emptyParamDictionary : [String:Any] {
-        return [
-            "isoCountryCode" : NSNull(),
-            "locality" : NSNull(),
-            "administrativeArea" : NSNull(),
-            "timezone" : NSNull()
-        ]
-
     }
     
     var country : Country? {

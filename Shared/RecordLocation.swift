@@ -65,7 +65,7 @@ struct RecordLocation : Codable {
     var country : Country? {
         return self.isoCountryCode
     }
-    var day : Int {
+    private var day : Int {
         let formatter = DateFormatter()
         formatter.dateFormat = "YYYYMMdd"
         if let day = Int(formatter.string(from: self.timestamp)) {
@@ -160,5 +160,11 @@ extension RecordLocation : CustomStringConvertible {
             String(format: "(%.4f,%.4f)", self.coordinate.latitude, self.coordinate.longitude)
         ]
         return String(format:"RecordLocation(%@,%@)", info.joined(separator: ", "), self.location.description)
+    }
+}
+
+extension RecordLocation : Equatable {
+    static func == (lhs : RecordLocation, rhs : RecordLocation) -> Bool {
+        return lhs.recordId == rhs.recordId && lhs.date == rhs.date && lhs.location == rhs.location
     }
 }

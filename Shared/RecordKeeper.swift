@@ -45,6 +45,18 @@ class RecordKeeper {
         self.db = db
     }
     
+    func load() {
+        self.records = [:]
+        if let res = self.db.executeQuery("SELECT * FROM recordLocation", withParameterDictionary: nil) {
+            while( res.next() ){
+                if let one = try? RecordLocation(res: res),
+                   let recordId = one.recordId{
+                    self.records[recordId] = one
+                }
+            }
+        }
+    }
+    
     func add( record : RecordLocation ) -> RecordLocation? {
         guard let newRecord = try? record.save(db: self.db),
               let recordId = newRecord.recordId else {
@@ -70,16 +82,16 @@ class RecordKeeper {
     var days : [DayVisits] {
         var found : [Int:DayVisits] = [:]
         for one in self.records.values{
-            if var day = found[one.day] {
-                if day.add(record: one) {
-                    found[one.day] = day
+            if var date = found[one.date] {
+                if date.add(record: one) {
+                    found[one.date] = date
                 }
             }else{
-                found[one.day] = DayVisits(record: one)
+                found[one.date] = DayVisits(record: one)
             }
         }
         return Array(found.values).sorted {
-            $1.day < $0.day
+            $1.date < $0.date
         }
     }
     

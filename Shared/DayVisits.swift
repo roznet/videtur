@@ -28,18 +28,18 @@
 import Foundation
 
 struct DayVisits {
-    let day : Int
+    let date : Int
     var locations : [ Location ] = []
     
     init(record : RecordLocation) {
-        self.day = record.day
+        self.date = record.date
 
         self.locations = [ record.location ]
     }
     
     mutating func add( record : RecordLocation) -> Bool {
         // only check if same day
-        guard record.day == self.day && !self.locations.contains(record.location) else { return false }
+        guard record.date == self.date && !self.locations.contains(record.location) else { return false }
         
         self.locations.append(record.location)
         
@@ -50,6 +50,6 @@ struct DayVisits {
 
 extension DayVisits : CustomStringConvertible {
     var description: String {
-        return String(format: "Visits(\(self.day), locations: %@)", self.locations)
+        return String(format: "Visits(\(self.date), locations: %@)", self.locations)
     }
 }

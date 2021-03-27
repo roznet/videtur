@@ -28,7 +28,7 @@ import CoreLocation
 import RZUtils
 @testable import videtur
 
-class videturTests: XCTestCase {
+class RecordTests: XCTestCase {
 
     var remaining : [CLLocationCoordinate2D] = []
     var currentDate : Date? = nil
@@ -41,7 +41,6 @@ class videturTests: XCTestCase {
         self.model = nil
         RZFileOrganizer.removeEditableFile("test.db")
         self.model = Model(dbname: "test.db")
-        
     }
 
     override func tearDownWithError() throws {
@@ -79,15 +78,12 @@ class videturTests: XCTestCase {
         self.updateNext()
         
         wait(for: [expectation], timeout: 5.0, enforceOrder: false)
-        
-        if let days = self.model?.recordKeeper.days {
-            print( "\(days)")
-        }
-        
-        if let locations = self.model?.recordKeeper.locations {
-            print( "\(locations)")
-        }
 
+        let reloadedModel = Model(dbname: "test.db")
+        
+        reloadedModel.recordKeeper.load()
+        
+        XCTAssertEqual(reloadedModel.recordKeeper.locations, self.model?.recordKeeper.locations)
     }
     
     func updateNext() {
