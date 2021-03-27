@@ -25,6 +25,7 @@
 
 import XCTest
 import CoreLocation
+import RZUtils
 @testable import videtur
 
 class videturTests: XCTestCase {
@@ -32,10 +33,15 @@ class videturTests: XCTestCase {
     var remaining : [CLLocationCoordinate2D] = []
     var currentDate : Date? = nil
     var expectation : XCTestExpectation? = nil
-    var model : Model = Model(dbname:"test.db")
+    var model : Model? = nil
     
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        // clear and reset model from scratch
+        self.model = nil
+        RZFileOrganizer.removeEditableFile("test.db")
+        self.model = Model(dbname: "test.db")
+        
     }
 
     override func tearDownWithError() throws {
@@ -43,14 +49,19 @@ class videturTests: XCTestCase {
     }
     
     func testPlacemark() throws {
-        let coords = [ CLLocationCoordinate2D(latitude: 51.5074, longitude: 0.1278), // London
-                       CLLocationCoordinate2D(latitude: 51.5074, longitude: 0.1278), // London
-                       CLLocationCoordinate2D(latitude: 51.5074, longitude: 0.1278), // London
-                       CLLocationCoordinate2D(latitude: 48.8566, longitude: 2.3522), // Paris
-                       CLLocationCoordinate2D(latitude: 48.8566, longitude: 2.3522), // Paris
-                       CLLocationCoordinate2D(latitude: 47.3769, longitude: 8.5417), // zurich
-                       CLLocationCoordinate2D(latitude: 46.2044, longitude: 6.1432), // geneva
-                       CLLocationCoordinate2D(latitude: 40.7128, longitude: -74.0060), // New York
+        let coords = [
+            CLLocationCoordinate2D(latitude: 51.5074, longitude: 0.1278), // London
+            CLLocationCoordinate2D(latitude: 51.5074, longitude: 0.1278), // London
+            CLLocationCoordinate2D(latitude: 51.5074, longitude: 0.1278), // London
+            CLLocationCoordinate2D(latitude: 51.5074, longitude: 0.1278), // London
+            CLLocationCoordinate2D(latitude: 48.8566, longitude: 2.3522), // Paris
+            CLLocationCoordinate2D(latitude: 48.8566, longitude: 2.3522), // Paris
+            CLLocationCoordinate2D(latitude: 48.8566, longitude: 2.3522), // Paris
+            CLLocationCoordinate2D(latitude: 48.8566, longitude: 2.3522), // Paris
+            CLLocationCoordinate2D(latitude: 47.3769, longitude: 8.5417), // zurich
+            CLLocationCoordinate2D(latitude: 46.2044, longitude: 6.1432), // geneva
+            CLLocationCoordinate2D(latitude: 46.2044, longitude: 6.1432), // geneva
+            CLLocationCoordinate2D(latitude: 40.7128, longitude: -74.0060), // New York
         ]
         self.remaining = coords
         let component = DateComponents(year: 2021, month: 3, day: 10, hour: 11)
@@ -71,10 +82,13 @@ class videturTests: XCTestCase {
         }
         
         let coord = self.remaining.removeLast()
-        if let date = self.currentDate {
-            self.model.locationTracker.updateNewLocation(date: date, coordinate: coord){
+        if let date = self.currentDate, let model = self.model {
+            model.locationTracker.updateNewLocation(date: date, coordinate: coord){
                 record in
-                self.currentDate = Calendar.current.date(byAdding: .day, value: 1, to: date)
+                if let record = record {
+                    print( "\(record)")
+                }
+                self.currentDate = Calendar.current.date(byAdding: .hour, value: 12, to: date)
                 self.updateNext()
             }
         }

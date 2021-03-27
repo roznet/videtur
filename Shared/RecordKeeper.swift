@@ -46,7 +46,9 @@ class RecordKeeper {
     
     func add( record : RecordLocation ) -> RecordLocation? {
         guard let newRecord = try? record.save(db: self.db),
-              let recordId = newRecord.recordId else { return nil }
+              let recordId = newRecord.recordId else {
+            return nil
+        }
         records[recordId] = newRecord
         return newRecord
     }

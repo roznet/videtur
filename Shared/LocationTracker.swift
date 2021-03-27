@@ -73,7 +73,7 @@ class LocationTracker : NSObject,CLLocationManagerDelegate {
         geoCoder.reverseGeocodeLocation(CLLocation(latitude: record.coordinate.latitude, longitude: record.coordinate.longitude)){
             (placemark, error) in
             if let placemark = placemark?.first {
-                let geocodedRecord = record.geocoded(country: placemark.isoCountryCode, city: placemark.locality)
+                let geocodedRecord = record.geocoded(placemark : placemark)
                 let savedRecord = try? model.recordKeeper.update(record: geocodedRecord)
                 completion( savedRecord )
             }

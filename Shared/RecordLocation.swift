@@ -44,6 +44,7 @@ extension CLLocationCoordinate2D: Codable {
      }
  }
 
+
 struct RecordLocation : Codable {
     enum Status : Error {
         case ok
@@ -53,32 +54,40 @@ struct RecordLocation : Codable {
     let recordId : Int?
     let date : Date
     let coordinate : CLLocationCoordinate2D
-    let country : String?
-    let city : String?
+    let isoCountryCode : String?
+    let locality : String?
+    let timeZone : TimeZone?
     
-    static var sqlCreationStatement = "CREATE TABLE recordLocation (recordId INTEGER PRIMARY KEY, date REAL NONNULL, latitude REAL,longitude REAL, country TEXT, city TEXT)"
+    var day : Int {
+        return Int( self.date.timeIntervalSince1970 / (3600.0 * 24.0) )
+    }
+    
+    static var sqlCreationStatement = "CREATE TABLE recordLocation (recordId INTEGER PRIMARY KEY, date REAL NONNULL, latitude REAL,longitude REAL, isoCountryCode TEXT, locality TEXT, timezone TEXT)"
         
     init(date : Date, coordinate : CLLocationCoordinate2D) {
         self.date = date
         self.coordinate = coordinate
-        self.country = nil
-        self.city = nil
+        self.isoCountryCode = nil
+        self.locality = nil
         self.recordId = nil
+        self.timeZone = nil
     }
     
     private init(record : RecordLocation, with id : Int) {
         self.date = record.date
         self.coordinate = record.coordinate
-        self.country = record.country
-        self.city = record.city
+        self.isoCountryCode = record.isoCountryCode
+        self.locality = record.locality
+        self.timeZone = record.timeZone
         self.recordId = id
     }
     
-    private init( record : RecordLocation, country : String?, city : String?){
+    private init( record : RecordLocation, placemark : CLPlacemark){
         self.date = record.date
         self.coordinate = record.coordinate
-        self.country = country
-        self.city = city
+        self.isoCountryCode = placemark.isoCountryCode
+        self.locality = placemark.locality
+        self.timeZone = placemark.timeZone
         self.recordId = record.recordId
     }
     
@@ -88,25 +97,79 @@ struct RecordLocation : Codable {
         self.recordId = Int(res.int(forColumn: "recordId"))
         self.date = date
         self.coordinate = CLLocationCoordinate2D(latitude: res.double(forColumn: "latitude"), longitude: res.double(forColumn: "longitude"))
-        self.country = res.string(forColumn: "country")
-        self.city = res.string(forColumn: "city")
-    }
-    
-    func save(db : FMDatabase) throws -> RecordLocation {
-        let row : [Any] = [ self.date, self.coordinate.latitude, self.coordinate.longitude, self.country ?? "", self.city ?? ""]
-        
-        if let recordId = self.recordId {
-            let row : [Any] = [ self.date, self.coordinate.latitude, self.coordinate.longitude, self.country ?? "", self.city ?? ""]
-            try db.executeUpdate("UPDATE recordLocation SET date = ?, latitude = ?, longitude = ?, country = ?, city = ? WHERE recordId = \(recordId)", values: row)
-            return self
+        self.isoCountryCode = res.string(forColumn: "country")
+        self.locality = res.string(forColumn: "city")
+        if let tzIdenfitier = res.string(forColumn: "timeZone"),
+           let tz = TimeZone(identifier: tzIdenfitier) {
+            self.timeZone = tz
         }else{
-            try db.executeUpdate("INSERT INTO recordLocation (date,latitude,longitude,country,city) VALUES (?,?,?,?,?)", values: row)
-            return RecordLocation(record: self, with: Int(db.lastInsertRowId))
+            self.timeZone = nil
         }
     }
     
-    func geocoded(country : String?, city : String?) -> RecordLocation {
-        return RecordLocation(record: self, country: country, city: city)
+    func save(db : FMDatabase) throws -> RecordLocation {
+        let row : [Any] = [
+            self.date,
+            self.coordinate.latitude,
+            self.coordinate.longitude,
+            self.isoCountryCode ?? NSNull(),
+            self.locality ?? NSNull(),
+            self.timeZone != nil ? self.timeZone!.identifier : NSNull()
+        ]
+        
+        if let recordId = self.recordId {
+
+            try db.executeUpdate("UPDATE recordLocation SET date = ?, latitude = ?, longitude = ?, isoCountryCode = ?, locality = ?, timezone = ? WHERE recordId = \(recordId)", values: row)
+            return self
+        }else{
+            try db.executeUpdate("INSERT INTO recordLocation (date,latitude,longitude,isoCountryCode,locality,timezone) VALUES (?,?,?,?,?,?)", values: row)
+            return RecordLocation(record: self, with: Int(db.lastInsertRowId) )
+        }
     }
     
+    func geocoded(placemark : CLPlacemark) -> RecordLocation {
+        return RecordLocation(record: self, placemark: placemark)
+    }
+    
+    var flag : String {
+        var rv = ""
+        if let country = self.isoCountryCode?.uppercased() {
+            for uS in country.unicodeScalars {
+                if let nuS = UnicodeScalar(127397+uS.value) {
+                    rv.unicodeScalars.append( nuS )
+                }
+            }
+        }
+        return rv
+    }
+}
+
+extension RecordLocation : CustomStringConvertible {
+    var description: String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.timeStyle = .short
+        var idstr = "noid"
+        if let recordId = self.recordId {
+            idstr = "\(recordId)"
+        }
+        
+        var info = [
+            idstr,
+            formatter.string(from: self.date),
+            "\(self.day)",
+            String(format: "(%.4f,%.4f)", self.coordinate.latitude, self.coordinate.longitude)
+        ]
+        if let country = self.isoCountryCode {
+            info.append(country)
+            info.append(self.flag)
+        }
+        if let city = self.locality {
+            info.append(city)
+        }
+        if let tz = self.timeZone?.identifier {
+            info.append(tz)
+        }
+        return String(format:"RecordLocation(%@)", info.joined(separator: ", "))
+    }
 }
