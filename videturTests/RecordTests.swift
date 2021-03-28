@@ -40,7 +40,7 @@ class RecordTests: XCTestCase {
         // clear and reset model from scratch
         self.model = nil
         RZFileOrganizer.removeEditableFile("test.db")
-        self.model = Model(dbname: "test.db")
+        self.model = Model(dbpath: RZFileOrganizer.writeableFilePath("test.db"))
     }
 
     override func tearDownWithError() throws {
@@ -79,7 +79,7 @@ class RecordTests: XCTestCase {
         
         wait(for: [expectation], timeout: 5.0, enforceOrder: false)
 
-        let reloadedModel = Model(dbname: "test.db")
+        let reloadedModel = Model(dbpath: RZFileOrganizer.writeableFilePath("test.db"))
         
         reloadedModel.recordKeeper.load()
         
