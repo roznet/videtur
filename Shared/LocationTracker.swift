@@ -33,30 +33,17 @@ class LocationTracker : NSObject,CLLocationManagerDelegate {
     let geoCoder = CLGeocoder()
     weak var model : Model? = nil
     
-    let db : FMDatabase
-    
-    override init() {
-        self.db = FMDatabase(path: RZFileOrganizer.writeableFilePath("videtur.db"))
-    }
-    
     func startTracking() {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
         self.locationManager.requestAlwaysAuthorization()
         locationManager.startMonitoringSignificantLocationChanges()
     }
-    
-    func requestAuthorization() {
         
-    }
-    
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        
-    }
-    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let first = locations.first else { return }
-        
+        guard let device = try? RecordingDevice() else { return }
+        print( "\(device)")
         self.updateNewLocation(date: Date(), coordinate: first.coordinate) {
             record in
             if let record = record {

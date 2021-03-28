@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		422F3B7A260FAE6800BE3417 /* RecordingDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422F3B79260FAE6800BE3417 /* RecordingDevice.swift */; };
+		422F3B7B260FAE6800BE3417 /* RecordingDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422F3B79260FAE6800BE3417 /* RecordingDevice.swift */; };
 		42E168A3260F1BAB00224979 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E168A2260F1BAB00224979 /* Tests_iOS.swift */; };
 		42E168AE260F1BAB00224979 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E168AD260F1BAB00224979 /* Tests_macOS.swift */; };
 		42E168B0260F1BAB00224979 /* videturApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E16887260F1BAB00224979 /* videturApp.swift */; };
@@ -66,6 +68,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		422F3B79260FAE6800BE3417 /* RecordingDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingDevice.swift; sourceTree = "<group>"; };
 		42E16887260F1BAB00224979 /* videturApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = videturApp.swift; sourceTree = "<group>"; };
 		42E16888260F1BAB00224979 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		42E16889260F1BAB00224979 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -228,6 +231,7 @@
 				42E1694B260F650600224979 /* Country.swift */,
 				42E16953260F763F00224979 /* DayVisits.swift */,
 				42E1695B260F79FB00224979 /* LocationVisits.swift */,
+				422F3B79260FAE6800BE3417 /* RecordingDevice.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -447,6 +451,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				42E1692F260F31A000224979 /* RecordKeeper.swift in Sources */,
+				422F3B7A260FAE6800BE3417 /* RecordingDevice.swift in Sources */,
 				42E168CC260F1C2000224979 /* TrackingEvent.swift in Sources */,
 				42E1691D260F230200224979 /* Model.swift in Sources */,
 				42E168CE260F1C2000224979 /* LocationTracker.swift in Sources */,
@@ -472,6 +477,7 @@
 				42E168CD260F1C2000224979 /* TrackingEvent.swift in Sources */,
 				42E16930260F31A000224979 /* RecordKeeper.swift in Sources */,
 				42E16940260F31FD00224979 /* EventLocationChange.swift in Sources */,
+				422F3B7B260FAE6800BE3417 /* RecordingDevice.swift in Sources */,
 				42E168CF260F1C2000224979 /* LocationTracker.swift in Sources */,
 				42E168B3260F1BAB00224979 /* ContentView.swift in Sources */,
 				42E16938260F31CB00224979 /* RecordLocation.swift in Sources */,
