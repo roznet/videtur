@@ -34,8 +34,8 @@ class Model {
     
     init(dbname : String = "videtur.db") {
         self.locationTracker = LocationTracker()
-        
-        let db = FMDatabase(path: RZFileOrganizer.writeableFilePath(dbname))
+        let dbpath = RZFileOrganizer.writeableFilePath(dbname, forGroup: "group.net.ro-z.videtur")
+        let db = FMDatabase(path: dbpath)
         db.open()
         RecordKeeper.ensureDbStructure(db: db)
         self.recordKeeper = RecordKeeper(db: db)

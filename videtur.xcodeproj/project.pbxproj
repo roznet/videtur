@@ -69,6 +69,8 @@
 
 /* Begin PBXFileReference section */
 		422F3B79260FAE6800BE3417 /* RecordingDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingDevice.swift; sourceTree = "<group>"; };
+		422F3B862610945800BE3417 /* videtur.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = videtur.entitlements; sourceTree = "<group>"; };
+		422F3B872610949000BE3417 /* rzutils */ = {isa = PBXFileReference; lastKnownFileType = folder; name = rzutils; path = ../rzutils; sourceTree = "<group>"; };
 		42E16887260F1BAB00224979 /* videturApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = videturApp.swift; sourceTree = "<group>"; };
 		42E16888260F1BAB00224979 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		42E16889260F1BAB00224979 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -143,6 +145,8 @@
 		42E16881260F1BAA00224979 = {
 			isa = PBXGroup;
 			children = (
+				422F3B872610949000BE3417 /* rzutils */,
+				422F3B862610945800BE3417 /* videtur.entitlements */,
 				42E16886260F1BAB00224979 /* Shared */,
 				42E16890260F1BAB00224979 /* iOS */,
 				42E16897260F1BAB00224979 /* macOS */,
@@ -648,6 +652,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = videtur.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M7QSSF3624;
 				ENABLE_PREVIEWS = YES;
@@ -670,6 +675,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = videtur.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M7QSSF3624;
 				ENABLE_PREVIEWS = YES;
