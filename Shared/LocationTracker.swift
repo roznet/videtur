@@ -27,47 +27,67 @@ import Foundation
 import CoreLocation
 import FMDB
 import RZUtils
+import RZUtilsSwift
+
 
 class LocationTracker : NSObject,CLLocationManagerDelegate {
+    typealias LocationTrackerCompletionHandler = (RecordLocation?) -> Void
+    
     let locationManager = CLLocationManager()
     let geoCoder = CLGeocoder()
     weak var model : Model? = nil
+    var completion : LocationTrackerCompletionHandler? = nil
     
-    func startTracking() {
+    
+    func startTracking(completion : LocationTrackerCompletionHandler? = nil) {
         locationManager.delegate = self
+        self.completion = completion
         locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
         self.locationManager.requestAlwaysAuthorization()
-        locationManager.startMonitoringSignificantLocationChanges()
+        locationManager.requestLocation()
     }
         
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let first = locations.first else { return }
+        #if os(iOS)
         guard let device = try? RecordingDevice() else { return }
-        print( "\(device)")
-        self.updateNewLocation(date: Date(), coordinate: first.coordinate) {
-            record in
-            if let record = record {
-                print( "Updated \(record)" )
-            }else{
-                print( "No record for \(locations)" )
-            }
-        }
+        RZSLog.info( "tracked from \(device)")
+        #endif
+        
+        self.updateNewLocation(date: Date(), coordinate: first.coordinate)
     }
     
-    func updateNewLocation( date: Date, coordinate : CLLocationCoordinate2D, completion: @escaping (RecordLocation?) -> Void) {
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        RZSLog.error("failed to locate \(error)")
+    }
+    
+    func updateNewLocation( date: Date, coordinate : CLLocationCoordinate2D, completion: LocationTrackerCompletionHandler? = nil) {
+        if completion != nil {
+            self.completion = completion
+        }
         guard let model = self.model,
               let record = model.recordKeeper.add(record: RecordLocation(date: date, coordinate: coordinate) )
         else {
-            completion(nil);
+            if let completion = self.completion {
+                completion(nil);
+            }
             return
         }
-        
+        RZSLog.info( "got location \(record)")
+
         geoCoder.reverseGeocodeLocation(CLLocation(latitude: record.coordinate.latitude, longitude: record.coordinate.longitude)){
             (placemark, error) in
             if let placemark = placemark?.first {
                 let geocodedRecord = record.geocoded(placemark : placemark)
                 let savedRecord = try? model.recordKeeper.update(record: geocodedRecord)
-                completion( savedRecord )
+                if let savedRecord = savedRecord {
+                    RZSLog.info( "reversed location \(savedRecord)")
+                }else{
+                    RZSLog.info( "reversed location failed \(record)")
+                }
+                if let completion = self.completion {
+                    completion(savedRecord);
+                }
             }
         }
     }

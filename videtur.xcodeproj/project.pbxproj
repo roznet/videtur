@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		422F3B7A260FAE6800BE3417 /* RecordingDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422F3B79260FAE6800BE3417 /* RecordingDevice.swift */; };
-		422F3B7B260FAE6800BE3417 /* RecordingDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422F3B79260FAE6800BE3417 /* RecordingDevice.swift */; };
+		42550D79261458E100FA28DF /* RZUtils in Frameworks */ = {isa = PBXBuildFile; productRef = 42550D78261458E100FA28DF /* RZUtils */; };
+		42550D8526145EA200FA28DF /* RZUtilsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 42550D8426145EA200FA28DF /* RZUtilsSwift */; };
 		42E168A3260F1BAB00224979 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E168A2260F1BAB00224979 /* Tests_iOS.swift */; };
 		42E168AE260F1BAB00224979 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E168AD260F1BAB00224979 /* Tests_macOS.swift */; };
 		42E168B0260F1BAB00224979 /* videturApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E16887260F1BAB00224979 /* videturApp.swift */; };
@@ -108,6 +109,7 @@
 			files = (
 				42E168DD260F1C6E00224979 /* RZUtils in Frameworks */,
 				42E168D6260F1C5C00224979 /* FMDB in Frameworks */,
+				42550D8526145EA200FA28DF /* RZUtilsSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,6 +117,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42550D79261458E100FA28DF /* RZUtils in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,6 +145,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		42550D77261458E100FA28DF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		42E16881260F1BAA00224979 = {
 			isa = PBXGroup;
 			children = (
@@ -152,6 +162,7 @@
 				42E16897260F1BAB00224979 /* macOS */,
 				42E168F9260F1F4200224979 /* Tests */,
 				42E1688F260F1BAB00224979 /* Products */,
+				42550D77261458E100FA28DF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -278,6 +289,7 @@
 			packageProductDependencies = (
 				42E168D5260F1C5C00224979 /* FMDB */,
 				42E168DC260F1C6E00224979 /* RZUtils */,
+				42550D8426145EA200FA28DF /* RZUtilsSwift */,
 			);
 			productName = "videtur (iOS)";
 			productReference = 42E1688E260F1BAB00224979 /* videtur.app */;
@@ -296,6 +308,9 @@
 			dependencies = (
 			);
 			name = "videtur (macOS)";
+			packageProductDependencies = (
+				42550D78261458E100FA28DF /* RZUtils */,
+			);
 			productName = "videtur (macOS)";
 			productReference = 42E16896260F1BAB00224979 /* videtur.app */;
 			productType = "com.apple.product-type.application";
@@ -481,7 +496,6 @@
 				42E168CD260F1C2000224979 /* TrackingEvent.swift in Sources */,
 				42E16930260F31A000224979 /* RecordKeeper.swift in Sources */,
 				42E16940260F31FD00224979 /* EventLocationChange.swift in Sources */,
-				422F3B7B260FAE6800BE3417 /* RecordingDevice.swift in Sources */,
 				42E168CF260F1C2000224979 /* LocationTracker.swift in Sources */,
 				42E168B3260F1BAB00224979 /* ContentView.swift in Sources */,
 				42E16938260F31CB00224979 /* RecordLocation.swift in Sources */,
@@ -955,6 +969,14 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		42550D78261458E100FA28DF /* RZUtils */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = RZUtils;
+		};
+		42550D8426145EA200FA28DF /* RZUtilsSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = RZUtilsSwift;
+		};
 		42E168D5260F1C5C00224979 /* FMDB */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 42E168D4260F1C5C00224979 /* XCRemoteSwiftPackageReference "fmdb" */;

@@ -25,18 +25,55 @@
 
 import Foundation
 import UIKit
+import BackgroundTasks
+import RZUtilsSwift
 
 class AppDelegate : NSObject, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        print( "Launching" )
-        
-        //application.setMinimumBackgroundFetchInterval(60.0)
-        
+        if let launchOptions = launchOptions {
+            RZSLog.info("Launched with \(launchOptions)")
+        }else{
+            RZSLog.info("Launched")
+        }
+        registerLocationTrack()
         return true
     }
+
+    func registerLocationTrack() {
+        BGTaskScheduler.shared.register(forTaskWithIdentifier: "net.ro-z.videtur.locationtrack", using: nil){
+            task in
+            guard let task = task as? BGAppRefreshTask else { return }
+            self.handleLocationTrackTask(task: task)
+        }
+    }
     
-    func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+    func scheduleLocationTrack() {
+        BGTaskScheduler.shared.getPendingTaskRequests{
+            tasks in
+            RZSLog.info("found \(tasks)")
+        }
         
+        let locationTrackTask = BGAppRefreshTaskRequest(identifier: "net.ro-z.videtur.locationtrack")
+        locationTrackTask.earliestBeginDate = Date(timeIntervalSinceNow: 3600.0)
+        do {
+            try BGTaskScheduler.shared.submit(locationTrackTask)
+            RZSLog.info("Submitted task \(locationTrackTask)")
+        }catch{
+            RZSLog.error("Unable to submit task: \(error.localizedDescription)")
+        }
+    }
+    
+    func handleLocationTrackTask(task : BGAppRefreshTask){
+        task.expirationHandler = {
+            task.setTaskCompleted(success: false)
+            RZSLog.error("Task expirerd \(task)")
+        }
+        // schedule next one
+        self.scheduleLocationTrack()
+        Model.shared.locationTracker.startTracking {
+            record in
+            task.setTaskCompleted(success: true)
+        }
     }
 }
