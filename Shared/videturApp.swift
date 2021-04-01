@@ -34,6 +34,10 @@ struct videturApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     #endif
         
+    init() {
+        self.registerBackgroundTasks()
+    }
+    
     var body: some Scene {
         WindowGroup {
             ContentView()

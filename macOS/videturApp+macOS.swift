@@ -33,5 +33,9 @@ class AppEventsmacOS : AppEvents {
     func sceneChange(phase: ScenePhase){
         
     }
+    
+    func registerBackgroundTasks() {
+        
+    }
 
 }

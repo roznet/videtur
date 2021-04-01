@@ -1,6 +1,6 @@
 //  MIT License
 //
-//  Created on 26/03/2021 for Videtur
+//  Created on 01/04/2021 for videtur
 //
 //  Copyright (c) 2021 Brice Rosenzweig
 //
@@ -23,24 +23,30 @@
 //  SOFTWARE.
 //
 
-import SwiftUI
 
-struct ContentView: View {
 
+import Foundation
+
+class RecordKeeperObservable : ObservableObject {
+    @Published var list : [RecordLocation] = []
     
-    var body: some View {
-        VStack(alignment: .leading) {
-            Text("Title")
-            
-            
-        }
-        RecordsListView(records: RecordKeeperObservable(recordKeeper: Model.shared.recordKeeper))
+    let recordKeeper : RecordKeeper?
+    
+    init(records: [RecordLocation]){
+        self.list = records
+        self.recordKeeper = nil
     }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        
-        ContentView()
+    
+    init(recordKeeper : RecordKeeper){
+        self.recordKeeper = recordKeeper
+        self.list = recordKeeper.records
+        NotificationCenter.default.addObserver(forName: RecordKeeper.recordChangedNotification, object: recordKeeper, queue: nil){
+            _ in
+            self.list = recordKeeper.records
+        }
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 }

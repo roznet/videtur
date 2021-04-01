@@ -15,8 +15,10 @@
 		4278F1942614837B00E5B7E5 /* videturApp+macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4278F1932614837B00E5B7E5 /* videturApp+macOS.swift */; };
 		4278F1B42614A37700E5B7E5 /* SingleRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4278F1B32614A37700E5B7E5 /* SingleRecordView.swift */; };
 		4278F1B52614A37700E5B7E5 /* SingleRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4278F1B32614A37700E5B7E5 /* SingleRecordView.swift */; };
-		4278F1BC2614F20700E5B7E5 /* RecordsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4278F1BB2614F20700E5B7E5 /* RecordsList.swift */; };
-		4278F1BD2614F20700E5B7E5 /* RecordsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4278F1BB2614F20700E5B7E5 /* RecordsList.swift */; };
+		4278F1BC2614F20700E5B7E5 /* RecordsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4278F1BB2614F20700E5B7E5 /* RecordsListView.swift */; };
+		4278F1BD2614F20700E5B7E5 /* RecordsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4278F1BB2614F20700E5B7E5 /* RecordsListView.swift */; };
+		4278F1CE2615ADB400E5B7E5 /* RecordKeeperObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4278F1CD2615ADB400E5B7E5 /* RecordKeeperObservable.swift */; };
+		4278F1CF2615ADB400E5B7E5 /* RecordKeeperObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4278F1CD2615ADB400E5B7E5 /* RecordKeeperObservable.swift */; };
 		42E168A3260F1BAB00224979 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E168A2260F1BAB00224979 /* Tests_iOS.swift */; };
 		42E168AE260F1BAB00224979 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E168AD260F1BAB00224979 /* Tests_macOS.swift */; };
 		42E168B0260F1BAB00224979 /* videturApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E16887260F1BAB00224979 /* videturApp.swift */; };
@@ -82,7 +84,8 @@
 		4278F18C2614835800E5B7E5 /* videturApp+iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "videturApp+iOS.swift"; sourceTree = "<group>"; };
 		4278F1932614837B00E5B7E5 /* videturApp+macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "videturApp+macOS.swift"; sourceTree = "<group>"; };
 		4278F1B32614A37700E5B7E5 /* SingleRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleRecordView.swift; sourceTree = "<group>"; };
-		4278F1BB2614F20700E5B7E5 /* RecordsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsList.swift; sourceTree = "<group>"; };
+		4278F1BB2614F20700E5B7E5 /* RecordsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsListView.swift; sourceTree = "<group>"; };
+		4278F1CD2615ADB400E5B7E5 /* RecordKeeperObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordKeeperObservable.swift; sourceTree = "<group>"; };
 		42E16887260F1BAB00224979 /* videturApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = videturApp.swift; sourceTree = "<group>"; };
 		42E16888260F1BAB00224979 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		42E16889260F1BAB00224979 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -244,7 +247,8 @@
 				42E16888260F1BAB00224979 /* ContentView.swift */,
 				42E16889260F1BAB00224979 /* Assets.xcassets */,
 				4278F1B32614A37700E5B7E5 /* SingleRecordView.swift */,
-				4278F1BB2614F20700E5B7E5 /* RecordsList.swift */,
+				4278F1BB2614F20700E5B7E5 /* RecordsListView.swift */,
+				4278F1CD2615ADB400E5B7E5 /* RecordKeeperObservable.swift */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -494,9 +498,10 @@
 				42E16954260F763F00224979 /* DayVisits.swift in Sources */,
 				42E168B2260F1BAB00224979 /* ContentView.swift in Sources */,
 				42E16964260F7F1100224979 /* Location.swift in Sources */,
-				4278F1BC2614F20700E5B7E5 /* RecordsList.swift in Sources */,
+				4278F1BC2614F20700E5B7E5 /* RecordsListView.swift in Sources */,
 				42E16911260F21F000224979 /* AppDelegate.swift in Sources */,
 				42E168B0260F1BAB00224979 /* videturApp.swift in Sources */,
+				4278F1CE2615ADB400E5B7E5 /* RecordKeeperObservable.swift in Sources */,
 				42E1693F260F31FD00224979 /* EventLocationChange.swift in Sources */,
 				42E1694C260F650600224979 /* Country.swift in Sources */,
 				42E1695C260F79FB00224979 /* LocationVisits.swift in Sources */,
@@ -518,7 +523,8 @@
 				4278F1B52614A37700E5B7E5 /* SingleRecordView.swift in Sources */,
 				42E16930260F31A000224979 /* RecordKeeper.swift in Sources */,
 				42E16940260F31FD00224979 /* EventLocationChange.swift in Sources */,
-				4278F1BD2614F20700E5B7E5 /* RecordsList.swift in Sources */,
+				4278F1BD2614F20700E5B7E5 /* RecordsListView.swift in Sources */,
+				4278F1CF2615ADB400E5B7E5 /* RecordKeeperObservable.swift in Sources */,
 				42E168CF260F1C2000224979 /* LocationTracker.swift in Sources */,
 				42E168B3260F1BAB00224979 /* ContentView.swift in Sources */,
 				42E16938260F31CB00224979 /* RecordLocation.swift in Sources */,

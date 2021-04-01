@@ -36,18 +36,16 @@ extension videturApp {
     func sceneChange(phase: ScenePhase){
         if phase == .active {
             // Register location track
-            /*
-            self.registerLocationTrack()
             self.scheduleLocationTrack()
             Model.shared.locationTracker.startTracking()
-             */
         }
     }
-
-    func registerLocationTrack() {
+    
+    func registerBackgroundTasks() {
         BGTaskScheduler.shared.register(forTaskWithIdentifier: "net.ro-z.videtur.locationtrack", using: nil){
             task in
             guard let task = task as? BGAppRefreshTask else { return }
+            RZSLog.info("Processing task \(task)")
             self.handleLocationTrackTask(task: task)
         }
     }

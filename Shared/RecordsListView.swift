@@ -27,11 +27,11 @@
 
 import SwiftUI
 
-struct RecordsList: View {
-    @State var records : [RecordLocation]
+struct RecordsListView: View {
+    @ObservedObject var records : RecordKeeperObservable
     
     var body: some View {
-        List(records) { record in
+        List(records.list) { record in
             SingleRecordView(record: record)
         }
     }
@@ -43,6 +43,6 @@ struct RecordsList_Previews: PreviewProvider {
         
         let sample = try! JSONDecoder().decode([RecordLocation].self, from: jsonData!)
 
-        RecordsList(records: sample)
+        RecordsListView(records: RecordKeeperObservable(records: sample))
     }
 }

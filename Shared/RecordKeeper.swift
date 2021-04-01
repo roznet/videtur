@@ -31,6 +31,8 @@ import RZUtils
 
 class RecordKeeper {
     
+    static let recordChangedNotification = Notification.Name("RecordKeeper.recordChanged")
+    
     enum Status : Error {
         case ok
         case invalidRecordWithoutId
@@ -41,7 +43,7 @@ class RecordKeeper {
     
     var records : [RecordLocation] {
         let rv : [RecordLocation] = Array(self.recordsDatabase.values)
-        return rv.sorted { $1.date < $0.date }
+        return rv.sorted { $1.timestamp < $0.timestamp }
         
     }
     
@@ -61,6 +63,7 @@ class RecordKeeper {
                 }
             }
         }
+        NotificationCenter.default.post(name: Self.recordChangedNotification, object: self)
     }
     
     func add( record : RecordLocation ) -> RecordLocation? {
@@ -69,6 +72,7 @@ class RecordKeeper {
             return nil
         }
         recordsDatabase[recordId] = newRecord
+        NotificationCenter.default.post(name: Self.recordChangedNotification, object: self)
         return newRecord
     }
     
@@ -76,6 +80,7 @@ class RecordKeeper {
         guard let recordId = record.recordId else { throw RecordKeeper.Status.invalidRecordWithoutId }
         let newRecord = try record.save(db: self.db)
         self.recordsDatabase[recordId] = newRecord
+        NotificationCenter.default.post(name: Self.recordChangedNotification, object: self)
         return newRecord
     }
     
