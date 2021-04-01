@@ -29,11 +29,11 @@ import RZUtilsSwift
 @main
 struct videturApp: App {
     @Environment(\.scenePhase) private var scenePhase
-    
+
     #if os(iOS)
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     #endif
-    
+        
     var body: some Scene {
         WindowGroup {
             ContentView()
@@ -41,13 +41,7 @@ struct videturApp: App {
         .onChange(of: scenePhase){
             phase in
             RZSLog.info("Scene change \(phase)")
-            if phase == .active {
-                Model.shared.locationTracker.startTracking {
-                    _ in
-                    // schedule the next track
-                    self.appDelegate.scheduleLocationTrack()
-                }
-            }
+            self.sceneChange(phase: phase)
         }
     }
 }

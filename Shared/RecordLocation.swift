@@ -45,11 +45,17 @@ extension CLLocationCoordinate2D: Codable {
  }
 
 
-struct RecordLocation : Codable {
+struct RecordLocation : Codable,Identifiable {
     enum Status : Error {
         case ok
         case invalidDate
     }
+    
+    private enum CodingKeys: String, CodingKey {
+        case recordId, timestamp, date, coordinate, location
+    }
+    
+    let id = UUID()
     
     let recordId : Int?
     let timestamp : Date

@@ -42,7 +42,7 @@ class LocationTracker : NSObject,CLLocationManagerDelegate {
     func startTracking(completion : LocationTrackerCompletionHandler? = nil) {
         locationManager.delegate = self
         self.completion = completion
-        locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
+        locationManager.desiredAccuracy = kCLLocationAccuracyReduced;
         self.locationManager.requestAlwaysAuthorization()
         locationManager.requestLocation()
     }

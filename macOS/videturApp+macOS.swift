@@ -1,6 +1,6 @@
 //  MIT License
 //
-//  Created on 26/03/2021 for Videtur
+//  Created on 31/03/2021 for videtur (macOS)
 //
 //  Copyright (c) 2021 Brice Rosenzweig
 //
@@ -22,27 +22,16 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 //
-import Foundation
-import CoreLocation
-import RZUtils
 
-class Model {
-    static var shared = Model()
+
+
+import Foundation
+import SwiftUI
+
+class AppEventsmacOS : AppEvents {
     
-    let locationTracker : LocationTracker
-    let recordKeeper : RecordKeeper
-    
-    init(dbpath : String = RZFileOrganizer.writeableFilePath("videtur.db", forGroup: "group.net.ro-z.videtur")) {
-        self.locationTracker = LocationTracker()
-        let db = FMDatabase(path: dbpath)
-        db.open()
-        RecordKeeper.ensureDbStructure(db: db)
-        self.recordKeeper = RecordKeeper(db: db)
+    func sceneChange(phase: ScenePhase){
         
-        self.locationTracker.model = self
-        self.recordKeeper.model = self
-        
-        self.recordKeeper.load()
     }
-    
+
 }

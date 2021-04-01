@@ -10,6 +10,13 @@
 		422F3B7A260FAE6800BE3417 /* RecordingDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422F3B79260FAE6800BE3417 /* RecordingDevice.swift */; };
 		42550D79261458E100FA28DF /* RZUtils in Frameworks */ = {isa = PBXBuildFile; productRef = 42550D78261458E100FA28DF /* RZUtils */; };
 		42550D8526145EA200FA28DF /* RZUtilsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 42550D8426145EA200FA28DF /* RZUtilsSwift */; };
+		4278F17E2614820300E5B7E5 /* RZUtilsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4278F17D2614820300E5B7E5 /* RZUtilsSwift */; };
+		4278F18D2614835800E5B7E5 /* videturApp+iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4278F18C2614835800E5B7E5 /* videturApp+iOS.swift */; };
+		4278F1942614837B00E5B7E5 /* videturApp+macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4278F1932614837B00E5B7E5 /* videturApp+macOS.swift */; };
+		4278F1B42614A37700E5B7E5 /* SingleRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4278F1B32614A37700E5B7E5 /* SingleRecordView.swift */; };
+		4278F1B52614A37700E5B7E5 /* SingleRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4278F1B32614A37700E5B7E5 /* SingleRecordView.swift */; };
+		4278F1BC2614F20700E5B7E5 /* RecordsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4278F1BB2614F20700E5B7E5 /* RecordsList.swift */; };
+		4278F1BD2614F20700E5B7E5 /* RecordsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4278F1BB2614F20700E5B7E5 /* RecordsList.swift */; };
 		42E168A3260F1BAB00224979 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E168A2260F1BAB00224979 /* Tests_iOS.swift */; };
 		42E168AE260F1BAB00224979 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E168AD260F1BAB00224979 /* Tests_macOS.swift */; };
 		42E168B0260F1BAB00224979 /* videturApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E16887260F1BAB00224979 /* videturApp.swift */; };
@@ -72,6 +79,10 @@
 		422F3B79260FAE6800BE3417 /* RecordingDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingDevice.swift; sourceTree = "<group>"; };
 		422F3B862610945800BE3417 /* videtur.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = videtur.entitlements; sourceTree = "<group>"; };
 		422F3B872610949000BE3417 /* rzutils */ = {isa = PBXFileReference; lastKnownFileType = folder; name = rzutils; path = ../rzutils; sourceTree = "<group>"; };
+		4278F18C2614835800E5B7E5 /* videturApp+iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "videturApp+iOS.swift"; sourceTree = "<group>"; };
+		4278F1932614837B00E5B7E5 /* videturApp+macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "videturApp+macOS.swift"; sourceTree = "<group>"; };
+		4278F1B32614A37700E5B7E5 /* SingleRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleRecordView.swift; sourceTree = "<group>"; };
+		4278F1BB2614F20700E5B7E5 /* RecordsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsList.swift; sourceTree = "<group>"; };
 		42E16887260F1BAB00224979 /* videturApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = videturApp.swift; sourceTree = "<group>"; };
 		42E16888260F1BAB00224979 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		42E16889260F1BAB00224979 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -117,6 +128,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4278F17E2614820300E5B7E5 /* RZUtilsSwift in Frameworks */,
 				42550D79261458E100FA28DF /* RZUtils in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -190,6 +202,7 @@
 		42E16890260F1BAB00224979 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				4278F18C2614835800E5B7E5 /* videturApp+iOS.swift */,
 				42E16910260F21F000224979 /* AppDelegate.swift */,
 				42E16891260F1BAB00224979 /* Info.plist */,
 			);
@@ -201,6 +214,7 @@
 			children = (
 				42E16898260F1BAB00224979 /* Info.plist */,
 				42E16899260F1BAB00224979 /* macOS.entitlements */,
+				4278F1932614837B00E5B7E5 /* videturApp+macOS.swift */,
 			);
 			path = macOS;
 			sourceTree = "<group>";
@@ -229,6 +243,8 @@
 				42E16887260F1BAB00224979 /* videturApp.swift */,
 				42E16888260F1BAB00224979 /* ContentView.swift */,
 				42E16889260F1BAB00224979 /* Assets.xcassets */,
+				4278F1B32614A37700E5B7E5 /* SingleRecordView.swift */,
+				4278F1BB2614F20700E5B7E5 /* RecordsList.swift */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -310,6 +326,7 @@
 			name = "videtur (macOS)";
 			packageProductDependencies = (
 				42550D78261458E100FA28DF /* RZUtils */,
+				4278F17D2614820300E5B7E5 /* RZUtilsSwift */,
 			);
 			productName = "videtur (macOS)";
 			productReference = 42E16896260F1BAB00224979 /* videtur.app */;
@@ -477,11 +494,14 @@
 				42E16954260F763F00224979 /* DayVisits.swift in Sources */,
 				42E168B2260F1BAB00224979 /* ContentView.swift in Sources */,
 				42E16964260F7F1100224979 /* Location.swift in Sources */,
+				4278F1BC2614F20700E5B7E5 /* RecordsList.swift in Sources */,
 				42E16911260F21F000224979 /* AppDelegate.swift in Sources */,
 				42E168B0260F1BAB00224979 /* videturApp.swift in Sources */,
 				42E1693F260F31FD00224979 /* EventLocationChange.swift in Sources */,
 				42E1694C260F650600224979 /* Country.swift in Sources */,
 				42E1695C260F79FB00224979 /* LocationVisits.swift in Sources */,
+				4278F1B42614A37700E5B7E5 /* SingleRecordView.swift in Sources */,
+				4278F18D2614835800E5B7E5 /* videturApp+iOS.swift in Sources */,
 				42E16937260F31CB00224979 /* RecordLocation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -490,12 +510,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4278F1942614837B00E5B7E5 /* videturApp+macOS.swift in Sources */,
 				42E1691E260F230200224979 /* Model.swift in Sources */,
 				42E1695D260F79FB00224979 /* LocationVisits.swift in Sources */,
 				42E1694D260F650600224979 /* Country.swift in Sources */,
 				42E168CD260F1C2000224979 /* TrackingEvent.swift in Sources */,
+				4278F1B52614A37700E5B7E5 /* SingleRecordView.swift in Sources */,
 				42E16930260F31A000224979 /* RecordKeeper.swift in Sources */,
 				42E16940260F31FD00224979 /* EventLocationChange.swift in Sources */,
+				4278F1BD2614F20700E5B7E5 /* RecordsList.swift in Sources */,
 				42E168CF260F1C2000224979 /* LocationTracker.swift in Sources */,
 				42E168B3260F1BAB00224979 /* ContentView.swift in Sources */,
 				42E16938260F31CB00224979 /* RecordLocation.swift in Sources */,
@@ -974,6 +997,10 @@
 			productName = RZUtils;
 		};
 		42550D8426145EA200FA28DF /* RZUtilsSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = RZUtilsSwift;
+		};
+		4278F17D2614820300E5B7E5 /* RZUtilsSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = RZUtilsSwift;
 		};

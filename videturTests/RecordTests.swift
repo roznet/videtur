@@ -88,6 +88,15 @@ class RecordTests: XCTestCase {
     
     func updateNext() {
         if self.remaining.count == 0 {
+            let records = self.model?.recordKeeper.records
+            do {
+                let encoded = try JSONEncoder().encode(records)
+                print( String(data:encoded, encoding: .utf8))
+                
+            }catch{
+                print( error)
+            }
+
             self.expectation?.fulfill()
             self.currentDate = nil
             return
@@ -98,8 +107,11 @@ class RecordTests: XCTestCase {
             model.locationTracker.updateNewLocation(date: date, coordinate: coord){
                 record in
                 if let record = record {
+                    
                     print( "\(record)")
+                    
                 }
+                
                 self.currentDate = Calendar.current.date(byAdding: .hour, value: 12, to: date)
                 self.updateNext()
             }

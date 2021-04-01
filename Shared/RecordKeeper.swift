@@ -37,7 +37,13 @@ class RecordKeeper {
     }
     
     let db : FMDatabase
-    var records : [Int:RecordLocation] = [:]
+    private var recordsDatabase : [Int:RecordLocation] = [:]
+    
+    var records : [RecordLocation] {
+        let rv : [RecordLocation] = Array(self.recordsDatabase.values)
+        return rv.sorted { $1.date < $0.date }
+        
+    }
     
     weak var model : Model? = nil
     
@@ -46,12 +52,12 @@ class RecordKeeper {
     }
     
     func load() {
-        self.records = [:]
+        self.recordsDatabase = [:]
         if let res = self.db.executeQuery("SELECT * FROM recordLocation", withParameterDictionary: nil) {
             while( res.next() ){
                 if let one = try? RecordLocation(res: res),
                    let recordId = one.recordId{
-                    self.records[recordId] = one
+                    self.recordsDatabase[recordId] = one
                 }
             }
         }
@@ -62,14 +68,14 @@ class RecordKeeper {
               let recordId = newRecord.recordId else {
             return nil
         }
-        records[recordId] = newRecord
+        recordsDatabase[recordId] = newRecord
         return newRecord
     }
     
     func update( record : RecordLocation) throws -> RecordLocation {
         guard let recordId = record.recordId else { throw RecordKeeper.Status.invalidRecordWithoutId }
         let newRecord = try record.save(db: self.db)
-        self.records[recordId] = newRecord
+        self.recordsDatabase[recordId] = newRecord
         return newRecord
     }
     
@@ -79,9 +85,19 @@ class RecordKeeper {
         }
     }
         
+    var lastRecord : RecordLocation? {
+        var rv : RecordLocation? = nil
+        for (_,v) in self.recordsDatabase {
+            if rv == nil || rv!.date < v.date{
+                rv = v
+            }
+        }
+        return rv
+    }
+
     var days : [DayVisits] {
         var found : [Int:DayVisits] = [:]
-        for one in self.records.values{
+        for one in self.recordsDatabase.values{
             if var date = found[one.date] {
                 if date.add(record: one) {
                     found[one.date] = date
@@ -97,7 +113,7 @@ class RecordKeeper {
     
     var locations : [LocationVisits] {
         var found : [Location:LocationVisits] = [:]
-        for one in self.records.values{
+        for one in self.recordsDatabase.values{
             if var location = found[one.location] {
                 if location.add(other: one) {
                     found[one.location] = location
@@ -110,4 +126,5 @@ class RecordKeeper {
             $1.latest < $0.latest
         }
     }
+
 }
