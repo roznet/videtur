@@ -1,6 +1,6 @@
 //  MIT License
 //
-//  Created on 31/03/2021 for videtur (macOS)
+//  Created on 01/04/2021 for videtur (macOS)
 //
 //  Copyright (c) 2021 Brice Rosenzweig
 //
@@ -26,19 +26,14 @@
 
 
 import Foundation
-import SwiftUI
+import Cocoa
 
-extension videturApp {
-    
-    func sceneChange(phase: ScenePhase){
-        
-    }
-    
-    func registerBackgroundTasks() {
-        DispatchQueue.global(qos: .default).async {
-            Model.shared.photos.fetchFromPhotos(startDate: Date(timeIntervalSinceNow: -3600.0*24.0*30.0))
-        }
-        
-    }
+typealias UIImage = NSImage
 
+extension NSImage {
+    var cgImage: CGImage? {
+        return cgImage(forProposedRect: nil,
+                       context: nil,
+                       hints: nil)
+    }
 }

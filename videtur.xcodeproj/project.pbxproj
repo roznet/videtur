@@ -19,6 +19,11 @@
 		4278F1BD2614F20700E5B7E5 /* RecordsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4278F1BB2614F20700E5B7E5 /* RecordsListView.swift */; };
 		4278F1CE2615ADB400E5B7E5 /* RecordKeeperObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4278F1CD2615ADB400E5B7E5 /* RecordKeeperObservable.swift */; };
 		4278F1CF2615ADB400E5B7E5 /* RecordKeeperObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4278F1CD2615ADB400E5B7E5 /* RecordKeeperObservable.swift */; };
+		4278F1DB2615C09300E5B7E5 /* Photos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4278F1DA2615C09300E5B7E5 /* Photos.swift */; };
+		4278F1DC2615C09300E5B7E5 /* Photos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4278F1DA2615C09300E5B7E5 /* Photos.swift */; };
+		4278F1ED2615D33600E5B7E5 /* PhotoLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4278F1EC2615D33600E5B7E5 /* PhotoLocation.swift */; };
+		4278F1EE2615D33600E5B7E5 /* PhotoLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4278F1EC2615D33600E5B7E5 /* PhotoLocation.swift */; };
+		4278F2342615E0B400E5B7E5 /* CrossPlatformBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4278F2332615E0B400E5B7E5 /* CrossPlatformBridge.swift */; };
 		42E168A3260F1BAB00224979 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E168A2260F1BAB00224979 /* Tests_iOS.swift */; };
 		42E168AE260F1BAB00224979 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E168AD260F1BAB00224979 /* Tests_macOS.swift */; };
 		42E168B0260F1BAB00224979 /* videturApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E16887260F1BAB00224979 /* videturApp.swift */; };
@@ -86,6 +91,9 @@
 		4278F1B32614A37700E5B7E5 /* SingleRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleRecordView.swift; sourceTree = "<group>"; };
 		4278F1BB2614F20700E5B7E5 /* RecordsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsListView.swift; sourceTree = "<group>"; };
 		4278F1CD2615ADB400E5B7E5 /* RecordKeeperObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordKeeperObservable.swift; sourceTree = "<group>"; };
+		4278F1DA2615C09300E5B7E5 /* Photos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photos.swift; sourceTree = "<group>"; };
+		4278F1EC2615D33600E5B7E5 /* PhotoLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLocation.swift; sourceTree = "<group>"; };
+		4278F2332615E0B400E5B7E5 /* CrossPlatformBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrossPlatformBridge.swift; sourceTree = "<group>"; };
 		42E16887260F1BAB00224979 /* videturApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = videturApp.swift; sourceTree = "<group>"; };
 		42E16888260F1BAB00224979 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		42E16889260F1BAB00224979 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -218,6 +226,7 @@
 				42E16898260F1BAB00224979 /* Info.plist */,
 				42E16899260F1BAB00224979 /* macOS.entitlements */,
 				4278F1932614837B00E5B7E5 /* videturApp+macOS.swift */,
+				4278F2332615E0B400E5B7E5 /* CrossPlatformBridge.swift */,
 			);
 			path = macOS;
 			sourceTree = "<group>";
@@ -267,6 +276,8 @@
 				42E16953260F763F00224979 /* DayVisits.swift */,
 				42E1695B260F79FB00224979 /* LocationVisits.swift */,
 				422F3B79260FAE6800BE3417 /* RecordingDevice.swift */,
+				4278F1DA2615C09300E5B7E5 /* Photos.swift */,
+				4278F1EC2615D33600E5B7E5 /* PhotoLocation.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -491,10 +502,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				42E1692F260F31A000224979 /* RecordKeeper.swift in Sources */,
+				4278F1ED2615D33600E5B7E5 /* PhotoLocation.swift in Sources */,
 				422F3B7A260FAE6800BE3417 /* RecordingDevice.swift in Sources */,
 				42E168CC260F1C2000224979 /* TrackingEvent.swift in Sources */,
 				42E1691D260F230200224979 /* Model.swift in Sources */,
 				42E168CE260F1C2000224979 /* LocationTracker.swift in Sources */,
+				4278F1DB2615C09300E5B7E5 /* Photos.swift in Sources */,
 				42E16954260F763F00224979 /* DayVisits.swift in Sources */,
 				42E168B2260F1BAB00224979 /* ContentView.swift in Sources */,
 				42E16964260F7F1100224979 /* Location.swift in Sources */,
@@ -516,10 +529,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				4278F1942614837B00E5B7E5 /* videturApp+macOS.swift in Sources */,
+				4278F1EE2615D33600E5B7E5 /* PhotoLocation.swift in Sources */,
 				42E1691E260F230200224979 /* Model.swift in Sources */,
 				42E1695D260F79FB00224979 /* LocationVisits.swift in Sources */,
 				42E1694D260F650600224979 /* Country.swift in Sources */,
 				42E168CD260F1C2000224979 /* TrackingEvent.swift in Sources */,
+				4278F2342615E0B400E5B7E5 /* CrossPlatformBridge.swift in Sources */,
 				4278F1B52614A37700E5B7E5 /* SingleRecordView.swift in Sources */,
 				42E16930260F31A000224979 /* RecordKeeper.swift in Sources */,
 				42E16940260F31FD00224979 /* EventLocationChange.swift in Sources */,
@@ -527,6 +542,7 @@
 				4278F1CF2615ADB400E5B7E5 /* RecordKeeperObservable.swift in Sources */,
 				42E168CF260F1C2000224979 /* LocationTracker.swift in Sources */,
 				42E168B3260F1BAB00224979 /* ContentView.swift in Sources */,
+				4278F1DC2615C09300E5B7E5 /* Photos.swift in Sources */,
 				42E16938260F31CB00224979 /* RecordLocation.swift in Sources */,
 				42E16955260F763F00224979 /* DayVisits.swift in Sources */,
 				42E16965260F7F1100224979 /* Location.swift in Sources */,
