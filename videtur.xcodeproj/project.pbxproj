@@ -8,9 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		422F3B7A260FAE6800BE3417 /* RecordingDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422F3B79260FAE6800BE3417 /* RecordingDevice.swift */; };
-		42550D79261458E100FA28DF /* RZUtils in Frameworks */ = {isa = PBXBuildFile; productRef = 42550D78261458E100FA28DF /* RZUtils */; };
-		42550D8526145EA200FA28DF /* RZUtilsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 42550D8426145EA200FA28DF /* RZUtilsSwift */; };
-		4278F17E2614820300E5B7E5 /* RZUtilsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4278F17D2614820300E5B7E5 /* RZUtilsSwift */; };
 		4278F18D2614835800E5B7E5 /* videturApp+iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4278F18C2614835800E5B7E5 /* videturApp+iOS.swift */; };
 		4278F1942614837B00E5B7E5 /* videturApp+macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4278F1932614837B00E5B7E5 /* videturApp+macOS.swift */; };
 		4278F1B42614A37700E5B7E5 /* SingleRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4278F1B32614A37700E5B7E5 /* SingleRecordView.swift */; };
@@ -85,7 +82,6 @@
 /* Begin PBXFileReference section */
 		422F3B79260FAE6800BE3417 /* RecordingDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingDevice.swift; sourceTree = "<group>"; };
 		422F3B862610945800BE3417 /* videtur.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = videtur.entitlements; sourceTree = "<group>"; };
-		422F3B872610949000BE3417 /* rzutils */ = {isa = PBXFileReference; lastKnownFileType = folder; name = rzutils; path = ../rzutils; sourceTree = "<group>"; };
 		4278F18C2614835800E5B7E5 /* videturApp+iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "videturApp+iOS.swift"; sourceTree = "<group>"; };
 		4278F1932614837B00E5B7E5 /* videturApp+macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "videturApp+macOS.swift"; sourceTree = "<group>"; };
 		4278F1B32614A37700E5B7E5 /* SingleRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleRecordView.swift; sourceTree = "<group>"; };
@@ -131,7 +127,6 @@
 			files = (
 				42E168DD260F1C6E00224979 /* RZUtils in Frameworks */,
 				42E168D6260F1C5C00224979 /* FMDB in Frameworks */,
-				42550D8526145EA200FA28DF /* RZUtilsSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,8 +134,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4278F17E2614820300E5B7E5 /* RZUtilsSwift in Frameworks */,
-				42550D79261458E100FA28DF /* RZUtils in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -178,7 +171,6 @@
 		42E16881260F1BAA00224979 = {
 			isa = PBXGroup;
 			children = (
-				422F3B872610949000BE3417 /* rzutils */,
 				422F3B862610945800BE3417 /* videtur.entitlements */,
 				42E16886260F1BAB00224979 /* Shared */,
 				42E16890260F1BAB00224979 /* iOS */,
@@ -320,7 +312,6 @@
 			packageProductDependencies = (
 				42E168D5260F1C5C00224979 /* FMDB */,
 				42E168DC260F1C6E00224979 /* RZUtils */,
-				42550D8426145EA200FA28DF /* RZUtilsSwift */,
 			);
 			productName = "videtur (iOS)";
 			productReference = 42E1688E260F1BAB00224979 /* videtur.app */;
@@ -340,8 +331,6 @@
 			);
 			name = "videtur (macOS)";
 			packageProductDependencies = (
-				42550D78261458E100FA28DF /* RZUtils */,
-				4278F17D2614820300E5B7E5 /* RZUtilsSwift */,
 			);
 			productName = "videtur (macOS)";
 			productReference = 42E16896260F1BAB00224979 /* videtur.app */;
@@ -1008,24 +997,12 @@
 			repositoryURL = "https://github.com/roznet/rzutils.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.11;
+				minimumVersion = 1.0.12;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		42550D78261458E100FA28DF /* RZUtils */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = RZUtils;
-		};
-		42550D8426145EA200FA28DF /* RZUtilsSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = RZUtilsSwift;
-		};
-		4278F17D2614820300E5B7E5 /* RZUtilsSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = RZUtilsSwift;
-		};
 		42E168D5260F1C5C00224979 /* FMDB */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 42E168D4260F1C5C00224979 /* XCRemoteSwiftPackageReference "fmdb" */;
