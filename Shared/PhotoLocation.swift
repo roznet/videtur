@@ -29,6 +29,9 @@ import Foundation
 import CoreLocation
 import Vision
 import Photos
+#if os(iOS)
+import UIKit
+#endif
 
 struct PhotoLocation {
     

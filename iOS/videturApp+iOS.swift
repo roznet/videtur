@@ -30,14 +30,29 @@ import UIKit
 import SwiftUI
 import BackgroundTasks
 import RZUtilsSwift
+import RZUtils
 
 extension videturApp {
+    
+    func backupGroupDb() {
+        let groupdb = RZFileOrganizer.writeableFilePath("videtur.db", forGroup: "group.net.ro-z.videtur")
+        let containerdb = RZFileOrganizer.writeableFilePath("videtur.db")
+        
+        if( FileManager.default.fileExists(atPath: groupdb)){
+            if FileManager.default.fileExists(atPath: containerdb) {
+                try? FileManager.default.removeItem(atPath: containerdb);
+            }
+            try? FileManager.default.copyItem(atPath: groupdb, toPath: containerdb)
+        }
+    }
     
     func sceneChange(phase: ScenePhase){
         if phase == .active {
             // Register location track
             self.scheduleLocationTrack()
             Model.shared.locationTracker.startTracking()
+        }else if phase == .inactive {
+            self.backupGroupDb()
         }
     }
     
@@ -52,7 +67,7 @@ extension videturApp {
     
     func scheduleLocationTrack() {       
         let locationTrackTask = BGAppRefreshTaskRequest(identifier: "net.ro-z.videtur.locationtrack")
-        locationTrackTask.earliestBeginDate = Date(timeIntervalSinceNow: 3600.0)
+        locationTrackTask.earliestBeginDate = Date(timeIntervalSinceNow: 6.0*3600.0)
         do {
             try BGTaskScheduler.shared.submit(locationTrackTask)
             RZSLog.info("Submitted task \(locationTrackTask)")
@@ -64,12 +79,17 @@ extension videturApp {
     func handleLocationTrackTask(task : BGAppRefreshTask){
         task.expirationHandler = {
             task.setTaskCompleted(success: false)
-            RZSLog.error("Task expirerd \(task)")
+            RZSLog.error("Task expired \(task)")
         }
         // schedule next one
         self.scheduleLocationTrack()
         Model.shared.locationTracker.startTracking {
             record in
+            if let record = record {
+                RZSLog.info("Background localization success \(record)")
+            }else{
+                RZSLog.warning("Background localization failed")
+            }
             task.setTaskCompleted(success: true)
         }
     }

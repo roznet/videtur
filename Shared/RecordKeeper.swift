@@ -28,6 +28,7 @@
 import Foundation
 import FMDB
 import RZUtils
+import RZUtilsSwift
 
 class RecordKeeper {
     
@@ -63,6 +64,8 @@ class RecordKeeper {
                 }
             }
         }
+        RZSLog.info("Loaded \(self.recordsDatabase.count) records" );
+        
         NotificationCenter.default.post(name: Self.recordChangedNotification, object: self)
     }
     

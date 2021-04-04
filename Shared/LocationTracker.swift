@@ -44,6 +44,7 @@ class LocationTracker : NSObject,CLLocationManagerDelegate {
         self.completion = completion
         locationManager.desiredAccuracy = kCLLocationAccuracyReduced;
         self.locationManager.requestAlwaysAuthorization()
+        RZSLog.info("Initiating request location")
         locationManager.requestLocation()
     }
         
@@ -53,7 +54,7 @@ class LocationTracker : NSObject,CLLocationManagerDelegate {
         guard let device = try? RecordingDevice() else { return }
         RZSLog.info( "tracked from \(device)")
         #endif
-        
+        RZSLog.info( "updated \(first)")
         self.updateNewLocation(date: Date(), coordinate: first.coordinate)
     }
     

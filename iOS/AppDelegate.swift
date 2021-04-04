@@ -25,7 +25,7 @@
 
 import Foundation
 import UIKit
-
+import RZUtils
 import RZUtilsSwift
 
 class AppDelegate : NSObject, UIApplicationDelegate {
@@ -36,7 +36,9 @@ class AppDelegate : NSObject, UIApplicationDelegate {
         }else{
             RZSLog.info("Launched")
         }
+        
         return true
     }
 
+    
 }
