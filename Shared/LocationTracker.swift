@@ -43,12 +43,15 @@ class LocationTracker : NSObject,CLLocationManagerDelegate {
         locationManager.delegate = self
         self.completion = completion
         locationManager.desiredAccuracy = kCLLocationAccuracyReduced;
+        locationManager.allowsBackgroundLocationUpdates = true
         self.locationManager.requestAlwaysAuthorization()
         RZSLog.info("Initiating request location")
         locationManager.requestLocation()
+        //locationManager.startUpdatingLocation()
     }
         
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        //locationManager.stopUpdatingLocation()
         guard let first = locations.first else { return }
         #if os(iOS)
         guard let device = try? RecordingDevice() else { return }
@@ -60,6 +63,22 @@ class LocationTracker : NSObject,CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         RZSLog.error("failed to locate \(error)")
+    }
+    
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        switch manager.authorizationStatus {
+        case .authorizedAlways:
+            RZSLog.error("Authorization changed always")
+        case .authorizedWhenInUse:
+            RZSLog.error("Authorization changed wheninused")
+        case .denied, .restricted:
+            RZSLog.error("Authorization changed denied/restricted")
+        case .notDetermined:
+            RZSLog.error("Authorization changed notDetermined")
+        default:
+            RZSLog.error("Authorization changed default")
+        }
+        
     }
     
     func updateNewLocation( date: Date, coordinate : CLLocationCoordinate2D, completion: LocationTrackerCompletionHandler? = nil) {
