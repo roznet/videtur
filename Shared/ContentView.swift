@@ -29,11 +29,6 @@ struct ContentView: View {
 
     
     var body: some View {
-        VStack(alignment: .leading) {
-            Text("Title")
-            
-            
-        }
         RecordsListView(records: RecordKeeperObservable(recordKeeper: Model.shared.recordKeeper))
     }
 }
@@ -41,6 +36,7 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         
-        ContentView()
+            ContentView()
+        
     }
 }

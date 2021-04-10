@@ -54,6 +54,9 @@
 		42E1695D260F79FB00224979 /* LocationVisits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E1695B260F79FB00224979 /* LocationVisits.swift */; };
 		42E16964260F7F1100224979 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E16963260F7F1100224979 /* Location.swift */; };
 		42E16965260F7F1100224979 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E16963260F7F1100224979 /* Location.swift */; };
+		42FC99442621DB4F00ACF6E1 /* RZUtils in Frameworks */ = {isa = PBXBuildFile; productRef = 42FC99432621DB4F00ACF6E1 /* RZUtils */; };
+		42FC99462621DB4F00ACF6E1 /* RZUtilsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 42FC99452621DB4F00ACF6E1 /* RZUtilsSwift */; };
+		42FC99482621DB4F00ACF6E1 /* RZUtilsUniversal in Frameworks */ = {isa = PBXBuildFile; productRef = 42FC99472621DB4F00ACF6E1 /* RZUtilsUniversal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,6 +122,7 @@
 		42E16953260F763F00224979 /* DayVisits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayVisits.swift; sourceTree = "<group>"; };
 		42E1695B260F79FB00224979 /* LocationVisits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationVisits.swift; sourceTree = "<group>"; };
 		42E16963260F7F1100224979 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		42FC994F2621E3EE00ACF6E1 /* samplerecords.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = samplerecords.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +140,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42FC99482621DB4F00ACF6E1 /* RZUtilsUniversal in Frameworks */,
+				42FC99462621DB4F00ACF6E1 /* RZUtilsSwift in Frameworks */,
+				42FC99442621DB4F00ACF6E1 /* RZUtils in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,11 +295,20 @@
 		42E168F9260F1F4200224979 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				42FC994E2621E3EE00ACF6E1 /* TestsAssets */,
 				42E168A1260F1BAB00224979 /* Tests iOS */,
 				42E168AC260F1BAB00224979 /* Tests macOS */,
 				42E168EB260F1F3200224979 /* videturTests */,
 			);
 			name = Tests;
+			sourceTree = "<group>";
+		};
+		42FC994E2621E3EE00ACF6E1 /* TestsAssets */ = {
+			isa = PBXGroup;
+			children = (
+				42FC994F2621E3EE00ACF6E1 /* samplerecords.json */,
+			);
+			path = TestsAssets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -334,6 +350,9 @@
 			);
 			name = "videtur (macOS)";
 			packageProductDependencies = (
+				42FC99432621DB4F00ACF6E1 /* RZUtils */,
+				42FC99452621DB4F00ACF6E1 /* RZUtilsSwift */,
+				42FC99472621DB4F00ACF6E1 /* RZUtilsUniversal */,
 			);
 			productName = "videtur (macOS)";
 			productReference = 42E16896260F1BAB00224979 /* videtur.app */;
@@ -705,6 +724,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = videtur.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = TestsAssets/samplerecords.json;
 				DEVELOPMENT_TEAM = M7QSSF3624;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
@@ -728,6 +748,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = videtur.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = TestsAssets/samplerecords.json;
 				DEVELOPMENT_TEAM = M7QSSF3624;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
@@ -1020,6 +1041,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 42E168DB260F1C6E00224979 /* XCRemoteSwiftPackageReference "rzutils" */;
 			productName = RZUtils;
+		};
+		42FC99432621DB4F00ACF6E1 /* RZUtils */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 42E168DB260F1C6E00224979 /* XCRemoteSwiftPackageReference "rzutils" */;
+			productName = RZUtils;
+		};
+		42FC99452621DB4F00ACF6E1 /* RZUtilsSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 42E168DB260F1C6E00224979 /* XCRemoteSwiftPackageReference "rzutils" */;
+			productName = RZUtilsSwift;
+		};
+		42FC99472621DB4F00ACF6E1 /* RZUtilsUniversal */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 42E168DB260F1C6E00224979 /* XCRemoteSwiftPackageReference "rzutils" */;
+			productName = RZUtilsUniversal;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

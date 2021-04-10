@@ -26,23 +26,43 @@
 
 
 import SwiftUI
+import RZUtils
 
 struct RecordsListView: View {
     @ObservedObject var records : RecordKeeperObservable
     
     var body: some View {
-        List(records.list) { record in
-            SingleRecordView(record: record)
+        NavigationView {
+            List(records.list) { record in
+                NavigationLink(
+                    destination: SingleRecordView(record: record) ){
+                SingleRecordView(record: record)
+                }
+            }
+            .navigationBarTitle("List", displayMode: .inline)
         }
+        
+        
     }
 }
 
 struct RecordsList_Previews: PreviewProvider {
     static var previews: some View {
-        let jsonData = "[{\"location\":{\"timeZone\":{\"identifier\":\"Europe\\/London\"},\"administrativeArea\":\"England\",\"locality\":\"London\",\"isoCountryCode\":\"GB\"},\"timestamp\":637801200,\"coordinate\":[0.1278,51.507399999999997],\"recordId\":18,\"date\":20210318},{\"location\":{\"timeZone\":{\"identifier\":\"Europe\\/Paris\"},\"administrativeArea\":\"Île-de-France\",\"locality\":\"Paris\",\"isoCountryCode\":\"FR\"},\"timestamp\":637671600,\"coordinate\":[2.3521999999999998,48.8566],\"recordId\":15,\"date\":20210317},{\"location\":{\"timeZone\":{\"identifier\":\"Europe\\/London\"},\"administrativeArea\":\"England\",\"locality\":\"London\",\"isoCountryCode\":\"GB\"},\"timestamp\":637714800,\"coordinate\":[0.1278,51.507399999999997],\"recordId\":16,\"date\":20210317},{\"location\":{\"timeZone\":{\"identifier\":\"Europe\\/Zurich\"},\"administrativeArea\":\"Schwyz\",\"locality\":\"Feusisberg\",\"isoCountryCode\":\"CH\"},\"timestamp\":637412400,\"coordinate\":[8.7127999999999997,47.174799999999998],\"recordId\":9,\"date\":20210314},{\"location\":{\"timeZone\":{\"identifier\":\"Europe\\/Zurich\"},\"administrativeArea\":\"Zürich\",\"locality\":\"Zürich\",\"isoCountryCode\":\"CH\"},\"timestamp\":637455600,\"coordinate\":[8.5417000000000005,47.376899999999999],\"recordId\":10,\"date\":20210314}]".data(using: .utf8)
-        
-        let sample = try! JSONDecoder().decode([RecordLocation].self, from: jsonData!)
 
-        RecordsListView(records: RecordKeeperObservable(records: sample))
+        RecordsListView(records: RecordKeeperObservable(records: Self.sampleRecords))
+    }
+    
+    static var sampleRecords : [RecordLocation] {
+        guard let url = Bundle.main.url( forResource: "samplerecords", withExtension: "json"),
+              let data = try? Data(contentsOf: url)
+        else {
+            return []
+        }
+        let decoder = JSONDecoder()
+        if let array = try? decoder.decode([RecordLocation].self, from: data) {
+            return array
+        }
+        return []
+        
     }
 }

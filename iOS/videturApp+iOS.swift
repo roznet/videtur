@@ -57,17 +57,22 @@ extension videturApp {
     }
     
     func registerBackgroundTasks() {
-        BGTaskScheduler.shared.register(forTaskWithIdentifier: "net.ro-z.videtur.locationtrack", using: nil){
+        let rv = BGTaskScheduler.shared.register(forTaskWithIdentifier: "net.ro-z.videtur.locationtrack", using: nil){
             task in
-            guard let task = task as? BGAppRefreshTask else { return }
             RZSLog.info("Processing task \(task)")
+            guard let task = task as? BGAppRefreshTask else { return }
             self.handleLocationTrackTask(task: task)
+        }
+        if rv {
+            RZSLog.info( "Registered background task successfully")
+        }else{
+            RZSLog.error( "Failed to register background task" )
         }
     }
     
     func scheduleLocationTrack() {       
         let locationTrackTask = BGAppRefreshTaskRequest(identifier: "net.ro-z.videtur.locationtrack")
-        locationTrackTask.earliestBeginDate = Date(timeIntervalSinceNow: 3600.0)
+        locationTrackTask.earliestBeginDate = Date(timeIntervalSinceNow: 30.0)
         //locationTrackTask.earliestBeginDate = Date(timeIntervalSinceNow: 30)
         do {
             try BGTaskScheduler.shared.submit(locationTrackTask)

@@ -44,14 +44,16 @@ class LocationTracker : NSObject,CLLocationManagerDelegate {
         self.completion = completion
         locationManager.desiredAccuracy = kCLLocationAccuracyReduced;
         locationManager.allowsBackgroundLocationUpdates = true
+        locationManager.pausesLocationUpdatesAutomatically = false
         self.locationManager.requestAlwaysAuthorization()
         RZSLog.info("Initiating request location")
-        locationManager.requestLocation()
-        //locationManager.startUpdatingLocation()
+        //locationManager.requestLocation()
+        locationManager.startUpdatingLocation()
     }
         
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        //locationManager.stopUpdatingLocation()
+        RZSLog.info("Callback from \(manager) \(locations)")
+        locationManager.stopUpdatingLocation()
         guard let first = locations.first else { return }
         #if os(iOS)
         guard let device = try? RecordingDevice() else { return }
@@ -68,15 +70,15 @@ class LocationTracker : NSObject,CLLocationManagerDelegate {
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         switch manager.authorizationStatus {
         case .authorizedAlways:
-            RZSLog.error("Authorization changed always")
+            RZSLog.info("Authorization always")
         case .authorizedWhenInUse:
-            RZSLog.error("Authorization changed wheninused")
+            RZSLog.info("Authorization wheninused")
         case .denied, .restricted:
             RZSLog.error("Authorization changed denied/restricted")
         case .notDetermined:
-            RZSLog.error("Authorization changed notDetermined")
+            RZSLog.warning("Authorization changed notDetermined")
         default:
-            RZSLog.error("Authorization changed default")
+            RZSLog.warning("Authorization changed default")
         }
         
     }

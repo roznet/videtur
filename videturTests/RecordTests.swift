@@ -91,7 +91,8 @@ class RecordTests: XCTestCase {
             let records = self.model?.recordKeeper.records
             do {
                 let encoded = try JSONEncoder().encode(records)
-                print( String(data:encoded, encoding: .utf8))
+                
+                try? encoded.write(to: URL(fileURLWithPath: RZFileOrganizer.writeableFilePath("testdata.json")))
                 
             }catch{
                 print( error)

@@ -25,7 +25,7 @@
 
 import SwiftUI
 import RZUtilsSwift
-
+import RZUtils
 @main
 struct videturApp: App {
     @Environment(\.scenePhase) private var scenePhase
@@ -36,11 +36,29 @@ struct videturApp: App {
         
     init() {
         self.registerBackgroundTasks()
+        print( "\(RecordsList_Previews.sampleRecords)")
     }
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TabView {
+                ContentView()
+                    .tabItem {
+                        Image( systemName: "location.viewfinder")
+                        Text( "Locations" )
+                    }
+            
+                Text("Tab 2")
+                    .tabItem {
+                        Image( systemName: "globe")
+                        Text( "Countries")
+                    }
+                Text("Calendar")
+                    .tabItem {
+                        Image(systemName: "calendar.badge.clock")
+                        Text( "Calendar" )
+                    }
+            }
         }
         .onChange(of: scenePhase){
             phase in

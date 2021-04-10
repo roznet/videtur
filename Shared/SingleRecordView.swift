@@ -40,19 +40,25 @@ struct SingleRecordView: View {
     @State var record : RecordLocation
     
     var body: some View {
+        
         VStack(alignment: .leading){
             HStack {
-                HStack{
+                HStack(){
                     Text(self.record.isoCountryCode ?? "")
                     Text(self.record.country?.flag ?? "")
-                }
-                HStack{
-                    Text(self.record.administrativeArea ?? "")
-                    Text(self.record.locality ?? "")
                 }
             }
             HStack {
                 Text( Self.dateFormatter.string(from: self.record.timestamp) )
+                    .font(.footnote)
+                    .foregroundColor(.secondary)
+                Spacer()
+                HStack{
+                    Text(self.record.administrativeArea ?? "")
+                    Text(self.record.locality ?? "")
+                        .font(.footnote)
+                        .foregroundColor(.secondary)
+                }
             }
         }
     }
