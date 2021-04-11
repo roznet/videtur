@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		422F3B7A260FAE6800BE3417 /* RecordingDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422F3B79260FAE6800BE3417 /* RecordingDevice.swift */; };
+		4272609F2622E38E00A99496 /* samplerecords.json in Resources */ = {isa = PBXBuildFile; fileRef = 42FC994F2621E3EE00ACF6E1 /* samplerecords.json */; };
+		427260A52622E38F00A99496 /* samplerecords.json in Resources */ = {isa = PBXBuildFile; fileRef = 42FC994F2621E3EE00ACF6E1 /* samplerecords.json */; };
 		4278F18D2614835800E5B7E5 /* videturApp+iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4278F18C2614835800E5B7E5 /* videturApp+iOS.swift */; };
 		4278F1942614837B00E5B7E5 /* videturApp+macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4278F1932614837B00E5B7E5 /* videturApp+macOS.swift */; };
 		4278F1B42614A37700E5B7E5 /* SingleRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4278F1B32614A37700E5B7E5 /* SingleRecordView.swift */; };
@@ -472,6 +474,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4272609F2622E38E00A99496 /* samplerecords.json in Resources */,
 				42E168B4260F1BAB00224979 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -480,6 +483,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				427260A52622E38F00A99496 /* samplerecords.json in Resources */,
 				42E168B5260F1BAB00224979 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

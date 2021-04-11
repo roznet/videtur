@@ -66,9 +66,23 @@ struct SingleRecordView: View {
 
 struct LastRecordView_Previews: PreviewProvider {
     static var previews: some View {
-        let jsonData = "{\"location\":{\"timeZone\":{\"identifier\":\"America\\/New_York\"},\"administrativeArea\":\"CT\",\"locality\":\"Stamford\",\"isoCountryCode\":\"US\"},\"timestamp\":637066800,\"coordinate\":[-73.538700000000006,41.053400000000003],\"recordId\":1,\"date\":20210310}".data(using: .utf8)
+        let samples = Self.sampleRecords
         
-        let sample = try! JSONDecoder().decode(RecordLocation.self, from: jsonData!)
-        SingleRecordView(record: sample)
+        SingleRecordView(record: samples[0])
+        SingleRecordView(record: samples[1])
+    }
+    
+    static var sampleRecords : [RecordLocation] {
+        let all = RecordsList_Previews.sampleRecords
+        var different : [RecordLocation] = []
+        var countries : Set<String> = []
+        for record in all {
+            guard let isoCountryCode = record.isoCountryCode else { continue }
+            if !countries.contains( isoCountryCode ){
+                different.append(record)
+                countries.insert(isoCountryCode)
+            }
+        }
+        return different
     }
 }
