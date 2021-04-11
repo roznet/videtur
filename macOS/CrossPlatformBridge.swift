@@ -27,6 +27,7 @@
 
 import Foundation
 import Cocoa
+import IOKit
 
 typealias UIImage = NSImage
 

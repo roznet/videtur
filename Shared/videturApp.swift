@@ -36,7 +36,6 @@ struct videturApp: App {
         
     init() {
         self.registerBackgroundTasks()
-        print( "\(RecordsList_Previews.sampleRecords)")
     }
     
     var body: some Scene {

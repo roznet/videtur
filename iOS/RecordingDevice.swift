@@ -27,9 +27,10 @@
 
 import Foundation
 import UIKit
+import FMDB
 
 struct RecordingDevice {
-    let uuid : UUID
+    let uuid : String
     let name : String
     let model : String
     
@@ -38,12 +39,36 @@ struct RecordingDevice {
         case internalError
     }
     
+    var sqlParameters : [String:String] {
+        return [ "uuid" : self.uuid, "name" : self.name, "model" : self.model ]
+    }
+    
     init(device : UIDevice = UIDevice.current) throws {
         guard let uuid = device.identifierForVendor else { throw RecordingDevice.Status.internalError }
-        self.uuid = uuid
+        self.uuid = uuid.uuidString
         self.name = device.name
         self.model = device.localizedModel
         
     }
     
+    func ensureDb(db : FMDatabase) {
+        if !db.tableExists("recording_device") {
+            db.executeUpdate("CREATE TABLE recording_device (device_id INTEGER PRIMARY KEY, uuid TEXT UNIQUE, name TEXT, model TEXT", withArgumentsIn: []);
+        }
+        
+        let sqlParams = self.sqlParameters
+        
+        let res = db.executeQuery("SELECT * FROM recording_device WHERE uuid = :uuid", withParameterDictionary: ["uuid" : self.uuid ] )
+        if res?.next() != nil,
+           let saved_name = res?.string(forColumn: "name"),
+           let saved_model = res?.string(forColumn: "model")
+           {
+            if saved_name != self.name || saved_model != self.model{
+                db.executeUpdate("UPDATE recording_device SET name = :name, model = :model WHERE uuid = :uuid", withParameterDictionary: sqlParams)
+            }
+        }else{
+            db.executeUpdate("INSERT INTO recording_device (uuid,name,model) VALUES (:uuid,:name,:model)",
+                             withParameterDictionary: sqlParams)
+        }
+    }
 }

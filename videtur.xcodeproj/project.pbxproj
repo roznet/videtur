@@ -32,8 +32,6 @@
 		42E168B3260F1BAB00224979 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E16888260F1BAB00224979 /* ContentView.swift */; };
 		42E168B4260F1BAB00224979 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42E16889260F1BAB00224979 /* Assets.xcassets */; };
 		42E168B5260F1BAB00224979 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42E16889260F1BAB00224979 /* Assets.xcassets */; };
-		42E168CC260F1C2000224979 /* TrackingEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E168CA260F1C2000224979 /* TrackingEvent.swift */; };
-		42E168CD260F1C2000224979 /* TrackingEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E168CA260F1C2000224979 /* TrackingEvent.swift */; };
 		42E168CE260F1C2000224979 /* LocationTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E168CB260F1C2000224979 /* LocationTracker.swift */; };
 		42E168CF260F1C2000224979 /* LocationTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E168CB260F1C2000224979 /* LocationTracker.swift */; };
 		42E168D6260F1C5C00224979 /* FMDB in Frameworks */ = {isa = PBXBuildFile; productRef = 42E168D5260F1C5C00224979 /* FMDB */; };
@@ -56,6 +54,7 @@
 		42E1695D260F79FB00224979 /* LocationVisits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E1695B260F79FB00224979 /* LocationVisits.swift */; };
 		42E16964260F7F1100224979 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E16963260F7F1100224979 /* Location.swift */; };
 		42E16965260F7F1100224979 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E16963260F7F1100224979 /* Location.swift */; };
+		42F38AD3262304E7001B79C4 /* RecordingDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F38AD2262304E7001B79C4 /* RecordingDevice.swift */; };
 		42FC99442621DB4F00ACF6E1 /* RZUtils in Frameworks */ = {isa = PBXBuildFile; productRef = 42FC99432621DB4F00ACF6E1 /* RZUtils */; };
 		42FC99462621DB4F00ACF6E1 /* RZUtilsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 42FC99452621DB4F00ACF6E1 /* RZUtilsSwift */; };
 		42FC99482621DB4F00ACF6E1 /* RZUtilsUniversal in Frameworks */ = {isa = PBXBuildFile; productRef = 42FC99472621DB4F00ACF6E1 /* RZUtilsUniversal */; };
@@ -110,7 +109,6 @@
 		42E168A9260F1BAB00224979 /* Tests macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		42E168AD260F1BAB00224979 /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
 		42E168AF260F1BAB00224979 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		42E168CA260F1C2000224979 /* TrackingEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackingEvent.swift; sourceTree = "<group>"; };
 		42E168CB260F1C2000224979 /* LocationTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTracker.swift; sourceTree = "<group>"; };
 		42E168EA260F1F3200224979 /* videturTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = videturTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		42E168EC260F1F3200224979 /* RecordTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordTests.swift; sourceTree = "<group>"; };
@@ -124,6 +122,7 @@
 		42E16953260F763F00224979 /* DayVisits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayVisits.swift; sourceTree = "<group>"; };
 		42E1695B260F79FB00224979 /* LocationVisits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationVisits.swift; sourceTree = "<group>"; };
 		42E16963260F7F1100224979 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		42F38AD2262304E7001B79C4 /* RecordingDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingDevice.swift; sourceTree = "<group>"; };
 		42FC994F2621E3EE00ACF6E1 /* samplerecords.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = samplerecords.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -179,6 +178,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		427260AC2622E74A00A99496 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				42E16887260F1BAB00224979 /* videturApp.swift */,
+				42E16889260F1BAB00224979 /* Assets.xcassets */,
+			);
+			name = App;
+			sourceTree = "<group>";
+		};
 		42E16881260F1BAA00224979 = {
 			isa = PBXGroup;
 			children = (
@@ -195,6 +203,7 @@
 		42E16886260F1BAB00224979 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				427260AC2622E74A00A99496 /* App */,
 				42E168C9260F1C0B00224979 /* Model */,
 				42E168C8260F1BFE00224979 /* UI */,
 			);
@@ -216,6 +225,7 @@
 		42E16890260F1BAB00224979 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				422F3B79260FAE6800BE3417 /* RecordingDevice.swift */,
 				4278F18C2614835800E5B7E5 /* videturApp+iOS.swift */,
 				42E16910260F21F000224979 /* AppDelegate.swift */,
 				42E16891260F1BAB00224979 /* Info.plist */,
@@ -230,6 +240,7 @@
 				42E16899260F1BAB00224979 /* macOS.entitlements */,
 				4278F1932614837B00E5B7E5 /* videturApp+macOS.swift */,
 				4278F2332615E0B400E5B7E5 /* CrossPlatformBridge.swift */,
+				42F38AD2262304E7001B79C4 /* RecordingDevice.swift */,
 			);
 			path = macOS;
 			sourceTree = "<group>";
@@ -255,9 +266,7 @@
 		42E168C8260F1BFE00224979 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				42E16887260F1BAB00224979 /* videturApp.swift */,
 				42E16888260F1BAB00224979 /* ContentView.swift */,
-				42E16889260F1BAB00224979 /* Assets.xcassets */,
 				4278F1B32614A37700E5B7E5 /* SingleRecordView.swift */,
 				4278F1BB2614F20700E5B7E5 /* RecordsListView.swift */,
 				4278F1CD2615ADB400E5B7E5 /* RecordKeeperObservable.swift */,
@@ -270,7 +279,6 @@
 			children = (
 				42E1691C260F230200224979 /* Model.swift */,
 				42E168CB260F1C2000224979 /* LocationTracker.swift */,
-				42E168CA260F1C2000224979 /* TrackingEvent.swift */,
 				42E1692E260F319F00224979 /* RecordKeeper.swift */,
 				42E16936260F31CB00224979 /* RecordLocation.swift */,
 				42E16963260F7F1100224979 /* Location.swift */,
@@ -278,7 +286,6 @@
 				42E1694B260F650600224979 /* Country.swift */,
 				42E16953260F763F00224979 /* DayVisits.swift */,
 				42E1695B260F79FB00224979 /* LocationVisits.swift */,
-				422F3B79260FAE6800BE3417 /* RecordingDevice.swift */,
 				4278F1DA2615C09300E5B7E5 /* Photos.swift */,
 				4278F1EC2615D33600E5B7E5 /* PhotoLocation.swift */,
 			);
@@ -519,7 +526,6 @@
 				42E1692F260F31A000224979 /* RecordKeeper.swift in Sources */,
 				4278F1ED2615D33600E5B7E5 /* PhotoLocation.swift in Sources */,
 				422F3B7A260FAE6800BE3417 /* RecordingDevice.swift in Sources */,
-				42E168CC260F1C2000224979 /* TrackingEvent.swift in Sources */,
 				42E1691D260F230200224979 /* Model.swift in Sources */,
 				42E168CE260F1C2000224979 /* LocationTracker.swift in Sources */,
 				4278F1DB2615C09300E5B7E5 /* Photos.swift in Sources */,
@@ -547,8 +553,8 @@
 				4278F1EE2615D33600E5B7E5 /* PhotoLocation.swift in Sources */,
 				42E1691E260F230200224979 /* Model.swift in Sources */,
 				42E1695D260F79FB00224979 /* LocationVisits.swift in Sources */,
+				42F38AD3262304E7001B79C4 /* RecordingDevice.swift in Sources */,
 				42E1694D260F650600224979 /* Country.swift in Sources */,
-				42E168CD260F1C2000224979 /* TrackingEvent.swift in Sources */,
 				4278F2342615E0B400E5B7E5 /* CrossPlatformBridge.swift in Sources */,
 				4278F1B52614A37700E5B7E5 /* SingleRecordView.swift in Sources */,
 				42E16930260F31A000224979 /* RecordKeeper.swift in Sources */,

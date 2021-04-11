@@ -144,6 +144,13 @@ struct RecordLocation : Codable,Identifiable {
         }
     }
     
+    func hasNewInformation(since: RecordLocation) -> Bool {
+        if self.day != since.day {
+            return true
+        }
+        return false
+    }
+    
     func geocoded(placemark : CLPlacemark) -> RecordLocation {
         return RecordLocation(record: self, placemark: placemark)
     }

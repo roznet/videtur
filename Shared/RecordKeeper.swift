@@ -45,7 +45,6 @@ class RecordKeeper {
     var records : [RecordLocation] {
         let rv : [RecordLocation] = Array(self.recordsDatabase.values)
         return rv.sorted { $1.timestamp < $0.timestamp }
-        
     }
     
     weak var model : Model? = nil
@@ -70,6 +69,10 @@ class RecordKeeper {
     }
     
     func add( record : RecordLocation ) -> RecordLocation? {
+        if let last = self.lastRecord {
+            
+        }
+        
         guard let newRecord = try? record.save(db: self.db),
               let recordId = newRecord.recordId else {
             return nil

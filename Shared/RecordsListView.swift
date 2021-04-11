@@ -39,13 +39,14 @@ struct RecordsListView: View {
                 SingleRecordView(record: record)
                 }
             }
-            .navigationBarTitle("List", displayMode: .inline)
+            
         }
         
         
     }
 }
 
+#if DEBUG
 struct RecordsList_Previews: PreviewProvider {
     static var previews: some View {
 
@@ -66,3 +67,4 @@ struct RecordsList_Previews: PreviewProvider {
         
     }
 }
+#endif

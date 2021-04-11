@@ -64,6 +64,7 @@ struct SingleRecordView: View {
     }
 }
 
+#if DEBUG
 struct LastRecordView_Previews: PreviewProvider {
     static var previews: some View {
         let samples = Self.sampleRecords
@@ -86,3 +87,4 @@ struct LastRecordView_Previews: PreviewProvider {
         return different
     }
 }
+#endif

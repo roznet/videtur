@@ -37,8 +37,21 @@ class LocationTracker : NSObject,CLLocationManagerDelegate {
     let geoCoder = CLGeocoder()
     weak var model : Model? = nil
     var completion : LocationTrackerCompletionHandler? = nil
+   
+    let db : FMDatabase
+
+    init(db : FMDatabase) {
+        self.db = db
+    }
     
-    
+    static var sqlCreationStatement = "CREATE TABLE location_tracker (recordTrackerId INTEGER PRIMARY KEY, timestamp REAL NONNULL, latitude REAL,longitude REAL, deviceId TEXT)"
+
+    static func ensureDbStructure(db : FMDatabase){
+        if !db.tableExists("location_tracker") {
+            db.executeUpdate(RecordLocation.sqlCreationStatement, withArgumentsIn: [])
+        }
+    }
+
     func startTracking(completion : LocationTrackerCompletionHandler? = nil) {
         locationManager.delegate = self
         self.completion = completion
@@ -47,19 +60,14 @@ class LocationTracker : NSObject,CLLocationManagerDelegate {
         locationManager.pausesLocationUpdatesAutomatically = false
         self.locationManager.requestAlwaysAuthorization()
         RZSLog.info("Initiating request location")
-        //locationManager.requestLocation()
-        locationManager.startUpdatingLocation()
+        locationManager.requestLocation()
+        //locationManager.startUpdatingLocation()
     }
         
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        RZSLog.info("Callback from \(manager) \(locations)")
-        locationManager.stopUpdatingLocation()
+        RZSLog.info("new location \(locations)")
+        //locationManager.stopUpdatingLocation()
         guard let first = locations.first else { return }
-        #if os(iOS)
-        guard let device = try? RecordingDevice() else { return }
-        RZSLog.info( "tracked from \(device)")
-        #endif
-        RZSLog.info( "updated \(first)")
         self.updateNewLocation(date: Date(), coordinate: first.coordinate)
     }
     
@@ -87,6 +95,9 @@ class LocationTracker : NSObject,CLLocationManagerDelegate {
         if completion != nil {
             self.completion = completion
         }
+        
+        guard let device = try? RecordingDevice() else { return }
+
         guard let model = self.model,
               let record = model.recordKeeper.add(record: RecordLocation(date: date, coordinate: coordinate) )
         else {
