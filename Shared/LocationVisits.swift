@@ -33,14 +33,14 @@ struct LocationVisits {
     var earliest : Int
     var latest : Int
     
-    init(record : RecordLocation) {
+    init(record : LocationRecord) {
         self.location = record.location
         self.days = [ record.date ]
         self.earliest = record.date
         self.latest = record.date
     }
     
-    mutating func add(other : RecordLocation) -> Bool {
+    mutating func add(other : LocationRecord) -> Bool {
         let date = other.date
         
         guard other.location == self.location && !days.contains(date) else { return false }

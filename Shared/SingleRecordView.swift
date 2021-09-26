@@ -37,7 +37,7 @@ struct SingleRecordView: View {
         return formatter
     }()
     
-    @State var record : RecordLocation
+    @State var record : LocationRecord
     
     var body: some View {
         
@@ -48,6 +48,7 @@ struct SingleRecordView: View {
                     Text(self.record.country?.flag ?? "")
                 }
             }
+            
             HStack {
                 Text( Self.dateFormatter.string(from: self.record.timestamp) )
                     .font(.footnote)
@@ -73,9 +74,9 @@ struct LastRecordView_Previews: PreviewProvider {
         SingleRecordView(record: samples[1])
     }
     
-    static var sampleRecords : [RecordLocation] {
+    static var sampleRecords : [LocationRecord] {
         let all = RecordsList_Previews.sampleRecords
-        var different : [RecordLocation] = []
+        var different : [LocationRecord] = []
         var countries : Set<String> = []
         for record in all {
             guard let isoCountryCode = record.isoCountryCode else { continue }

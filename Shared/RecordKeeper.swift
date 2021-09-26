@@ -40,10 +40,10 @@ class RecordKeeper {
     }
     
     let db : FMDatabase
-    private var recordsDatabase : [Int:RecordLocation] = [:]
+    private var recordsDatabase : [Int:LocationRecord] = [:]
     
-    var records : [RecordLocation] {
-        let rv : [RecordLocation] = Array(self.recordsDatabase.values)
+    var records : [LocationRecord] {
+        let rv : [LocationRecord] = Array(self.recordsDatabase.values)
         return rv.sorted { $1.timestamp < $0.timestamp }
     }
     
@@ -57,7 +57,7 @@ class RecordKeeper {
         self.recordsDatabase = [:]
         if let res = self.db.executeQuery("SELECT * FROM recordLocation", withParameterDictionary: nil) {
             while( res.next() ){
-                if let one = try? RecordLocation(res: res),
+                if let one = try? LocationRecord(res: res),
                    let recordId = one.recordId{
                     self.recordsDatabase[recordId] = one
                 }
@@ -68,21 +68,26 @@ class RecordKeeper {
         NotificationCenter.default.post(name: Self.recordChangedNotification, object: self)
     }
     
-    func add( record : RecordLocation ) -> RecordLocation? {
-        if let last = self.lastRecord {
-            
-        }
-        
-        guard let newRecord = try? record.save(db: self.db),
-              let recordId = newRecord.recordId else {
-            return nil
-        }
-        recordsDatabase[recordId] = newRecord
-        NotificationCenter.default.post(name: Self.recordChangedNotification, object: self)
-        return newRecord
+    func log( record : LocationRecord ){
+        record.log(db: self.db)
     }
     
-    func update( record : RecordLocation) throws -> RecordLocation {
+    func add( record : LocationRecord ) -> LocationRecord? {
+        let last = self.lastRecord
+        if last == nil || record.hasNewInformation(since: last!) {
+            guard let newRecord = try? record.save(db: self.db),
+                  let recordId = newRecord.recordId else {
+                      return nil
+                  }
+            recordsDatabase[recordId] = newRecord
+            NotificationCenter.default.post(name: Self.recordChangedNotification, object: self)
+            return newRecord
+        }
+
+        return nil
+    }
+    
+    func update( record : LocationRecord) throws -> LocationRecord {
         guard let recordId = record.recordId else { throw RecordKeeper.Status.invalidRecordWithoutId }
         let newRecord = try record.save(db: self.db)
         self.recordsDatabase[recordId] = newRecord
@@ -92,12 +97,16 @@ class RecordKeeper {
     
     static func ensureDbStructure(db : FMDatabase){
         if !db.tableExists("recordLocation") {
-            db.executeUpdate(RecordLocation.sqlCreationStatement, withArgumentsIn: [])
+            db.executeUpdate(LocationRecord.sqlCreationStatement, withArgumentsIn: [])
         }
+        if !db.tableExists("recordLog") {
+            db.executeUpdate(LocationRecord.sqlLogCreationStatement, withArgumentsIn: [])
+        }
+        LocationRecord.recordingDevice.ensureDb(db: db)
     }
         
-    var lastRecord : RecordLocation? {
-        var rv : RecordLocation? = nil
+    var lastRecord : LocationRecord? {
+        var rv : LocationRecord? = nil
         for (_,v) in self.recordsDatabase {
             if rv == nil || rv!.date < v.date{
                 rv = v

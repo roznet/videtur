@@ -60,35 +60,27 @@ class Photos {
                                                contentMode: .aspectFit,
                                                options: requestOption){
                     image, metadata in
-                    /*
-                    let options = PHContentEditingInputRequestOptions()
-                    asset.requestContentEditingInput(with: options){
-                        input, _ in
-                        if let url = input?.fullSizeImageURL,
-                           let fullImage = CIImage(contentsOf: url) {
-                            print( "\(fullImage.properties)")
-                        }
-                    }*/
                     
                     if let image = image{
                         if let cgImage = image.cgImage {
                             let requestHandler = VNImageRequestHandler(cgImage: cgImage)
                             let request = VNClassifyImageRequest()
                             try? requestHandler.perform([request])
-                            let results = request.results as! [VNClassificationObservation]
-                            let top : [VNClassificationObservation] = Array(results[0..<10])
-                            
-                            if let photoLocation = try? PhotoLocation(asset: asset, classification: top, image: image){
-                                if let existing = self.photosRecord[photoLocation.date] {
-                                    if photoLocation.isPreferred(over: existing){
+                            if let results = request.results  {
+                                let top : [VNClassificationObservation] = Array(results[0..<10])
+                                
+                                if let photoLocation = try? PhotoLocation(asset: asset, classification: top, image: image){
+                                    if let existing = self.photosRecord[photoLocation.date] {
+                                        if photoLocation.isPreferred(over: existing){
+                                            self.photosRecord[photoLocation.date] = photoLocation
+                                        }
+                                    }else{
+                                        idx += 1
                                         self.photosRecord[photoLocation.date] = photoLocation
-                                    }
-                                }else{
-                                    idx += 1
-                                    self.photosRecord[photoLocation.date] = photoLocation
-                                    // notify once in a while (every 15 new days)
-                                    if idx % 15 == 0 {
-                                        NotificationCenter.default.post(name: Self.newPhotoAvailableNotification, object: self)
+                                        // notify once in a while (every 15 new days)
+                                        if idx % 15 == 0 {
+                                            NotificationCenter.default.post(name: Self.newPhotoAvailableNotification, object: self)
+                                        }
                                     }
                                 }
                             }

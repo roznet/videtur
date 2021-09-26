@@ -28,11 +28,11 @@
 import Foundation
 
 class RecordKeeperObservable : ObservableObject {
-    @Published var list : [RecordLocation] = []
+    @Published var list : [LocationRecord] = []
     
     let recordKeeper : RecordKeeper?
     
-    init(records: [RecordLocation]){
+    init(records: [LocationRecord]){
         self.list = records
         self.recordKeeper = nil
     }

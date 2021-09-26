@@ -47,28 +47,22 @@ class RecordTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
+    func loadSample() -> [LocationRecord]{
+        let decoder = JSONDecoder()
+        
+        guard let url = Bundle(for: type(of: self)).url( forResource: "samplerecords", withExtension: "json"),
+              let data = try? Data(contentsOf: url),
+              let array = try? decoder.decode([LocationRecord].self, from: data)
+        else {
+            XCTAssertTrue(false, "Can't load bundle")
+            return []
+        }
+        XCTAssertNotNil(array)
+        return array
+    }
+    
     func testPlacemark() throws {
-        let coords = [
-            CLLocationCoordinate2D(latitude: 51.5074, longitude: 0.1278), // London
-            CLLocationCoordinate2D(latitude: 51.5074, longitude: 0.1278), // London
-            CLLocationCoordinate2D(latitude: 51.5074, longitude: 0.1278), // London
-            CLLocationCoordinate2D(latitude: 51.5074, longitude: 0.1278), // London
-            CLLocationCoordinate2D(latitude: 48.8566, longitude: 2.3522), // Paris
-            CLLocationCoordinate2D(latitude: 48.8566, longitude: 2.3522), // Paris
-            CLLocationCoordinate2D(latitude: 48.8566, longitude: 2.3522), // Paris
-            CLLocationCoordinate2D(latitude: 48.8566, longitude: 2.3522), // Paris
-            CLLocationCoordinate2D(latitude: 47.3769, longitude: 8.5417), // zurich
-            CLLocationCoordinate2D(latitude: 47.3769, longitude: 8.5417), // zurich
-            CLLocationCoordinate2D(latitude: 47.1748, longitude: 8.7128), // schindellegi
-            CLLocationCoordinate2D(latitude: 47.1748, longitude: 8.7128), // schindellegi
-            CLLocationCoordinate2D(latitude: 47.1748, longitude: 8.7128), // schindellegi
-            CLLocationCoordinate2D(latitude: 46.2941, longitude: 7.5335), // sierre
-            CLLocationCoordinate2D(latitude: 46.2044, longitude: 6.1432), // geneva
-            CLLocationCoordinate2D(latitude: 40.7128, longitude: -74.0060), // New York, NY
-            CLLocationCoordinate2D(latitude: 40.7128, longitude: -74.0060), // New York, NY
-            CLLocationCoordinate2D(latitude: 41.0534, longitude: -73.5387), // Stamford, CO
-            CLLocationCoordinate2D(latitude: 41.0534, longitude: -73.5387), // Stamford, CO
-        ]
+        let coords = self.loadSample().map { $0.coordinate }
         self.remaining = coords
         let component = DateComponents(year: 2021, month: 3, day: 10, hour: 11)
         self.currentDate = Calendar.current.date(from: component)

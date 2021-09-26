@@ -53,14 +53,14 @@ struct RecordsList_Previews: PreviewProvider {
         RecordsListView(records: RecordKeeperObservable(records: Self.sampleRecords))
     }
     
-    static var sampleRecords : [RecordLocation] {
+    static var sampleRecords : [LocationRecord] {
         guard let url = Bundle.main.url( forResource: "samplerecords", withExtension: "json"),
               let data = try? Data(contentsOf: url)
         else {
             return []
         }
         let decoder = JSONDecoder()
-        if let array = try? decoder.decode([RecordLocation].self, from: data) {
+        if let array = try? decoder.decode([LocationRecord].self, from: data) {
             return array
         }
         return []

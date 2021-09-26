@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4228C5B6267202F200F838B2 /* samplerecords.json in Resources */ = {isa = PBXBuildFile; fileRef = 42FC994F2621E3EE00ACF6E1 /* samplerecords.json */; };
 		422F3B7A260FAE6800BE3417 /* RecordingDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422F3B79260FAE6800BE3417 /* RecordingDevice.swift */; };
 		4272609F2622E38E00A99496 /* samplerecords.json in Resources */ = {isa = PBXBuildFile; fileRef = 42FC994F2621E3EE00ACF6E1 /* samplerecords.json */; };
 		427260A52622E38F00A99496 /* samplerecords.json in Resources */ = {isa = PBXBuildFile; fileRef = 42FC994F2621E3EE00ACF6E1 /* samplerecords.json */; };
@@ -22,7 +23,7 @@
 		4278F1DC2615C09300E5B7E5 /* Photos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4278F1DA2615C09300E5B7E5 /* Photos.swift */; };
 		4278F1ED2615D33600E5B7E5 /* PhotoLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4278F1EC2615D33600E5B7E5 /* PhotoLocation.swift */; };
 		4278F1EE2615D33600E5B7E5 /* PhotoLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4278F1EC2615D33600E5B7E5 /* PhotoLocation.swift */; };
-		4278F2342615E0B400E5B7E5 /* CrossPlatformBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4278F2332615E0B400E5B7E5 /* CrossPlatformBridge.swift */; };
+		4278F2342615E0B400E5B7E5 /* macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4278F2332615E0B400E5B7E5 /* macOS.swift */; };
 		4288140B261B87C90017DB46 /* RZUtilsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4288140A261B87C90017DB46 /* RZUtilsSwift */; };
 		42E168A3260F1BAB00224979 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E168A2260F1BAB00224979 /* Tests_iOS.swift */; };
 		42E168AE260F1BAB00224979 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E168AD260F1BAB00224979 /* Tests_macOS.swift */; };
@@ -42,10 +43,8 @@
 		42E1691E260F230200224979 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E1691C260F230200224979 /* Model.swift */; };
 		42E1692F260F31A000224979 /* RecordKeeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E1692E260F319F00224979 /* RecordKeeper.swift */; };
 		42E16930260F31A000224979 /* RecordKeeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E1692E260F319F00224979 /* RecordKeeper.swift */; };
-		42E16937260F31CB00224979 /* RecordLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E16936260F31CB00224979 /* RecordLocation.swift */; };
-		42E16938260F31CB00224979 /* RecordLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E16936260F31CB00224979 /* RecordLocation.swift */; };
-		42E1693F260F31FD00224979 /* EventLocationChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E1693E260F31FD00224979 /* EventLocationChange.swift */; };
-		42E16940260F31FD00224979 /* EventLocationChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E1693E260F31FD00224979 /* EventLocationChange.swift */; };
+		42E16937260F31CB00224979 /* LocationRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E16936260F31CB00224979 /* LocationRecord.swift */; };
+		42E16938260F31CB00224979 /* LocationRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E16936260F31CB00224979 /* LocationRecord.swift */; };
 		42E1694C260F650600224979 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E1694B260F650600224979 /* Country.swift */; };
 		42E1694D260F650600224979 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E1694B260F650600224979 /* Country.swift */; };
 		42E16954260F763F00224979 /* DayVisits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E16953260F763F00224979 /* DayVisits.swift */; };
@@ -94,7 +93,7 @@
 		4278F1CD2615ADB400E5B7E5 /* RecordKeeperObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordKeeperObservable.swift; sourceTree = "<group>"; };
 		4278F1DA2615C09300E5B7E5 /* Photos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photos.swift; sourceTree = "<group>"; };
 		4278F1EC2615D33600E5B7E5 /* PhotoLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLocation.swift; sourceTree = "<group>"; };
-		4278F2332615E0B400E5B7E5 /* CrossPlatformBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrossPlatformBridge.swift; sourceTree = "<group>"; };
+		4278F2332615E0B400E5B7E5 /* macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = macOS.swift; sourceTree = "<group>"; };
 		42E16887260F1BAB00224979 /* videturApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = videturApp.swift; sourceTree = "<group>"; };
 		42E16888260F1BAB00224979 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		42E16889260F1BAB00224979 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -116,8 +115,7 @@
 		42E16910260F21F000224979 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42E1691C260F230200224979 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		42E1692E260F319F00224979 /* RecordKeeper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordKeeper.swift; sourceTree = "<group>"; };
-		42E16936260F31CB00224979 /* RecordLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordLocation.swift; sourceTree = "<group>"; };
-		42E1693E260F31FD00224979 /* EventLocationChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventLocationChange.swift; sourceTree = "<group>"; };
+		42E16936260F31CB00224979 /* LocationRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationRecord.swift; sourceTree = "<group>"; };
 		42E1694B260F650600224979 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		42E16953260F763F00224979 /* DayVisits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayVisits.swift; sourceTree = "<group>"; };
 		42E1695B260F79FB00224979 /* LocationVisits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationVisits.swift; sourceTree = "<group>"; };
@@ -239,7 +237,7 @@
 				42E16898260F1BAB00224979 /* Info.plist */,
 				42E16899260F1BAB00224979 /* macOS.entitlements */,
 				4278F1932614837B00E5B7E5 /* videturApp+macOS.swift */,
-				4278F2332615E0B400E5B7E5 /* CrossPlatformBridge.swift */,
+				4278F2332615E0B400E5B7E5 /* macOS.swift */,
 				42F38AD2262304E7001B79C4 /* RecordingDevice.swift */,
 			);
 			path = macOS;
@@ -278,11 +276,10 @@
 			isa = PBXGroup;
 			children = (
 				42E1691C260F230200224979 /* Model.swift */,
-				42E168CB260F1C2000224979 /* LocationTracker.swift */,
 				42E1692E260F319F00224979 /* RecordKeeper.swift */,
-				42E16936260F31CB00224979 /* RecordLocation.swift */,
+				42E168CB260F1C2000224979 /* LocationTracker.swift */,
+				42E16936260F31CB00224979 /* LocationRecord.swift */,
 				42E16963260F7F1100224979 /* Location.swift */,
-				42E1693E260F31FD00224979 /* EventLocationChange.swift */,
 				42E1694B260F650600224979 /* Country.swift */,
 				42E16953260F763F00224979 /* DayVisits.swift */,
 				42E1695B260F79FB00224979 /* LocationVisits.swift */,
@@ -428,7 +425,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1240;
-				LastUpgradeCheck = 1240;
+				LastUpgradeCheck = 1250;
 				TargetAttributes = {
 					42E1688D260F1BAB00224979 = {
 						CreatedOnToolsVersion = 12.4;
@@ -513,6 +510,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4228C5B6267202F200F838B2 /* samplerecords.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -536,12 +534,11 @@
 				42E16911260F21F000224979 /* AppDelegate.swift in Sources */,
 				42E168B0260F1BAB00224979 /* videturApp.swift in Sources */,
 				4278F1CE2615ADB400E5B7E5 /* RecordKeeperObservable.swift in Sources */,
-				42E1693F260F31FD00224979 /* EventLocationChange.swift in Sources */,
 				42E1694C260F650600224979 /* Country.swift in Sources */,
 				42E1695C260F79FB00224979 /* LocationVisits.swift in Sources */,
 				4278F1B42614A37700E5B7E5 /* SingleRecordView.swift in Sources */,
 				4278F18D2614835800E5B7E5 /* videturApp+iOS.swift in Sources */,
-				42E16937260F31CB00224979 /* RecordLocation.swift in Sources */,
+				42E16937260F31CB00224979 /* LocationRecord.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -555,16 +552,15 @@
 				42E1695D260F79FB00224979 /* LocationVisits.swift in Sources */,
 				42F38AD3262304E7001B79C4 /* RecordingDevice.swift in Sources */,
 				42E1694D260F650600224979 /* Country.swift in Sources */,
-				4278F2342615E0B400E5B7E5 /* CrossPlatformBridge.swift in Sources */,
+				4278F2342615E0B400E5B7E5 /* macOS.swift in Sources */,
 				4278F1B52614A37700E5B7E5 /* SingleRecordView.swift in Sources */,
 				42E16930260F31A000224979 /* RecordKeeper.swift in Sources */,
-				42E16940260F31FD00224979 /* EventLocationChange.swift in Sources */,
 				4278F1BD2614F20700E5B7E5 /* RecordsListView.swift in Sources */,
 				4278F1CF2615ADB400E5B7E5 /* RecordKeeperObservable.swift in Sources */,
 				42E168CF260F1C2000224979 /* LocationTracker.swift in Sources */,
 				42E168B3260F1BAB00224979 /* ContentView.swift in Sources */,
 				4278F1DC2615C09300E5B7E5 /* Photos.swift in Sources */,
-				42E16938260F31CB00224979 /* RecordLocation.swift in Sources */,
+				42E16938260F31CB00224979 /* LocationRecord.swift in Sources */,
 				42E16955260F763F00224979 /* DayVisits.swift in Sources */,
 				42E16965260F7F1100224979 /* Location.swift in Sources */,
 				42E168B1260F1BAB00224979 /* videturApp.swift in Sources */,
@@ -782,6 +778,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = M7QSSF3624;
@@ -806,6 +803,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = M7QSSF3624;

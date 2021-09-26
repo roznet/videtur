@@ -31,7 +31,7 @@ import RZUtilsSwift
 
 
 class LocationTracker : NSObject,CLLocationManagerDelegate {
-    typealias LocationTrackerCompletionHandler = (RecordLocation?) -> Void
+    typealias LocationTrackerCompletionHandler = (LocationRecord?) -> Void
     
     let locationManager = CLLocationManager()
     let geoCoder = CLGeocoder()
@@ -48,7 +48,7 @@ class LocationTracker : NSObject,CLLocationManagerDelegate {
 
     static func ensureDbStructure(db : FMDatabase){
         if !db.tableExists("location_tracker") {
-            db.executeUpdate(RecordLocation.sqlCreationStatement, withArgumentsIn: [])
+            db.executeUpdate(LocationRecord.sqlCreationStatement, withArgumentsIn: [])
         }
     }
 
@@ -66,7 +66,6 @@ class LocationTracker : NSObject,CLLocationManagerDelegate {
         
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         RZSLog.info("new location \(locations)")
-        //locationManager.stopUpdatingLocation()
         guard let first = locations.first else { return }
         self.updateNewLocation(date: Date(), coordinate: first.coordinate)
     }
@@ -96,23 +95,21 @@ class LocationTracker : NSObject,CLLocationManagerDelegate {
             self.completion = completion
         }
         
-        guard let device = try? RecordingDevice() else { return }
-
-        guard let model = self.model,
-              let record = model.recordKeeper.add(record: RecordLocation(date: date, coordinate: coordinate) )
-        else {
+        guard let model = self.model else {
             if let completion = self.completion {
                 completion(nil);
             }
             return
         }
+        let record = LocationRecord(date: date, coordinate: coordinate)
+        model.recordKeeper.log(record: record )
         RZSLog.info( "got location \(record)")
 
         geoCoder.reverseGeocodeLocation(CLLocation(latitude: record.coordinate.latitude, longitude: record.coordinate.longitude)){
             (placemark, error) in
             if let placemark = placemark?.first {
                 let geocodedRecord = record.geocoded(placemark : placemark)
-                let savedRecord = try? model.recordKeeper.update(record: geocodedRecord)
+                let savedRecord = model.recordKeeper.add(record: geocodedRecord)
                 if let savedRecord = savedRecord {
                     RZSLog.info( "reversed location \(savedRecord)")
                 }else{

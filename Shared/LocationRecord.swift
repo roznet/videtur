@@ -45,7 +45,7 @@ extension CLLocationCoordinate2D: Codable {
  }
 
 
-struct RecordLocation : Codable,Identifiable {
+struct LocationRecord : Codable,Identifiable {
     enum Status : Error {
         case ok
         case invalidDate
@@ -71,6 +71,9 @@ struct RecordLocation : Codable,Identifiable {
     var country : Country? {
         return self.isoCountryCode
     }
+    
+    static let recordingDevice = RecordingDevice()
+    
     private var day : Int {
         let formatter = DateFormatter()
         formatter.dateFormat = "YYYYMMdd"
@@ -82,6 +85,7 @@ struct RecordLocation : Codable,Identifiable {
         //return Int( self.date.timeIntervalSince1970 / (3600.0 * 24.0) )
     }
     
+    static var sqlLogCreationStatement = "CREATE TABLE recordLog (logID INTEGER PRIMARY KEY, timestamp REAL NONNULL, date INTEGER, latitude REAL, longitude REAL,device TEXT)"
     static var sqlCreationStatement = "CREATE TABLE recordLocation (recordId INTEGER PRIMARY KEY, timestamp REAL NONNULL, date INTEGER, latitude REAL,longitude REAL, isoCountryCode TEXT, administrativeArea TEXT, locality TEXT, timezone TEXT)"
         
     init(date : Date, coordinate : CLLocationCoordinate2D) {
@@ -98,7 +102,7 @@ struct RecordLocation : Codable,Identifiable {
         self.recordId = nil
     }
     
-    private init(record : RecordLocation, with id : Int) {
+    private init(record : LocationRecord, with id : Int) {
         self.timestamp = record.timestamp
         self.date = record.date
         self.coordinate = record.coordinate
@@ -106,7 +110,7 @@ struct RecordLocation : Codable,Identifiable {
         self.recordId = id
     }
     
-    private init( record : RecordLocation, placemark : CLPlacemark){
+    private init( record : LocationRecord, placemark : CLPlacemark){
         self.timestamp = record.timestamp
         self.date = record.date
         self.coordinate = record.coordinate
@@ -115,7 +119,7 @@ struct RecordLocation : Codable,Identifiable {
     }
     
     init(res : FMResultSet) throws{
-        guard let timestamp = res.date(forColumn: "timestamp") else { throw RecordLocation.Status.invalidDate }
+        guard let timestamp = res.date(forColumn: "timestamp") else { throw LocationRecord.Status.invalidDate }
         
         self.recordId = Int(res.int(forColumn: "recordId"))
         self.date = Int(res.int(forColumn: "date"))
@@ -124,7 +128,18 @@ struct RecordLocation : Codable,Identifiable {
         self.location = Location(res: res)
     }
     
-    func save(db : FMDatabase) throws -> RecordLocation {
+    func log(db : FMDatabase)  {
+        let params : [String:Any] = [
+            "date" : self.date,
+            "timestamp" : self.timestamp,
+            "latitude" : self.coordinate.latitude,
+            "longitude" : self.coordinate.longitude,
+            "device":Self.recordingDevice.uuid
+        ]
+        db.executeUpdate("INSERT INTO recordLog (timestamp,date,latitude,longitude,device) VALUES (:timestamp,:date,:latitude,:longitude,:device)", withParameterDictionary: params)
+    }
+    
+    func save(db : FMDatabase) throws -> LocationRecord {
         var params : [String:Any] = [
             "date" : self.date,
             "timestamp" : self.timestamp,
@@ -140,23 +155,23 @@ struct RecordLocation : Codable,Identifiable {
             return self
         }else{
             db.executeUpdate("INSERT INTO recordLocation (timestamp,date,latitude,longitude,isoCountryCode,administrativeArea,locality,timezone) VALUES (:timestamp,:date,:latitude,:longitude,:isoCountryCode,:administrativeArea,:locality,:timezone)", withParameterDictionary: params)
-            return RecordLocation(record: self, with: Int(db.lastInsertRowId) )
+            return LocationRecord(record: self, with: Int(db.lastInsertRowId) )
         }
     }
     
-    func hasNewInformation(since: RecordLocation) -> Bool {
+    func hasNewInformation(since: LocationRecord) -> Bool {
         if self.day != since.day {
             return true
         }
-        return false
+        return self.location != since.location
     }
     
-    func geocoded(placemark : CLPlacemark) -> RecordLocation {
-        return RecordLocation(record: self, placemark: placemark)
+    func geocoded(placemark : CLPlacemark) -> LocationRecord {
+        return LocationRecord(record: self, placemark: placemark)
     }
 }
 
-extension RecordLocation : CustomStringConvertible {
+extension LocationRecord : CustomStringConvertible {
     var description: String {
         let formatter = DateFormatter()
         formatter.dateStyle = .none
@@ -176,8 +191,10 @@ extension RecordLocation : CustomStringConvertible {
     }
 }
 
-extension RecordLocation : Equatable {
-    static func == (lhs : RecordLocation, rhs : RecordLocation) -> Bool {
+extension LocationRecord : Equatable {
+    static func == (lhs : LocationRecord, rhs : LocationRecord) -> Bool {
         return lhs.recordId == rhs.recordId && lhs.date == rhs.date && lhs.location == rhs.location
     }
 }
+
+

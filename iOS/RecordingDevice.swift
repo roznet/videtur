@@ -43,17 +43,16 @@ struct RecordingDevice {
         return [ "uuid" : self.uuid, "name" : self.name, "model" : self.model ]
     }
     
-    init(device : UIDevice = UIDevice.current) throws {
-        guard let uuid = device.identifierForVendor else { throw RecordingDevice.Status.internalError }
+    init(device : UIDevice = UIDevice.current) {
+        let uuid = device.identifierForVendor ?? UUID()
         self.uuid = uuid.uuidString
         self.name = device.name
         self.model = device.localizedModel
-        
     }
     
     func ensureDb(db : FMDatabase) {
         if !db.tableExists("recording_device") {
-            db.executeUpdate("CREATE TABLE recording_device (device_id INTEGER PRIMARY KEY, uuid TEXT UNIQUE, name TEXT, model TEXT", withArgumentsIn: []);
+            db.executeUpdate("CREATE TABLE recording_device (device_id INTEGER PRIMARY KEY, uuid TEXT UNIQUE, name TEXT, model TEXT)", withArgumentsIn: []);
         }
         
         let sqlParams = self.sqlParameters

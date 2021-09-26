@@ -1,1 +1,325 @@
-[{"location":{"timeZone":{"identifier":"Europe\/London"},"administrativeArea":"England","locality":"London","isoCountryCode":"GB"},"timestamp":637844400,"coordinate":[0.1278,51.507399999999997],"recordId":19,"date":20210319},{"location":{"timeZone":{"identifier":"Europe\/London"},"administrativeArea":"England","locality":"London","isoCountryCode":"GB"},"timestamp":637801200,"coordinate":[0.1278,51.507399999999997],"recordId":18,"date":20210318},{"location":{"timeZone":{"identifier":"Europe\/London"},"administrativeArea":"England","locality":"London","isoCountryCode":"GB"},"timestamp":637758000,"coordinate":[0.1278,51.507399999999997],"recordId":17,"date":20210318},{"location":{"timeZone":{"identifier":"Europe\/London"},"administrativeArea":"England","locality":"London","isoCountryCode":"GB"},"timestamp":637714800,"coordinate":[0.1278,51.507399999999997],"recordId":16,"date":20210317},{"location":{"timeZone":{"identifier":"Europe\/Paris"},"administrativeArea":"Île-de-France","locality":"Paris","isoCountryCode":"FR"},"timestamp":637671600,"coordinate":[2.3521999999999998,48.8566],"recordId":15,"date":20210317},{"location":{"timeZone":{"identifier":"Europe\/Paris"},"administrativeArea":"Île-de-France","locality":"Paris","isoCountryCode":"FR"},"timestamp":637628400,"coordinate":[2.3521999999999998,48.8566],"recordId":14,"date":20210316},{"location":{"timeZone":{"identifier":"Europe\/Paris"},"administrativeArea":"Île-de-France","locality":"Paris","isoCountryCode":"FR"},"timestamp":637585200,"coordinate":[2.3521999999999998,48.8566],"recordId":13,"date":20210316},{"location":{"timeZone":{"identifier":"Europe\/Paris"},"administrativeArea":"Île-de-France","locality":"Paris","isoCountryCode":"FR"},"timestamp":637542000,"coordinate":[2.3521999999999998,48.8566],"recordId":12,"date":20210315},{"location":{"timeZone":{"identifier":"Europe\/Zurich"},"administrativeArea":"Zürich","locality":"Zürich","isoCountryCode":"CH"},"timestamp":637498800,"coordinate":[8.5417000000000005,47.376899999999999],"recordId":11,"date":20210315},{"location":{"timeZone":{"identifier":"Europe\/Zurich"},"administrativeArea":"Zürich","locality":"Zürich","isoCountryCode":"CH"},"timestamp":637455600,"coordinate":[8.5417000000000005,47.376899999999999],"recordId":10,"date":20210314},{"location":{"timeZone":{"identifier":"Europe\/Zurich"},"administrativeArea":"Schwyz","locality":"Feusisberg","isoCountryCode":"CH"},"timestamp":637412400,"coordinate":[8.7127999999999997,47.174799999999998],"recordId":9,"date":20210314},{"location":{"timeZone":{"identifier":"Europe\/Zurich"},"administrativeArea":"Schwyz","locality":"Feusisberg","isoCountryCode":"CH"},"timestamp":637369200,"coordinate":[8.7127999999999997,47.174799999999998],"recordId":8,"date":20210313},{"location":{"timeZone":{"identifier":"Europe\/Zurich"},"administrativeArea":"Schwyz","locality":"Feusisberg","isoCountryCode":"CH"},"timestamp":637326000,"coordinate":[8.7127999999999997,47.174799999999998],"recordId":7,"date":20210313},{"location":{"timeZone":{"identifier":"Europe\/Zurich"},"administrativeArea":"Valais","locality":"Sierre","isoCountryCode":"CH"},"timestamp":637282800,"coordinate":[7.5335000000000001,46.2941],"recordId":6,"date":20210312},{"location":{"timeZone":{"identifier":"Europe\/Zurich"},"administrativeArea":"Geneva","locality":"Geneva","isoCountryCode":"CH"},"timestamp":637239600,"coordinate":[6.1432000000000002,46.2044],"recordId":5,"date":20210312},{"location":{"timeZone":{"identifier":"America\/New_York"},"administrativeArea":"NY","locality":"New York","isoCountryCode":"US"},"timestamp":637196400,"coordinate":[-74.006,40.712800000000001],"recordId":4,"date":20210311},{"location":{"timeZone":{"identifier":"America\/New_York"},"administrativeArea":"NY","locality":"New York","isoCountryCode":"US"},"timestamp":637153200,"coordinate":[-74.006,40.712800000000001],"recordId":3,"date":20210311},{"location":{"timeZone":{"identifier":"America\/New_York"},"administrativeArea":"CT","locality":"Stamford","isoCountryCode":"US"},"timestamp":637110000,"coordinate":[-73.538700000000006,41.053400000000003],"recordId":2,"date":20210310},{"location":{"timeZone":{"identifier":"America\/New_York"},"administrativeArea":"CT","locality":"Stamford","isoCountryCode":"US"},"timestamp":637066800,"coordinate":[-73.538700000000006,41.053400000000003],"recordId":1,"date":20210310}]
+[
+  {
+    "location": {
+      "timeZone": {
+        "identifier": "Europe/London"
+      },
+      "administrativeArea": "England",
+      "locality": "London",
+      "isoCountryCode": "GB"
+    },
+    "timestamp": 637844400,
+    "coordinate": [
+      0.1278,
+      51.5074
+    ],
+    "recordId": 19,
+    "date": 20210319
+  },
+  {
+    "location": {
+      "timeZone": {
+        "identifier": "Europe/London"
+      },
+      "administrativeArea": "England",
+      "locality": "London",
+      "isoCountryCode": "GB"
+    },
+    "timestamp": 637801200,
+    "coordinate": [
+      0.1278,
+      51.5074
+    ],
+    "recordId": 18,
+    "date": 20210318
+  },
+  {
+    "location": {
+      "timeZone": {
+        "identifier": "Europe/London"
+      },
+      "administrativeArea": "England",
+      "locality": "London",
+      "isoCountryCode": "GB"
+    },
+    "timestamp": 637758000,
+    "coordinate": [
+      0.1278,
+      51.5074
+    ],
+    "recordId": 17,
+    "date": 20210318
+  },
+  {
+    "location": {
+      "timeZone": {
+        "identifier": "Europe/London"
+      },
+      "administrativeArea": "England",
+      "locality": "London",
+      "isoCountryCode": "GB"
+    },
+    "timestamp": 637714800,
+    "coordinate": [
+      0.1278,
+      51.5074
+    ],
+    "recordId": 16,
+    "date": 20210317
+  },
+  {
+    "location": {
+      "timeZone": {
+        "identifier": "Europe/Paris"
+      },
+      "administrativeArea": "Île-de-France",
+      "locality": "Paris",
+      "isoCountryCode": "FR"
+    },
+    "timestamp": 637671600,
+    "coordinate": [
+      2.3522,
+      48.8566
+    ],
+    "recordId": 15,
+    "date": 20210317
+  },
+  {
+    "location": {
+      "timeZone": {
+        "identifier": "Europe/Paris"
+      },
+      "administrativeArea": "Île-de-France",
+      "locality": "Paris",
+      "isoCountryCode": "FR"
+    },
+    "timestamp": 637628400,
+    "coordinate": [
+      2.3522,
+      48.8566
+    ],
+    "recordId": 14,
+    "date": 20210316
+  },
+  {
+    "location": {
+      "timeZone": {
+        "identifier": "Europe/Paris"
+      },
+      "administrativeArea": "Île-de-France",
+      "locality": "Paris",
+      "isoCountryCode": "FR"
+    },
+    "timestamp": 637585200,
+    "coordinate": [
+      2.3522,
+      48.8566
+    ],
+    "recordId": 13,
+    "date": 20210316
+  },
+  {
+    "location": {
+      "timeZone": {
+        "identifier": "Europe/Paris"
+      },
+      "administrativeArea": "Île-de-France",
+      "locality": "Paris",
+      "isoCountryCode": "FR"
+    },
+    "timestamp": 637542000,
+    "coordinate": [
+      2.3522,
+      48.8566
+    ],
+    "recordId": 12,
+    "date": 20210315
+  },
+  {
+    "location": {
+      "timeZone": {
+        "identifier": "Europe/Zurich"
+      },
+      "administrativeArea": "Zürich",
+      "locality": "Zürich",
+      "isoCountryCode": "CH"
+    },
+    "timestamp": 637498800,
+    "coordinate": [
+      8.5417,
+      47.3769
+    ],
+    "recordId": 11,
+    "date": 20210315
+  },
+  {
+    "location": {
+      "timeZone": {
+        "identifier": "Europe/Zurich"
+      },
+      "administrativeArea": "Zürich",
+      "locality": "Zürich",
+      "isoCountryCode": "CH"
+    },
+    "timestamp": 637455600,
+    "coordinate": [
+      8.5417,
+      47.3769
+    ],
+    "recordId": 10,
+    "date": 20210314
+  },
+  {
+    "location": {
+      "timeZone": {
+        "identifier": "Europe/Zurich"
+      },
+      "administrativeArea": "Schwyz",
+      "locality": "Feusisberg",
+      "isoCountryCode": "CH"
+    },
+    "timestamp": 637412400,
+    "coordinate": [
+      8.7128,
+      47.1748
+    ],
+    "recordId": 9,
+    "date": 20210314
+  },
+  {
+    "location": {
+      "timeZone": {
+        "identifier": "Europe/Zurich"
+      },
+      "administrativeArea": "Schwyz",
+      "locality": "Feusisberg",
+      "isoCountryCode": "CH"
+    },
+    "timestamp": 637369200,
+    "coordinate": [
+      8.7128,
+      47.1748
+    ],
+    "recordId": 8,
+    "date": 20210313
+  },
+  {
+    "location": {
+      "timeZone": {
+        "identifier": "Europe/Zurich"
+      },
+      "administrativeArea": "Schwyz",
+      "locality": "Feusisberg",
+      "isoCountryCode": "CH"
+    },
+    "timestamp": 637326000,
+    "coordinate": [
+      8.7128,
+      47.1748
+    ],
+    "recordId": 7,
+    "date": 20210313
+  },
+  {
+    "location": {
+      "timeZone": {
+        "identifier": "Europe/Zurich"
+      },
+      "administrativeArea": "Valais",
+      "locality": "Sierre",
+      "isoCountryCode": "CH"
+    },
+    "timestamp": 637282800,
+    "coordinate": [
+      7.5335,
+      46.2941
+    ],
+    "recordId": 6,
+    "date": 20210312
+  },
+  {
+    "location": {
+      "timeZone": {
+        "identifier": "Europe/Zurich"
+      },
+      "administrativeArea": "Geneva",
+      "locality": "Geneva",
+      "isoCountryCode": "CH"
+    },
+    "timestamp": 637239600,
+    "coordinate": [
+      6.1432,
+      46.2044
+    ],
+    "recordId": 5,
+    "date": 20210312
+  },
+  {
+    "location": {
+      "timeZone": {
+        "identifier": "America/New_York"
+      },
+      "administrativeArea": "NY",
+      "locality": "New York",
+      "isoCountryCode": "US"
+    },
+    "timestamp": 637196400,
+    "coordinate": [
+      -74.006,
+      40.7128
+    ],
+    "recordId": 4,
+    "date": 20210311
+  },
+  {
+    "location": {
+      "timeZone": {
+        "identifier": "America/New_York"
+      },
+      "administrativeArea": "NY",
+      "locality": "New York",
+      "isoCountryCode": "US"
+    },
+    "timestamp": 637153200,
+    "coordinate": [
+      -74.006,
+      40.7128
+    ],
+    "recordId": 3,
+    "date": 20210311
+  },
+  {
+    "location": {
+      "timeZone": {
+        "identifier": "America/New_York"
+      },
+      "administrativeArea": "CT",
+      "locality": "Stamford",
+      "isoCountryCode": "US"
+    },
+    "timestamp": 637110000,
+    "coordinate": [
+      -73.5387,
+      41.0534
+    ],
+    "recordId": 2,
+    "date": 20210310
+  },
+  {
+    "location": {
+      "timeZone": {
+        "identifier": "America/New_York"
+      },
+      "administrativeArea": "CT",
+      "locality": "Stamford",
+      "isoCountryCode": "US"
+    },
+    "timestamp": 637066800,
+    "coordinate": [
+      -73.5387,
+      41.0534
+    ],
+    "recordId": 1,
+    "date": 20210310
+  }
+]

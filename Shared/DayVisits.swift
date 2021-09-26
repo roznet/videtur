@@ -31,13 +31,13 @@ struct DayVisits {
     let date : Int
     var locations : [ Location ] = []
     
-    init(record : RecordLocation) {
+    init(record : LocationRecord) {
         self.date = record.date
 
         self.locations = [ record.location ]
     }
     
-    mutating func add( record : RecordLocation) -> Bool {
+    mutating func add( record : LocationRecord) -> Bool {
         // only check if same day
         guard record.date == self.date && !self.locations.contains(record.location) else { return false }
         
