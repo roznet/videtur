@@ -52,11 +52,11 @@ struct videturApp: App {
                         Image( systemName: "globe")
                         Text( "Countries")
                     }
-                Text("Calendar")
+                /*Text("Calendar")
                     .tabItem {
                         Image(systemName: "calendar.badge.clock")
                         Text( "Calendar" )
-                    }
+                    }*/
             }
         }
         .onChange(of: scenePhase){

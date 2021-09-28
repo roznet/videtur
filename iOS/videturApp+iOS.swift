@@ -72,7 +72,7 @@ extension videturApp {
     
     func scheduleLocationTrack() {       
         let locationTrackTask = BGAppRefreshTaskRequest(identifier: "net.ro-z.videtur.locationtrack")
-        locationTrackTask.earliestBeginDate = Date(timeIntervalSinceNow: 30.0)
+        locationTrackTask.earliestBeginDate = Date(timeIntervalSinceNow: 3600.0)
         //locationTrackTask.earliestBeginDate = Date(timeIntervalSinceNow: 30)
         do {
             try BGTaskScheduler.shared.submit(locationTrackTask)
