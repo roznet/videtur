@@ -1,6 +1,6 @@
 //  MIT License
 //
-//  Created on 31/03/2021 for videtur
+//  Created on 28/09/2021 for videtur
 //
 //  Copyright (c) 2021 Brice Rosenzweig
 //
@@ -26,34 +26,62 @@
 
 
 import SwiftUI
-import RZUtils
 
-struct RecordsListView: View {
-    @ObservedObject var records : RecordKeeperObservable
+struct LocationVisitsSingleView: View {
+    
+    static let dateFormatter : DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        return formatter
+    }()
+
+    @State var visit : LocationVisits
+    
+    var earliestString : String {
+        Self.dateFormatter.string(from: self.visit.earliest)
+    }
+
+    var latestString : String {
+        Self.dateFormatter.string(from: self.visit.latest)
+    }
+
+    var countString : String {
+        return "\(visit.days.count) days"
+    }
     
     var body: some View {
-        NavigationView {
-            List(records.list) { record in
-                NavigationLink(
-                    destination: RecordSingleView(record: record) ){
-                RecordSingleView(record: record)
+        VStack(alignment: .leading){
+            HStack {
+                HStack(){
+                    Text(self.visit.location.isoCountryCode ?? "")
+                    Text(self.visit.location.country?.flag ?? "")
+                    Spacer()
+                    HStack{
+                        Text( self.countString )
+                    }
                 }
             }
             
+            HStack {
+                Text( "between \(self.earliestString) and \(self.latestString)" )
+                    .font(.footnote)
+                    .foregroundColor(.secondary)
+            }
         }
-        
-        
     }
 }
 
 #if DEBUG
-struct RecordsList_Previews: PreviewProvider {
+struct LocationVisitsSingleView_Previews: PreviewProvider {
     static var previews: some View {
-
-        RecordsListView(records: RecordKeeperObservable(records: Self.sampleRecords))
+        let samples = Self.sampleCountryVisits
+        
+        LocationVisitsSingleView(visit: samples[0])
+        LocationVisitsSingleView(visit: samples[1])
     }
     
-    static var sampleRecords : [LocationRecord] {
+    static var sampleCountryVisits : [LocationVisits] {
         guard let url = Bundle.main.url( forResource: "samplerecords", withExtension: "json"),
               let data = try? Data(contentsOf: url)
         else {
@@ -61,10 +89,12 @@ struct RecordsList_Previews: PreviewProvider {
         }
         let decoder = JSONDecoder()
         if let array = try? decoder.decode([LocationRecord].self, from: data) {
-            return array
+            let keeper = RecordKeeper(records: array)
+            return keeper.countries
         }
         return []
         
     }
+
 }
 #endif

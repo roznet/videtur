@@ -29,7 +29,7 @@ import SwiftUI
 import CoreLocation
 import Foundation
 
-struct SingleRecordView: View {
+struct RecordSingleView: View {
     static let dateFormatter : DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .long
@@ -70,8 +70,8 @@ struct LastRecordView_Previews: PreviewProvider {
     static var previews: some View {
         let samples = Self.sampleRecords
         
-        SingleRecordView(record: samples[0])
-        SingleRecordView(record: samples[1])
+        RecordSingleView(record: samples[0])
+        RecordSingleView(record: samples[1])
     }
     
     static var sampleRecords : [LocationRecord] {

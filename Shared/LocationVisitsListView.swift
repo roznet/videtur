@@ -1,6 +1,6 @@
 //  MIT License
 //
-//  Created on 26/03/2021 for Videtur
+//  Created on 26/09/2021 for videtur
 //
 //  Copyright (c) 2021 Brice Rosenzweig
 //
@@ -23,22 +23,46 @@
 //  SOFTWARE.
 //
 
+
+
 import SwiftUI
 
-struct ContentView: View {
-
+struct LocationVisitsListView: View {
+    @State var visits : [LocationVisits]
     
     var body: some View {
-        RecordsListView(records: RecordKeeperObservable(recordKeeper: Model.shared.recordKeeper))
+        NavigationView {
+           List(visits) { visit in
+                NavigationLink(
+                    destination: LocationVisitsSingleView(visit: visit) ){
+                        LocationVisitsSingleView(visit: visit)
+                }
+            }
+            
+        }
     }
 }
 
 #if DEBUG
-struct ContentView_Previews: PreviewProvider {
+struct LocationVisitsListView_Previews: PreviewProvider {
     static var previews: some View {
-        
-            ContentView()
+        LocationVisitsListView(visits: Self.sampleCountryVisits)
+    }
+    
+    static var sampleCountryVisits : [LocationVisits] {
+        guard let url = Bundle.main.url( forResource: "samplerecords", withExtension: "json"),
+              let data = try? Data(contentsOf: url)
+        else {
+            return []
+        }
+        let decoder = JSONDecoder()
+        if let array = try? decoder.decode([LocationRecord].self, from: data) {
+            let keeper = RecordKeeper(records: array)
+            return keeper.countries
+        }
+        return []
         
     }
 }
 #endif
+

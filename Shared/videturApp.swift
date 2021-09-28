@@ -41,13 +41,13 @@ struct videturApp: App {
     var body: some Scene {
         WindowGroup {
             TabView {
-                ContentView()
+                RecordsListView(records: RecordKeeperObservable(recordKeeper: Model.shared.recordKeeper))
                     .tabItem {
                         Image( systemName: "location.viewfinder")
                         Text( "Locations" )
                     }
             
-                Text("Tab 2")
+                LocationVisitsListView(visits: Model.shared.recordKeeper.countries)
                     .tabItem {
                         Image( systemName: "globe")
                         Text( "Countries")

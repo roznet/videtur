@@ -27,31 +27,48 @@
 
 import Foundation
 
-struct LocationVisits {
+struct LocationVisits : Codable,Identifiable {
+    
+    let id = UUID()
+    
+    private enum CodingKeys: String, CodingKey {
+        case days, earliest, latest, location,earliestDate,latestDate
+    }
+
+    
     let location : Location
     var days : [Int] = []
-    var earliest : Int
-    var latest : Int
+    var earliest : Date
+    var latest : Date
+
+    var earliestDate : Int
+    var latestDate : Int
+
     
     init(record : LocationRecord) {
         self.location = record.location
         self.days = [ record.date ]
-        self.earliest = record.date
-        self.latest = record.date
+        self.earliest = record.timestamp
+        self.latest = record.timestamp
+        self.earliestDate = record.date
+        self.latestDate = record.date
     }
     
     mutating func add(other : LocationRecord) -> Bool {
         let date = other.date
+        let time = other.timestamp
         
         guard other.location == self.location && !days.contains(date) else { return false }
         
         days.append(date)
         days.sort { $0 < $1 }
-        if date < self.earliest {
-            self.earliest = date
+        if time < self.earliest {
+            self.earliest = time
+            self.earliestDate = date
         }
-        if date > self.latest {
-            self.latest = date
+        if time > self.latest {
+            self.latestDate = date
+            self.latest = time
         }
         return true
     }

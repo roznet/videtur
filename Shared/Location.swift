@@ -34,7 +34,7 @@ struct Location : Codable,Equatable,Hashable {
     let administrativeArea : String?
     let locality : String?
     let timeZone : TimeZone?
-        
+            
     init(placemark : CLPlacemark? = nil) {
         self.isoCountryCode = placemark?.isoCountryCode
         self.locality = placemark?.locality
@@ -54,6 +54,13 @@ struct Location : Codable,Equatable,Hashable {
         }
     }
         
+    private init(country : Location){
+        self.isoCountryCode = country.isoCountryCode
+        self.locality = nil
+        self.timeZone = nil
+        self.administrativeArea = nil
+    }
+    
     var sqlParamDictionary : [String:Any] {
         return [
             "isoCountryCode" : self.isoCountryCode ?? NSNull(),
@@ -61,6 +68,10 @@ struct Location : Codable,Equatable,Hashable {
             "administrativeArea" : self.administrativeArea ?? NSNull(),
             "timezone" : self.timeZone?.identifier ?? NSNull()
         ]
+    }
+    
+    var countryAsLocation : Location {
+        return Location(country: self)
     }
     
     var country : Country? {

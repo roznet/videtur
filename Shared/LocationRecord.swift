@@ -72,6 +72,10 @@ struct LocationRecord : Codable,Identifiable {
         return self.isoCountryCode
     }
     
+    var countryAsLocation : Location {
+        return self.location.countryAsLocation
+    }
+    
     static let recordingDevice = RecordingDevice()
     
     private var day : Int {
@@ -102,6 +106,14 @@ struct LocationRecord : Codable,Identifiable {
         self.recordId = nil
     }
     
+    init( record : LocationRecord, location : Location ){
+        self.timestamp = record.timestamp
+        self.date = record.date
+        self.coordinate = record.coordinate
+        self.recordId = record.recordId
+        self.location = location
+    }
+
     private init(record : LocationRecord, with id : Int) {
         self.timestamp = record.timestamp
         self.date = record.date

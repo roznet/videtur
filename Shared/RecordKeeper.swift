@@ -53,6 +53,18 @@ class RecordKeeper {
         self.db = db
     }
     
+    init(records : [LocationRecord]){
+        // in memory database
+        self.db = FMDatabase(path: nil)
+        var input : [Int:LocationRecord] = [:]
+        for one in records {
+            if let recordId = one.recordId {
+                input[recordId] = one
+            }
+        }
+        self.recordsDatabase = input
+    }
+        
     func load() {
         self.recordsDatabase = [:]
         if let res = self.db.executeQuery("SELECT * FROM recordLocation", withParameterDictionary: nil) {
@@ -142,6 +154,25 @@ class RecordKeeper {
                 found[one.location] = LocationVisits(record: one)
             }
         }
+        return Array(found.values).sorted {
+            $1.latest < $0.latest
+        }
+    }
+    
+    var countries : [LocationVisits] {
+        var found : [Location:LocationVisits] = [:]
+        for one in self.recordsDatabase.values{
+            let country = one.countryAsLocation
+            let countryonly = LocationRecord(record: one, location: country)
+            if var location = found[country] {
+                if location.add(other: countryonly) {
+                    found[country] = location
+                }
+            }else{
+                found[country] = LocationVisits(record: countryonly)
+            }
+        }
+        
         return Array(found.values).sorted {
             $1.latest < $0.latest
         }

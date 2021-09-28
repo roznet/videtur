@@ -38,13 +38,18 @@ class RecordTests: XCTestCase {
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         // clear and reset model from scratch
-        self.model = nil
-        RZFileOrganizer.removeEditableFile("test.db")
-        self.model = Model(dbpath: RZFileOrganizer.writeableFilePath("test.db"))
     }
 
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+    }
+
+    
+    func createModel(name : String ) {
+        self.model = nil
+        RZFileOrganizer.removeEditableFile(name)
+        self.model = Model(dbpath: RZFileOrganizer.writeableFilePath(name))
+
     }
     
     func loadSample() -> [LocationRecord]{
@@ -61,7 +66,49 @@ class RecordTests: XCTestCase {
         return array
     }
     
-    func testPlacemark() throws {
+    func testRecreate() {
+        self.createModel(name: "test_create.db")
+        guard let recordKeeper = self.model?.recordKeeper else { XCTAssertTrue(false); return }
+        
+        let samples = self.loadSample()
+        var records : [LocationRecord] = []
+        var dups : [LocationRecord] = []
+        for sample in samples {
+            let record = LocationRecord(date: sample.timestamp, coordinate: sample.coordinate)
+            recordKeeper.log(record: record)
+            XCTAssertNil(record.recordId)
+            
+            let withlocation = LocationRecord(record: record, location: sample.location)
+            
+            if let last = records.last {
+                if withlocation.hasNewInformation(since: last) {
+                    guard let fullrecord = recordKeeper.add(record: withlocation) else { XCTAssertNotNil(nil); return }
+                    records.append(fullrecord)
+                }else{
+                    dups.append(withlocation)
+                }
+            }else{
+                guard let fullrecord = recordKeeper.add(record: withlocation) else { XCTAssertNotNil(nil); return }
+                records.append(fullrecord)
+            }
+        }
+        XCTAssertGreaterThan(records.count, 0)
+        XCTAssertGreaterThan(dups.count, 0)
+        XCTAssertEqual(records.count+dups.count, samples.count)
+        XCTAssertEqual(records.count, recordKeeper.records.count)
+        
+        let days = recordKeeper.days
+        let locations = recordKeeper.locations
+        let countries = recordKeeper.countries
+        
+        print( "\(days)")
+        print( "\(locations)")
+        print( "\(countries)")
+    }
+    
+    
+    func testGeoDecode() throws {
+        self.createModel(name: "test_geodecode.db")
         let coords = self.loadSample().map { $0.coordinate }
         self.remaining = coords
         let component = DateComponents(year: 2021, month: 3, day: 10, hour: 11)
@@ -73,7 +120,7 @@ class RecordTests: XCTestCase {
         
         wait(for: [expectation], timeout: 5.0, enforceOrder: false)
 
-        let reloadedModel = Model(dbpath: RZFileOrganizer.writeableFilePath("test.db"))
+        let reloadedModel = Model(dbpath: RZFileOrganizer.writeableFilePath("test_geodecode.db"))
         
         reloadedModel.recordKeeper.load()
         
