@@ -67,11 +67,17 @@ class RecordKeeper {
         
     func load() {
         self.recordsDatabase = [:]
+        var last : LocationRecord? = nil
         if let res = self.db.executeQuery("SELECT * FROM recordLocation", withParameterDictionary: nil) {
             while( res.next() ){
                 if let one = try? LocationRecord(res: res),
                    let recordId = one.recordId{
-                    self.recordsDatabase[recordId] = one
+                    if last == nil || one.hasNewInformation(since: last!) {
+                        if one.location.isoCountryCode != nil {
+                            self.recordsDatabase[recordId] = one
+                            last = one
+                        }
+                    }
                 }
             }
         }
